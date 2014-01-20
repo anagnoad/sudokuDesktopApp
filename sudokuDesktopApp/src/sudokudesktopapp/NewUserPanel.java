@@ -13,7 +13,8 @@ public class NewUserPanel extends javax.swing.JPanel {
     /**
      * Creates new form NewUserPanel
      */
-    public NewUserPanel() {
+    public NewUserPanel(GUIHandler guiHandler) {
+        this.myGuiHandler = guiHandler;
         initComponents();
     }
 
@@ -88,14 +89,14 @@ public class NewUserPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_onTextFieldEntered
 
     private void onEnterPressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onEnterPressed
-        // TODO add your handling code here:
-        // check input and add the new user to the db
+        this.myGuiHandler.addNewUser(this.nicknameInput.getText());
     }//GEN-LAST:event_onEnterPressed
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        // TODO add your handling code here:
+        this.myGuiHandler.addNewUser(this.nicknameInput.getText());
     }//GEN-LAST:event_okButtonActionPerformed
 
+    private GUIHandler myGuiHandler;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel buttonsPanel;
     private javax.swing.JPanel nicknameEnterPanel;

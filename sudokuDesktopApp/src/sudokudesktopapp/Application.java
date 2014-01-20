@@ -9,5 +9,11 @@ import javax.swing.JFrame;
  * @author Steve
  */
 public class Application extends JFrame{
+    private GUIHandler myGuiHandler;
     
+    
+    public Application(GUIHandler guiHandler)
+    {
+        this.myGuiHandler = guiHandler;
+    }
 }

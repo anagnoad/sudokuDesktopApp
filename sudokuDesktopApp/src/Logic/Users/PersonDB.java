@@ -77,14 +77,18 @@ public class PersonDB implements Serializable {
     /**
      * Creates and adds a new person to the Database.
      * @param nickname the nickname we want the player we are adding to have
-     * @return true if added, false otherwise.
+     * @return the person added, if added, null otherwise
      */
-    public boolean addNewPerson(String nickname)
+    public Person addNewPerson(String nickname)
     {
-            return theDB.add(new Person(nickname));
+        Person personToBeAdded = new Person(nickname);
+            if (theDB.add(personToBeAdded))
+                return personToBeAdded;
+            else
+                return null;
     }
 
-    public boolean addNewPerson(Person personToAdd)
+    private boolean addNewPerson(Person personToAdd)
     {
             return theDB.add(personToAdd); // you have to implement equals, otherwise it fails
     }

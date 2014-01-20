@@ -95,7 +95,7 @@ public class GettingStartedPanel extends javax.swing.JPanel {
 
     private void newUserClick(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newUserClick
         // this will redirect you to a JFrame To Add a new user
-        this.myGuiHandler.showAddNewUser();
+        this.myGuiHandler.showAddNewUserPanel();
     }//GEN-LAST:event_newUserClick
 
     private void logInClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logInClicked
