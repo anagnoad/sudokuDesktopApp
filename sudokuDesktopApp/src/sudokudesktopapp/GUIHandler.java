@@ -5,7 +5,13 @@
 package sudokudesktopapp;
 
 import Logic.Users.Person;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -17,6 +23,7 @@ public class GUIHandler {
     /*---------------------Member vars--------------------------*/
     /*--------------------Logic elements ----------------------*/
     private ApplicationInstance appInstance; // knows the application instance
+    private static final String helpPath = "./resources/sudoku_help.html";
     
     /* -------------------GUI elements-------------------------*/
     private Application myApp; // access modifier may need to change
@@ -112,6 +119,23 @@ public class GUIHandler {
         return listToReturn; // may return null
     }
     
-    
-    
+    public String loadHelpFromHTML()
+    {
+        // define somewhere the constant of the file
+        try(BufferedReader input = new BufferedReader(new FileReader(helpPath));)
+        {
+            String temp;
+            StringBuilder s = new StringBuilder();
+            while ((temp = input.readLine()) != null )
+            {
+                s.append(temp);
+            }
+            return s.toString();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GUIHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GUIHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "Help not available";
+    }
 }
