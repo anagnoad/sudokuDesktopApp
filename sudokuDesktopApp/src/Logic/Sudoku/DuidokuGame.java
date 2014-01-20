@@ -1,6 +1,8 @@
 package Logic.Sudoku;
 
-import com.example.sudokuapp.Logic.Users.Person;
+import Logic.Users.Person;
+
+
 /**
  * Class representing the Duidoku game.
  * Can be extened to work with more than one player.

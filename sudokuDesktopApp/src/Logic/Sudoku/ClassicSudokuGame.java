@@ -1,7 +1,6 @@
 package Logic.Sudoku;
 
-import java.util.ArrayList;
-import com.example.sudokuapp.Logic.Users.Person;
+import Logic.Users.Person;
 
 /**
  * Represents the instance of a ClassicSudokuGame started by the Player

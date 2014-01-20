@@ -1,24 +1,24 @@
 package Logic.IO;
 
+import Logic.Sudoku.BaseGame;
+import Logic.Sudoku.Coord_2D;
+import Logic.Sudoku.TypeOfGame;
+import static Logic.Sudoku.TypeOfGame.CLASSIC;
+import static Logic.Sudoku.TypeOfGame.DUIDOKU;
+import static Logic.Sudoku.TypeOfGame.HYPERDOKU;
+import Logic.Users.PersonDB;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
+import javax.naming.Context;
 
-
-
-import com.example.sudokuapp.Logic.Sudoku.BaseGame;
-import com.example.sudokuapp.Logic.Sudoku.ClassicSudoku;
-import com.example.sudokuapp.Logic.Sudoku.ClassicSudokuGame;
-import com.example.sudokuapp.Logic.Sudoku.Coord_2D;
-import com.example.sudokuapp.Logic.Sudoku.Duidoku;
-import com.example.sudokuapp.Logic.Sudoku.HyperSudoku;
-import com.example.sudokuapp.Logic.Sudoku.TypeOfGame;
-import com.example.sudokuapp.Logic.Users.PersonDB;
 
 public class IO {
 
@@ -26,10 +26,10 @@ public class IO {
 	// Remember to close the streams opened for files.
 	
 	
-	static public boolean loadPlayers(String filename, PersonDB playersDB, Context appContext)
+	static public boolean loadPlayers(String filename, PersonDB playersDB)
 	{
 		try {
-			ObjectInputStream input = new ObjectInputStream(appContext.getApplicationContext().openFileInput(filename));
+			ObjectInputStream input = new ObjectInputStream(new FileInputStream(filename));
 			playersDB = (PersonDB) input.readObject();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -55,7 +55,7 @@ public class IO {
 	static public boolean savePlayers(String filename, PersonDB playersDB, Context appContext)
 	{
 		try {
-			ObjectOutputStream output = new ObjectOutputStream(appContext.getApplicationContext().openFileOutput(filename, Context.MODE_PRIVATE));
+			ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(filename));
 			output.writeObject(playersDB);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -101,7 +101,7 @@ public class IO {
 		
 		try {
 			BufferedReader bufferedReader = new BufferedReader(new FileReader(new 
-			        File(appContext.getApplicationContext().getFilesDir()+File.separator+"MyFile.txt")));
+			        File("MyFile.txt")));
 			for (int i=0;i<dimensions.x;i++)
 			{
 				int[] lineElements = new int[9];
@@ -141,7 +141,7 @@ public class IO {
 	static public boolean readFromFile(String filename, BaseGame gameLoadedFromFile, Context appContext)
 	{
 		try {
-			ObjectInputStream input = new ObjectInputStream(appContext.getApplicationContext().openFileInput(filename));
+			ObjectInputStream input = new ObjectInputStream(new FileInputStream(filename));
 			try {
 				gameLoadedFromFile = (BaseGame) input.readObject(); // at this time, you don't know the type of the game
 			} catch (ClassNotFoundException e) {
@@ -177,7 +177,7 @@ public class IO {
 	static public boolean saveToFile(String filename, BaseGame gameToSave, Context appContext)
 	{
 		try {
-			ObjectOutputStream output = new ObjectOutputStream(appContext.getApplicationContext().openFileOutput(filename, Context.MODE_PRIVATE));
+			ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(filename));
 			output.writeObject(gameToSave);
 			output.close();
 		} catch (FileNotFoundException e) {

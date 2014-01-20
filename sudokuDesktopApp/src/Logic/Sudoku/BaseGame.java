@@ -1,9 +1,9 @@
 package Logic.Sudoku;
 
+import Logic.Users.Person;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import com.example.sudokuapp.Logic.Users.Person;
 
 /**
  * Abstract class that is used for a particular game of a puzzle.

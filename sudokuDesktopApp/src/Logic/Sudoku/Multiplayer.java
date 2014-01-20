@@ -1,6 +1,7 @@
 package Logic.Sudoku;
 
-import com.example.sudokuapp.Logic.Users.Person;
+import Logic.Users.Person;
+
 
 public interface Multiplayer {
  

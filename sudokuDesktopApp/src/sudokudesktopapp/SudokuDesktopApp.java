@@ -17,6 +17,5 @@ public class SudokuDesktopApp {
         // TODO code application logic here
         ApplicationInstance appInstance = ApplicationInstance.getInstance();
         GUIHandler guiHandler = new GUIHandler(appInstance);
-        
     }
 }
