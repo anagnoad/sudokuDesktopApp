@@ -5,6 +5,7 @@
 package sudokudesktopapp;
 
 import Logic.Users.Person;
+import java.util.ArrayList;
 
 
 /**
@@ -104,9 +105,11 @@ public class GUIHandler {
         }
     }
     
-    public void showLogIn() // is supposed to be called when the user wishes to login
+    public ArrayList<Person> searchByNickname(String nicknameToSearch)
     {
-        
+        ArrayList<Person> listToReturn;
+        listToReturn = this.appInstance.playersDB.searchByNickName(nicknameToSearch);
+        return listToReturn; // may return null
     }
     
     

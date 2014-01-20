@@ -79,6 +79,15 @@ public class Person {
         return hash;
     }
 
+    @Override
+    public String toString() // this is implemented to show the results of a search in a JList
+    {
+        StringBuilder toBeReturned = new StringBuilder();
+        toBeReturned.append(this.nickname);
+        toBeReturned.append(" ");
+        toBeReturned.append(this.lastLoggedIn.toString());
+        return toBeReturned.toString();
+    }
     // setters
     /**
      * Changes the nickname of the user to the specified value.

@@ -27,11 +27,20 @@ public class GettingStartedPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
         gettingStartedLabel = new javax.swing.JLabel();
         newUserLabel = new javax.swing.JLabel();
         logInLabel = new javax.swing.JLabel();
         playSudokuLabel = new javax.swing.JLabel();
         showRulesLabel = new javax.swing.JLabel();
+
+        jList1.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
 
         setBackground(new java.awt.Color(193, 220, 255));
         setBorder(new javax.swing.border.MatteBorder(null));
@@ -44,7 +53,6 @@ public class GettingStartedPanel extends javax.swing.JPanel {
         gettingStartedLabel.setToolTipText("");
         add(gettingStartedLabel);
         gettingStartedLabel.getAccessibleContext().setAccessibleName("GettingStartedLabel");
-        gettingStartedLabel.getAccessibleContext().setAccessibleDescription("");
 
         newUserLabel.setFont(new java.awt.Font("Lucida Grande", 3, 12)); // NOI18N
         newUserLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -114,6 +122,8 @@ public class GettingStartedPanel extends javax.swing.JPanel {
     private GUIHandler myGuiHandler;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel gettingStartedLabel;
+    private javax.swing.JList jList1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel logInLabel;
     private javax.swing.JLabel newUserLabel;
     private javax.swing.JLabel playSudokuLabel;
