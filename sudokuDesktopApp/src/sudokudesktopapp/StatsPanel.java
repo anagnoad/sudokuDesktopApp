@@ -17,14 +17,9 @@ public class StatsPanel extends javax.swing.JPanel {
      */
     public StatsPanel(GUIHandler guiHandler, Person p) {
         this.myGuiHandler = guiHandler;
+        this.player = p;
         initComponents();
-        if (p!=null)
-        {
-            // populate the fields
-            this.aliasLabel.setText(p.getNickname());
-            this.victoriesLabel.setText(String.valueOf(p.getVictories()));
-            this.defeatsLabel.setText(String.valueOf(p.getDefeats()));
-        }
+        updateUIToPlayerStats();
     }
 
     /**
@@ -151,9 +146,23 @@ public class StatsPanel extends javax.swing.JPanel {
     private void clearAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearAllButtonActionPerformed
         // TODO add your handling code here:
         if (this.player != null)
+        {
             player.reset();
+            updateUIToPlayerStats();
+        }
     }//GEN-LAST:event_clearAllButtonActionPerformed
 
+    private void updateUIToPlayerStats()
+    {
+        if (player!=null)
+        {
+            // populate the fields
+            this.nicknameLabel.setText(player.getNickname());
+            this.gamesPlayedLabel.setText(String.valueOf(player.getGamesPlayed()));
+            this.victoriesLabel.setText(String.valueOf(player.getVictories()));
+            this.defeatsLabel.setText(String.valueOf(player.getDefeats()));
+        }
+    }
     
     private GUIHandler myGuiHandler;
     private Person player;

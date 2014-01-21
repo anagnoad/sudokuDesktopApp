@@ -32,7 +32,6 @@ public class Person {
      * Used to present the difference to the user between diffrerent users with the same nickname.
      */
     protected Date lastLoggedIn; // will use date in order to distinguish different users with the same nickname.
-
     /*-------------- Methods -------------*/
     //ctor
     /**
@@ -43,7 +42,7 @@ public class Person {
     {
             this.id = this.hashCode();
             this.nickname = null;
-            this.sudokuSolved = new HashSet<Integer>();
+            this.sudokuSolved = new HashSet<>();
             this.statistics = new Stats();
             this.lastLoggedIn = new Date(); // gets the current date. The first time of login is when the user is created.
     }
@@ -190,8 +189,14 @@ public class Person {
     
     public void reset()
     {
+        this.sudokuSolved = new HashSet<>();
         this.statistics.numberOfDefeats = 0;
         this.statistics.numberOfVictories = 0;
+    }
+    
+    public int getGamesPlayed()
+    {
+        return this.sudokuSolved.size();
     }
 }
 /**

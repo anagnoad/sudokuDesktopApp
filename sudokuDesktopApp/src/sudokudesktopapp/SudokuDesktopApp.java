@@ -14,7 +14,7 @@ public class SudokuDesktopApp {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        // Start the appInstance and the GuiHandler of the application.
         ApplicationInstance appInstance = ApplicationInstance.getInstance();
         GUIHandler guiHandler = new GUIHandler(appInstance);
     }
