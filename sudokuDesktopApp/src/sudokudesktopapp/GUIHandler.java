@@ -92,35 +92,14 @@ public class GUIHandler {
         this.myApp.remove(myApp.sideBarPanel);
         this.newUserPanel = new NewUserPanel(this);
         this.newUserPanel.setVisible(true);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        
-        this.myApp.repaint();
-=======
-=======
->>>>>>> 5481984906021ef4118b45141ec37013dd38e287
-=======
->>>>>>> 5481984906021ef4118b45141ec37013dd38e287
-=======
->>>>>>> 5481984906021ef4118b45141ec37013dd38e287
+
         this.myApp.sideBarPanel = this.newUserPanel;
         this.myApp.sideBarPanel.setBounds(600, 140, 200, 250);
         this.myApp.add(myApp.sideBarPanel);
         this.myApp.getContentPane().validate();
         this.myApp.getContentPane().repaint();
         this.myApp.sideBarPanel.setVisible(true);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 5481984906021ef4118b45141ec37013dd38e287
-=======
->>>>>>> 5481984906021ef4118b45141ec37013dd38e287
-=======
->>>>>>> 5481984906021ef4118b45141ec37013dd38e287
-=======
->>>>>>> 5481984906021ef4118b45141ec37013dd38e287
+
     }
     
         public void closeAddNewUserPanel()
@@ -167,23 +146,13 @@ public class GUIHandler {
         listToReturn = this.appInstance.playersDB.searchByNickName(nicknameToSearch);
         return listToReturn; // may return null
     }
-    
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     public void showHelpDialog() //works
     {
         this.sudokuHelpDialog = new SudokuHelpDialog(myApp, true, this);
         this.sudokuHelpDialog.setVisible(true);
-=======
-=======
->>>>>>> 5481984906021ef4118b45141ec37013dd38e287
-=======
->>>>>>> 5481984906021ef4118b45141ec37013dd38e287
-=======
->>>>>>> 5481984906021ef4118b45141ec37013dd38e287
-
+    }
+    
     public void newClassicSudoku()
     {
         this.appInstance.game = new ClassicSudokuGame();
@@ -261,16 +230,6 @@ public class GUIHandler {
             SudokuPanel panel = (SudokuPanel) this.myApp.mainPanel;
             panel.selected.setText("");
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 5481984906021ef4118b45141ec37013dd38e287
-=======
->>>>>>> 5481984906021ef4118b45141ec37013dd38e287
-=======
->>>>>>> 5481984906021ef4118b45141ec37013dd38e287
-=======
->>>>>>> 5481984906021ef4118b45141ec37013dd38e287
     }
     
     public String loadHelpFromHTML()
