@@ -7,6 +7,8 @@
 package sudokudesktopapp;
 
 import java.awt.MenuBar;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -46,8 +48,32 @@ public class MainMenuBar extends JMenuBar{
         
         newGameMenu = new JMenu("New game");
         classicSudokuItem = new JMenuItem("Classic sudoku");
+        classicSudokuItem.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myGuiHandler.newClassicSudoku();
+            }
+        }
+        );
         hyperSudokuItem = new JMenuItem("HyperSudoku");
+        hyperSudokuItem.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myGuiHandler.newHyperSudoku();
+            }
+        
+        });
         duidokuItem = new JMenuItem("Duidoku");
+        duidokuItem.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myGuiHandler.newDuidoku();
+            }
+            
+        });
         newGameMenu.add(classicSudokuItem);
         newGameMenu.add(hyperSudokuItem);
         newGameMenu.add(duidokuItem);
@@ -62,6 +88,14 @@ public class MainMenuBar extends JMenuBar{
         userMenu = new JMenu("User");
         loginItem = new JMenuItem("Login");
         newUserItem = new JMenuItem("Create new user");
+        newUserItem.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myGuiHandler.showAddNewUserPanel();
+            }
+        
+        });
         showStatsItem = new JMenuItem("Show stats");
         deleteHistoryItem = new JMenuItem("Delete history");
         userMenu.add(loginItem);

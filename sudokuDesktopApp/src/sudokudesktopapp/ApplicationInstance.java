@@ -1,6 +1,7 @@
 package sudokudesktopapp;
 
 import Logic.IO.IO;
+import Logic.Sudoku.BaseGame;
 import Logic.Users.Person;
 import Logic.Users.PersonDB;
 
@@ -9,10 +10,12 @@ public final class ApplicationInstance {
     public Person loggedInUser;
     public boolean anonymousUser;
     public PersonDB playersDB; // load or create the db in the ctor
-
+    public BaseGame game;
+    
     private ApplicationInstance()
     {
             loggedInUser = null;
+            game = null;
             anonymousUser = true;
             if (!loadPlayersDB(" "))// enter filename containing the PlayersDB
             {

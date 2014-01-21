@@ -13,8 +13,8 @@ import javax.swing.JPanel;
 public class Application extends JFrame{
     private GUIHandler myGuiHandler;
     
-    private JPanel sideBarPanel;
-    private JPanel mainPanel;
+    public JPanel sideBarPanel;
+    public JPanel mainPanel;
     
     public Application(GUIHandler guiHandler)
     {
@@ -37,11 +37,11 @@ public class Application extends JFrame{
         add(sideBarPanel);
         sideBarPanel.setVisible(true);
         
-        
-        mainPanel = new SudokuPanel(myGuiHandler);
+        /*
+        mainPanel = new SudokuPanel(myGuiHandler,9,9);
         mainPanel.setBounds(20, 20, 520, 520);
         add(mainPanel);
         setVisible(true);
-        
+        */
     }
 }
