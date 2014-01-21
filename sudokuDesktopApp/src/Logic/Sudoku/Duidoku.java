@@ -29,6 +29,15 @@ public class Duidoku extends ClassicSudoku
 		loadFromArray(arrayToLoad);
 	}
 	
+        @Override
+        public boolean setCell(int value, int x, int y)
+        {
+            boolean flag = super.setCell(value,x,y);
+            if (flag)
+                this.isEditableArray[x][y] = false;
+            return flag;
+        }
+        
 	@Override
 	public boolean checkRules(int value, int x, int y)
 	{
@@ -36,6 +45,9 @@ public class Duidoku extends ClassicSudoku
 		if (value==0)
 			return true;
 		
+                if(!isEditableArray[x][y])
+                    return false;
+
 		for (int i=0;i<getX();i++)
 		{
 			if (matrix[i][y] == value)

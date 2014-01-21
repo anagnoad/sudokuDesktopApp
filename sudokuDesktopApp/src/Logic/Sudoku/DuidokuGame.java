@@ -47,6 +47,9 @@ public class DuidokuGame    extends BaseGame // this can be easily extended to b
     {
             super();
             this.mySudoku = new Duidoku();
+            this.computerPlays = true;
+        this.numberOfPlayers = 2;
+        this.randGenerator = new Random();
     }
     
     /**
@@ -57,9 +60,7 @@ public class DuidokuGame    extends BaseGame // this can be easily extended to b
     {
         this();
         this.players.add(player);
-        this.computerPlays = true;
-        this.numberOfPlayers = 2;
-        this.randGenerator = new Random();
+        
     }
 
     /**

@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 public class ClassicSudoku extends BasePuzzle {
-    private boolean [][] isEditableArray; //inner checking of this
+    protected boolean [][] isEditableArray; //inner checking of this
     public TypeOfGame type; // is needed in order to know with smaller code in which class we are in.
 
     //ctor

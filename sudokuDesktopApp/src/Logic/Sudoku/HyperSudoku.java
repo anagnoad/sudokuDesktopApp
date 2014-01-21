@@ -118,6 +118,9 @@ public class HyperSudoku extends ClassicSudoku {
 	@Override
 	public boolean checkRules(int value, int x, int y)
 	{
+                if(!isEditableArray[x][y])
+                    return false;
+
 		int rootDimX = (int) Math.sqrt(getX());
 		int rootDimY = (int) Math.sqrt(getY());
 		
@@ -156,22 +159,23 @@ public class HyperSudoku extends ClassicSudoku {
 		{
 			values.add(x);
 		}
-		Coord_2D firstCell = innerSudokus.get(sudokuMatrix[cell.x][cell.y]);
-		int X = firstCell.x;
-		int Y = firstCell.y;
-		if(sudokuMatrix[X][Y] !=-1)
-		{
-			HashSet<Integer> toBeRemoved = new HashSet<Integer>();
-			for(int i=0;i<rootDimX;i++)
-			{
-				for (int j=0;j<rootDimY;j++)
-				{
-					if (matrix[X+i][Y+j] != 0)
-						toBeRemoved.add(matrix[X+i][Y+j]);
-				}
-			}
-			values.removeAll(toBeRemoved);
-		}
+                
+		if(sudokuMatrix[cell.x][cell.y]!=-1)
+                {
+                    Coord_2D firstCell = innerSudokus.get(sudokuMatrix[cell.x][cell.y]);
+                    int X = firstCell.x;
+                    int Y = firstCell.y;
+                    HashSet<Integer> toBeRemoved = new HashSet<Integer>();
+                    for(int i=0;i<rootDimX;i++)
+                    {
+                            for (int j=0;j<rootDimY;j++)
+                            {
+                                    if (matrix[X+i][Y+j] != 0)
+                                            toBeRemoved.add(matrix[X+i][Y+j]);
+                            }
+                    }
+                    values.removeAll(toBeRemoved);
+                }
 		int[] toBeReturned = new int[values.size()];
 		int counter = 0;
 		Iterator i = values.iterator();
