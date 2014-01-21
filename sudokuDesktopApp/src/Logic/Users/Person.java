@@ -187,6 +187,12 @@ public class Person {
     {
             return this.statistics.numberOfDefeats;
     }
+    
+    public void reset()
+    {
+        this.statistics.numberOfDefeats = 0;
+        this.statistics.numberOfVictories = 0;
+    }
 }
 /**
 * Container class of Player stats

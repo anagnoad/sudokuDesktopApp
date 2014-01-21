@@ -4,6 +4,8 @@
  */
 package sudokudesktopapp;
 
+import java.awt.Color;
+
 /**
  *
  * @author Steve
@@ -26,6 +28,7 @@ public class GettingStartedPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
@@ -45,13 +48,17 @@ public class GettingStartedPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(193, 220, 255));
         setBorder(new javax.swing.border.MatteBorder(null));
         setPreferredSize(new java.awt.Dimension(200, 350));
-        setLayout(new java.awt.GridLayout(0, 1, 0, 2));
+        setLayout(new java.awt.GridBagLayout());
 
         gettingStartedLabel.setFont(new java.awt.Font("Lucida Grande", 1, 16)); // NOI18N
         gettingStartedLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         gettingStartedLabel.setText("Getting Started");
         gettingStartedLabel.setToolTipText("");
-        add(gettingStartedLabel);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.ipadx = 17;
+        gridBagConstraints.ipady = 19;
+        gridBagConstraints.insets = new java.awt.Insets(9, 9, 9, 9);
+        add(gettingStartedLabel, gridBagConstraints);
         gettingStartedLabel.getAccessibleContext().setAccessibleName("GettingStartedLabel");
 
         newUserLabel.setFont(new java.awt.Font("Lucida Grande", 3, 12)); // NOI18N
@@ -62,8 +69,19 @@ public class GettingStartedPanel extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 newUserClick(evt);
             }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                newUserLabelMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                newUserLabelMouseEntered(evt);
+            }
         });
-        add(newUserLabel);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipady = 11;
+        gridBagConstraints.insets = new java.awt.Insets(9, 9, 9, 9);
+        add(newUserLabel, gridBagConstraints);
         newUserLabel.getAccessibleContext().setAccessibleName("NewUserLabel");
 
         logInLabel.setFont(new java.awt.Font("Lucida Grande", 3, 12)); // NOI18N
@@ -74,8 +92,19 @@ public class GettingStartedPanel extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 logInClicked(evt);
             }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                logInLabelMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                logInLabelMouseEntered(evt);
+            }
         });
-        add(logInLabel);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipady = 11;
+        gridBagConstraints.insets = new java.awt.Insets(9, 9, 9, 9);
+        add(logInLabel, gridBagConstraints);
 
         playSudokuLabel.setFont(new java.awt.Font("Lucida Grande", 3, 12)); // NOI18N
         playSudokuLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -86,8 +115,19 @@ public class GettingStartedPanel extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 playSudokuAnonymouslyClicked(evt);
             }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                playSudokuLabelMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                playSudokuLabelMouseEntered(evt);
+            }
         });
-        add(playSudokuLabel);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.ipady = 11;
+        gridBagConstraints.insets = new java.awt.Insets(9, 9, 9, 9);
+        add(playSudokuLabel, gridBagConstraints);
 
         showRulesLabel.setFont(new java.awt.Font("Lucida Grande", 3, 12)); // NOI18N
         showRulesLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -97,8 +137,19 @@ public class GettingStartedPanel extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 showSudokuRulesClicked(evt);
             }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                showRulesLabelMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                showRulesLabelMouseEntered(evt);
+            }
         });
-        add(showRulesLabel);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.ipady = 11;
+        gridBagConstraints.insets = new java.awt.Insets(9, 9, 9, 9);
+        add(showRulesLabel, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void newUserClick(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newUserClick
@@ -108,6 +159,7 @@ public class GettingStartedPanel extends javax.swing.JPanel {
 
     private void logInClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logInClicked
         // this will redirect you to a JFrame to choose with which nickname to log in
+        
     }//GEN-LAST:event_logInClicked
 
     private void playSudokuAnonymouslyClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playSudokuAnonymouslyClicked
@@ -116,9 +168,53 @@ public class GettingStartedPanel extends javax.swing.JPanel {
 
     private void showSudokuRulesClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showSudokuRulesClicked
         // this will open up a JPanel showing help from a file for sudoku
+        myGuiHandler.showHelpDialog();
     }//GEN-LAST:event_showSudokuRulesClicked
 
+    private void newUserLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newUserLabelMouseEntered
+        // TODO add your handling code here:
+        this.newUserLabel.setForeground(alternativeFontColor);
+    }//GEN-LAST:event_newUserLabelMouseEntered
+
+    private void newUserLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newUserLabelMouseExited
+        // TODO add your handling code here:
+        this.newUserLabel.setForeground(defaultFontColor);
+        
+    }//GEN-LAST:event_newUserLabelMouseExited
+
+    private void logInLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logInLabelMouseEntered
+        // TODO add your handling code here:
+        this.logInLabel.setForeground(alternativeFontColor);
+    }//GEN-LAST:event_logInLabelMouseEntered
+
+    private void logInLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logInLabelMouseExited
+        // TODO add your handling code here:
+        this.logInLabel.setForeground(defaultFontColor);
+    }//GEN-LAST:event_logInLabelMouseExited
+
+    private void playSudokuLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playSudokuLabelMouseEntered
+        // TODO add your handling code here:
+        this.playSudokuLabel.setForeground(alternativeFontColor);
+    }//GEN-LAST:event_playSudokuLabelMouseEntered
+
+    private void playSudokuLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playSudokuLabelMouseExited
+        // TODO add your handling code here:
+        this.playSudokuLabel.setForeground(defaultFontColor);
+    }//GEN-LAST:event_playSudokuLabelMouseExited
+
+    private void showRulesLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showRulesLabelMouseEntered
+        // TODO add your handling code here:
+        this.showRulesLabel.setForeground(alternativeFontColor);
+    }//GEN-LAST:event_showRulesLabelMouseEntered
+
+    private void showRulesLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showRulesLabelMouseExited
+        // TODO add your handling code here:
+        this.showRulesLabel.setForeground(defaultFontColor);
+    }//GEN-LAST:event_showRulesLabelMouseExited
+
     
+    private static final Color defaultFontColor = new Color(255, 255, 255);
+    private static final Color alternativeFontColor = new Color(204, 204, 204);
     private GUIHandler myGuiHandler;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel gettingStartedLabel;

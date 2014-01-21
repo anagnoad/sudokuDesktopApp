@@ -29,6 +29,8 @@ public class GUIHandler {
     private Application myApp; // access modifier may need to change
     private GettingStartedPanel gettingStartedPanel;
     private NewUserPanel newUserPanel;
+    private LogInPanel loginPanel;
+    private SudokuHelpDialog sudokuHelpDialog;
     
     /*--------------------------Methods------------------------------*/
     //ctor
@@ -78,6 +80,7 @@ public class GUIHandler {
 //---------------------------addNewUserPanel methods-------------------------------------------     
     public void showAddNewUserPanel() // is supposed to be called when the user wishes to create new user
     {
+        
         // if the action is coming from the gettingStartedPanel
         if (this.gettingStartedPanel.isVisible())
             this.gettingStartedPanel.setVisible(false);
@@ -86,6 +89,8 @@ public class GUIHandler {
         this.newUserPanel = new NewUserPanel(this);
         this.myApp.add(this.newUserPanel);
         this.newUserPanel.setVisible(true);
+        
+        this.myApp.repaint();
     }
     
         public void closeAddNewUserPanel()
@@ -112,11 +117,31 @@ public class GUIHandler {
         }
     }
     
+    
+    public void showLogInPanel()
+    {
+        // if the action is coming from the gettingStartedPanel
+        if (this.gettingStartedPanel.isVisible())
+            this.gettingStartedPanel.setVisible(false);
+        
+        this.loginPanel = new LogInPanel(this);
+        this.myApp.add(loginPanel);
+        this.loginPanel.setVisible(true);
+        
+        this.myApp.repaint();
+    }
+    
     public ArrayList<Person> searchByNickname(String nicknameToSearch)
     {
         ArrayList<Person> listToReturn;
         listToReturn = this.appInstance.playersDB.searchByNickName(nicknameToSearch);
         return listToReturn; // may return null
+    }
+    
+    public void showHelpDialog() //works
+    {
+        this.sudokuHelpDialog = new SudokuHelpDialog(myApp, true, this);
+        this.sudokuHelpDialog.setVisible(true);
     }
     
     public String loadHelpFromHTML()
