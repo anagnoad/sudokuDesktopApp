@@ -18,6 +18,7 @@ public class SudokuHelpDialog extends javax.swing.JDialog {
         this.help = guiHandler.loadHelpFromHTML();
         this.myGuiHandler = guiHandler;
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -41,7 +42,6 @@ public class SudokuHelpDialog extends javax.swing.JDialog {
         jEditorPane1.setText(this.help);
         jEditorPane1.setEnabled(false);
         jEditorPane1.setMinimumSize(new java.awt.Dimension(240, 320));
-        jEditorPane1.setSize(new java.awt.Dimension(100, 100));
         jScrollPane1.setViewportView(jEditorPane1);
 
         getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);

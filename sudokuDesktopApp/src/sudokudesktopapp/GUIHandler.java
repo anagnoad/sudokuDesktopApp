@@ -5,6 +5,7 @@
 package sudokudesktopapp;
 
 import Logic.Sudoku.ClassicSudokuGame;
+import Logic.Sudoku.TypeOfGame;
 import Logic.Users.Person;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -205,7 +206,7 @@ public class GUIHandler {
         }
         // make it visible to the sidebar
         myApp.sideBarPanel = this.loggedInPanel;
-        myApp.sideBarPanel.setBounds(600, 140, 250, 250);
+        myApp.sideBarPanel.setBounds(600, 140, 200, 250);
         myApp.add(myApp.sideBarPanel);
         myApp.sideBarPanel.setVisible(true);
     }
@@ -281,13 +282,14 @@ public class GUIHandler {
     
     public void newClassicSudoku()
     {
+        this.cleanSidePanel(true);
         this.appInstance.game = new ClassicSudokuGame();
         if(this.myApp.mainPanel!=null)
         {
             this.myApp.mainPanel.setVisible(false);
             this.myApp.remove(myApp.mainPanel);
         }
-        this.myApp.mainPanel = new SudokuPanel(this, 9, 9);
+        this.myApp.mainPanel = new SudokuPanel(this,TypeOfGame.CLASSIC, 9, 9);
         this.myApp.mainPanel.setBounds(20, 20, 520, 520);
         this.myApp.add(myApp.mainPanel);
         this.myApp.getContentPane().validate();
@@ -297,12 +299,13 @@ public class GUIHandler {
     
     public void newHyperSudoku()
     {
+        this.cleanSidePanel(true);
         if(this.myApp.mainPanel!=null)
         {
             this.myApp.mainPanel.setVisible(false);
             this.myApp.remove(myApp.mainPanel);
         }
-        this.myApp.mainPanel = new SudokuPanel(this, 9, 9);
+        this.myApp.mainPanel = new SudokuPanel(this,TypeOfGame.HYPERDOKU, 9, 9);
         this.myApp.mainPanel.setBounds(20, 20, 520, 520);
         this.myApp.add(myApp.mainPanel);
         this.myApp.getContentPane().validate();
@@ -312,12 +315,13 @@ public class GUIHandler {
     
     public void newDuidoku()
     {
+        this.cleanSidePanel(true);
         if(this.myApp.mainPanel!=null)
         {
             this.myApp.mainPanel.setVisible(false);
             this.myApp.remove(myApp.mainPanel);
         }
-        this.myApp.mainPanel = new SudokuPanel(this, 4, 4);
+        this.myApp.mainPanel = new SudokuPanel(this,TypeOfGame.DUIDOKU,4,4);
         this.myApp.mainPanel.setBounds(20, 20, 520, 520);
         this.myApp.add(myApp.mainPanel);
         this.myApp.getContentPane().validate();
@@ -325,14 +329,32 @@ public class GUIHandler {
         this.myApp.mainPanel.setVisible(true);
     }
     
-    public void showSudokuCellOptions()
+    public void showSudokuCellOptions(TypeOfGame type)
     {
         if(this.myApp.sideBarPanel!=null)
         {
             this.myApp.sideBarPanel.setVisible(false);
             this.myApp.remove(myApp.sideBarPanel);
         }
-        this.myApp.sideBarPanel = new SudokuCellOptionsPanel(this);
+        if(type == TypeOfGame.CLASSIC || type == TypeOfGame.HYPERDOKU)
+            this.myApp.sideBarPanel = new SudokuCellOptionsPanel(this);
+        else if(type==TypeOfGame.DUIDOKU)
+            this.myApp.sideBarPanel = new DuidokuCellOptionsPanel(this);
+        this.myApp.sideBarPanel.setBounds(600, 140, 200, 250);
+        this.myApp.add(myApp.sideBarPanel);
+        this.myApp.getContentPane().validate();
+        this.myApp.getContentPane().repaint();
+        this.myApp.sideBarPanel.setVisible(true);
+    }
+    
+    public void showDuidokuCellOptions()
+    {
+        if(this.myApp.sideBarPanel!=null)
+        {
+            this.myApp.sideBarPanel.setVisible(false);
+            this.myApp.remove(myApp.sideBarPanel);
+        }
+        this.myApp.sideBarPanel = new DuidokuCellOptionsPanel(this);
         this.myApp.sideBarPanel.setBounds(600, 140, 200, 250);
         this.myApp.add(myApp.sideBarPanel);
         this.myApp.getContentPane().validate();

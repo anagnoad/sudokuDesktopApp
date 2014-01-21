@@ -6,7 +6,7 @@
 
 package sudokudesktopapp;
 
-import Logic.Sudoku.BaseGame;
+import Logic.Sudoku.TypeOfGame;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -14,9 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 
 /**
  *
@@ -30,11 +28,13 @@ public class SudokuPanel extends JPanel {
     
     public JLabel selected;
     
-    public SudokuPanel(GUIHandler handler, int rows, int columns)
+    private TypeOfGame type;
+    public SudokuPanel(GUIHandler handler, TypeOfGame type, int rows, int columns)
     {
         super();
         selected = null;
         this.myGuiHandler = handler;
+        this.type = type;
         labels = new JLabel[rows][columns];
         setLayout(new GridLayout(rows,columns,10,10));
         for (int i = 0; i < rows; i++) {
@@ -58,9 +58,9 @@ public class SudokuPanel extends JPanel {
         setVisible(true);
     }
     
-    public SudokuPanel(GUIHandler handler, int[][] sudokuMatrix, boolean[][] isEditableMatrix, int rows, int columns)
+    public SudokuPanel(GUIHandler handler, TypeOfGame type,int[][] sudokuMatrix, boolean[][] isEditableMatrix, int rows, int columns)
     {
-        this(handler, rows,columns);
+        this(handler,type, rows,columns);
         loadValues(sudokuMatrix);
         lockValues(isEditableMatrix);
     }
@@ -103,7 +103,8 @@ public class SudokuPanel extends JPanel {
             {
                 if(selected!=null)
                     selected.setBackground(Color.getHSBColor(26, 0, 88));
-                myGuiHandler.showSudokuCellOptions();
+                
+                myGuiHandler.showSudokuCellOptions(type);
                 selected = labels[i][j];
                 selected.setBackground(Color.getHSBColor(26, 0, 20));
             }
