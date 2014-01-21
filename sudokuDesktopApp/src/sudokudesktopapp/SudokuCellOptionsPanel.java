@@ -28,6 +28,7 @@ public class SudokuCellOptionsPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
@@ -46,13 +47,20 @@ public class SudokuCellOptionsPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(193, 220, 255));
         setBorder(new javax.swing.border.MatteBorder(null));
         setPreferredSize(new java.awt.Dimension(200, 350));
-        setLayout(new java.awt.GridLayout(0, 1, 0, 2));
+        setLayout(new java.awt.GridBagLayout());
 
         cellOptionsLabel.setFont(new java.awt.Font("Lucida Grande", 1, 16)); // NOI18N
         cellOptionsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cellOptionsLabel.setText("Cell options");
         cellOptionsLabel.setToolTipText("");
-        add(cellOptionsLabel);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 17;
+        gridBagConstraints.ipady = 19;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        add(cellOptionsLabel, gridBagConstraints);
         cellOptionsLabel.getAccessibleContext().setAccessibleName("GettingStartedLabel");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
@@ -61,7 +69,14 @@ public class SudokuCellOptionsPanel extends javax.swing.JPanel {
                 jComboBox1ActionPerformed(evt);
             }
         });
-        add(jComboBox1);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 17;
+        gridBagConstraints.ipady = 19;
+        gridBagConstraints.insets = new java.awt.Insets(9, 9, 9, 9);
+        add(jComboBox1, gridBagConstraints);
 
         clearLabel.setFont(new java.awt.Font("Lucida Grande", 3, 12)); // NOI18N
         clearLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -72,7 +87,13 @@ public class SudokuCellOptionsPanel extends javax.swing.JPanel {
                 showSudokuRulesClicked(evt);
             }
         });
-        add(clearLabel);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 17;
+        gridBagConstraints.ipady = 19;
+        gridBagConstraints.insets = new java.awt.Insets(9, 9, 9, 9);
+        add(clearLabel, gridBagConstraints);
 
         showHintsLabel.setFont(new java.awt.Font("Lucida Grande", 3, 12)); // NOI18N
         showHintsLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -83,7 +104,13 @@ public class SudokuCellOptionsPanel extends javax.swing.JPanel {
                 showHintsLabelshowSudokuRulesClicked(evt);
             }
         });
-        add(showHintsLabel);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.ipadx = 17;
+        gridBagConstraints.ipady = 19;
+        gridBagConstraints.insets = new java.awt.Insets(9, 9, 9, 9);
+        add(showHintsLabel, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void showSudokuRulesClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showSudokuRulesClicked
@@ -101,6 +128,10 @@ public class SudokuCellOptionsPanel extends javax.swing.JPanel {
         this.myGuiHandler.changeSudokuCell(intvalue);
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    protected JComboBox getChoicesComboBox()
+    {
+        return jComboBox1;
+    }
     
     private GUIHandler myGuiHandler;
     // Variables declaration - do not modify//GEN-BEGIN:variables

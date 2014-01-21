@@ -31,7 +31,7 @@ public class Application extends JFrame{
         setResizable(false);
         setLayout(null);
         setJMenuBar(new MainMenuBar(myGuiHandler));
-        
+       
         sideBarPanel = new GettingStartedPanel(myGuiHandler);
         sideBarPanel.setBounds(600, 140, 200, 250);
         add(sideBarPanel);

@@ -26,8 +26,7 @@ public class MainMenuBar extends JMenuBar{
     private JMenuItem hyperSudokuItem;
     private JMenuItem duidokuItem;
     private JMenuItem restorePreviousItem;
-    
-    private JMenu editMenu;
+    private JMenuItem exitItem;
     
     private JMenu userMenu;
     private JMenuItem loginItem;
@@ -80,10 +79,10 @@ public class MainMenuBar extends JMenuBar{
         fileMenu.add(newGameMenu);
         restorePreviousItem = new JMenuItem("Restore previous game");
         fileMenu.add(restorePreviousItem);
+        exitItem = new JMenuItem("Exit");
+        fileMenu.add(exitItem);
         add(fileMenu);
         
-        editMenu = new JMenu("Edit");
-        add(editMenu);
         
         userMenu = new JMenu("User");
         loginItem = new JMenuItem("Login");
