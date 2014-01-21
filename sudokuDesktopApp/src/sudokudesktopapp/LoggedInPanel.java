@@ -129,11 +129,12 @@ public class LoggedInPanel extends javax.swing.JPanel {
 
     private void newGameLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newGameLabelMouseClicked
         // TODO add your handling code here:
-        this.myGuiHandler.showStatsPanel();
+        
     }//GEN-LAST:event_newGameLabelMouseClicked
 
     private void showStatsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showStatsLabelMouseClicked
         // TODO add your handling code here:
+        this.myGuiHandler.showStatsPanel();
     }//GEN-LAST:event_showStatsLabelMouseClicked
 
     private void continueLastGameLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_continueLastGameLabelMouseEntered

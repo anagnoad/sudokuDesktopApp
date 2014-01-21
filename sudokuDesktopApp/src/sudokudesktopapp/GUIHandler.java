@@ -31,6 +31,7 @@ public class GUIHandler {
     private GettingStartedPanel gettingStartedPanel;
     private NewUserPanel newUserPanel;
     private LogInPanel loginPanel;
+    private LoggedInPanel loggedInPanel;
     private SudokuHelpDialog sudokuHelpDialog;
     private StatsPanel statsPanel;
     
@@ -38,82 +39,81 @@ public class GUIHandler {
     //ctor
     public GUIHandler(ApplicationInstance appInstance)
     {
+        // Start the application
+        // to be done:
+        // 1. create the application fram
+        // 2. add the getting started to the sidebar
+        
+        
         this.appInstance = appInstance;
-        // show the main frame
         this.myApp = new Application(this);
-        this.myApp.setVisible(true);
+        
         this.showGettingStartedPanel();
+        this.myApp.setVisible(true);
     }
     
-//---------------------------gettingStartedPanel Methods-------------------------------------------    
     
     public void showGettingStartedPanel() // is supposed to be called on launch
     {
         if (this.gettingStartedPanel == null)
         {
             this.gettingStartedPanel = new GettingStartedPanel(this);
-            this.gettingStartedPanel.setVisible(true);
         }
-        else
-            if (this.gettingStartedPanel.isVisible())
-            {/* already visible, nothing to be done*/}
-            else
-            {
-                this.gettingStartedPanel.setVisible(true);
-            }
+        // make it visible to the sidebar
+        myApp.sideBarPanel = this.gettingStartedPanel;
+        myApp.sideBarPanel.setBounds(600, 140, 200, 250);
+        myApp.add(myApp.sideBarPanel);
+        myApp.sideBarPanel.setVisible(true);
     }
     
-    public void closeGettingStartedPanel()
+    public void hideGettingStartedPanel()
     {
-        if (this.gettingStartedPanel == null)
-        {/* nothing to be done*/}
-        else
-        {
-            if (this.gettingStartedPanel.isVisible())
-            {
-                this.gettingStartedPanel.setVisible(false);
-            }
-            else
-            {/* nothing to be done*/}
-        }
+       if (this.gettingStartedPanel == null)
+       {/* Nothing to be done */}
+       else
+       {
+           if(this.gettingStartedPanel.isVisible())
+           {
+               myApp.sideBarPanel.setVisible(false);
+               myApp.sideBarPanel.remove(this.gettingStartedPanel);
+               myApp.sideBarPanel.repaint();
+           }
+       }
     }
- //------------------------------------------------------------------------------------------------
-    
-//---------------------------addNewUserPanel methods-------------------------------------------     
+
     public void showAddNewUserPanel() // is supposed to be called when the user wishes to create new user
     {
+        /*
+         * To-do:
+         * 1. hide the gettingStartedPanel
+         * 2. Show the logInPanel to the mainPanel of the application frame
+         */
         
-        // if the action is coming from the gettingStartedPanel
+        
+        // 1)
         if (this.gettingStartedPanel.isVisible())
-            this.gettingStartedPanel.setVisible(false);
+            this.hideGettingStartedPanel();
         
-        // show the panel to create the new user
-        
-        this.myApp.sideBarPanel.setVisible(false);
-        this.myApp.remove(myApp.sideBarPanel);
+        // 2)
         this.newUserPanel = new NewUserPanel(this);
-        this.newUserPanel.setVisible(true);
-
-        this.myApp.sideBarPanel = this.newUserPanel;
-        this.myApp.sideBarPanel.setBounds(600, 140, 200, 250);
-        this.myApp.add(myApp.sideBarPanel);
-        this.myApp.getContentPane().validate();
-        this.myApp.getContentPane().repaint();
-        this.myApp.sideBarPanel.setVisible(true);
-
+        
+        this.myApp.mainPanel = newUserPanel;
+        this.myApp.mainPanel.setBounds(120, 120, 250, 250);
+        this.myApp.add(myApp.mainPanel);
+        this.myApp.setVisible(true);
+        this.myApp.repaint();
     }
     
         public void hideAddNewUserPanel()
-    {
-        if (this.newUserPanel!=null)
         {
-            this.newUserPanel.setVisible(false); // hide the panel
-            this.myApp.remove(this.newUserPanel); // remove it from the JFrame
-            this.newUserPanel = null; // let the GC delete the Panel
+            if (this.newUserPanel!=null)
+            {
+                this.newUserPanel.setVisible(false); // hide the panel
+                this.myApp.remove(myApp.mainPanel);
+                this.myApp.repaint();
+                this.newUserPanel = null;
+            }
         }
-    }
-    
- //------------------------------------------------------------------------------------------------
         
         
     public void addNewUser(String nickname)
@@ -124,11 +124,13 @@ public class GUIHandler {
         {
             // login to the current user
             this.appInstance.login(player);
+            //DEBUGING: System.out.println(this.appInstance.loggedInUser.toString());
         }
         else
         {
             // thow exception or/and show message
         }
+        this.showLoggedInPanel();
     }
     
     
@@ -145,6 +147,34 @@ public class GUIHandler {
         
         this.myApp.repaint();
     }
+    
+    public void hideLoginPanel() //
+    {
+        if (this.loginPanel != null)
+        {}
+    }
+    
+    
+    public void showLoggedInPanel()
+    {
+        if (this.loggedInPanel == null)
+        {
+            this.loggedInPanel = new LoggedInPanel(this);
+        }
+        // make it visible to the sidebar
+        myApp.sideBarPanel = this.loggedInPanel;
+        myApp.sideBarPanel.setBounds(600, 140, 200, 250);
+        myApp.add(myApp.sideBarPanel);
+        myApp.sideBarPanel.setVisible(true);
+    }
+    
+    public void hideLoggedInPanel()
+    {
+        myApp.sideBarPanel.setVisible(false);
+        myApp.sideBarPanel.remove(this.gettingStartedPanel);
+        myApp.sideBarPanel.repaint();
+    }
+    
     
     public ArrayList<Person> searchByNickname(String nicknameToSearch)
     {
@@ -164,12 +194,21 @@ public class GUIHandler {
     {
         if (this.statsPanel == null)
         {
+            //System.out.println(appInstance.loggedInUser.getNickname()+"...");
             this.statsPanel = new StatsPanel(this, appInstance.loggedInUser);
-            this.myApp.add(statsPanel);
         }
-        if (!this.statsPanel.isVisible())
-            this.statsPanel.setVisible(true);
-        
+        else
+        {
+            if (this.statsPanel.isVisible())
+            {
+                // already visible
+                return;
+            }
+        }
+        this.myApp.mainPanel = this.statsPanel;
+        this.myApp.mainPanel.setBounds(30, 30, 400, 400);
+        this.myApp.add(myApp.mainPanel);
+        this.myApp.setVisible(true);
         this.myApp.repaint();
     }
     

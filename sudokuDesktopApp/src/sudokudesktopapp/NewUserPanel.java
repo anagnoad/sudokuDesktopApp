@@ -36,6 +36,8 @@ public class NewUserPanel extends javax.swing.JPanel {
 
         setLayout(new java.awt.GridLayout(0, 1));
 
+        nicknameEnterPanel.setPreferredSize(new java.awt.Dimension(100, 38));
+        nicknameEnterPanel.setSize(new java.awt.Dimension(100, 100));
         nicknameEnterPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 8, 5));
 
         nicknameLabel.setText("Nickname:");
@@ -91,10 +93,12 @@ public class NewUserPanel extends javax.swing.JPanel {
 
     private void onEnterPressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onEnterPressed
         this.myGuiHandler.addNewUser(this.nicknameInput.getText());
+        this.myGuiHandler.hideAddNewUserPanel();
     }//GEN-LAST:event_onEnterPressed
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         this.myGuiHandler.addNewUser(this.nicknameInput.getText());
+        this.myGuiHandler.hideAddNewUserPanel();
     }//GEN-LAST:event_okButtonActionPerformed
 
     private GUIHandler myGuiHandler;

@@ -32,10 +32,10 @@ public class Application extends JFrame{
         setLayout(null);
         setJMenuBar(new MainMenuBar(myGuiHandler));
         
-        sideBarPanel = new GettingStartedPanel(myGuiHandler);
-        sideBarPanel.setBounds(600, 140, 200, 250);
-        add(sideBarPanel);
-        sideBarPanel.setVisible(true);
+//        sideBarPanel = new GettingStartedPanel(myGuiHandler);
+//        sideBarPanel.setBounds(600, 140, 200, 250);
+//        add(sideBarPanel);
+//        sideBarPanel.setVisible(true);
         
         /*
         mainPanel = new SudokuPanel(myGuiHandler,9,9);
