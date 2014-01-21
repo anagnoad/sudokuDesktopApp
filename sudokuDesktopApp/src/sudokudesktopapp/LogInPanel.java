@@ -6,6 +6,7 @@ package sudokudesktopapp;
 
 import Logic.Users.Person;
 import java.util.ArrayList;
+import javax.swing.AbstractListModel;
 
 /**
  *
@@ -18,6 +19,15 @@ public class LogInPanel extends javax.swing.JPanel {
      */
     public LogInPanel(GUIHandler guiHandler) {
         this.myGuiHandler = guiHandler;
+        this.resultsToShare = new ArrayList<>(); // so as not to have null ptr exception
+        listModeForJList = new javax.swing.AbstractListModel()
+        {
+                ArrayList<Person> listToShow = resultsToShare;
+                @Override
+                public int getSize() {return listToShow.size();}
+                @Override
+                public Object getElementAt(int i) {return listToShow.get(i);}
+        };
         initComponents();
     }
 
@@ -80,39 +90,38 @@ public class LogInPanel extends javax.swing.JPanel {
         jScrollPane1.setBackground(new java.awt.Color(192, 192, 192));
 
         resultsJList.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        resultsJList.setModel(new javax.swing.AbstractListModel()
-            {
-                ArrayList<Person> listToShow = resultsToShare;
-                public int getSize() {return listToShow.size();}
-                public Object getElementAt(int i) {return listToShow.get(i);}
-            });
-            resultsJList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-            resultsJList.setToolTipText("Choose among results");
-            jScrollPane1.setViewportView(resultsJList);
+        resultsJList.setModel(listModeForJList);
+        resultsJList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        resultsJList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                resultsJListValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(resultsJList);
 
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 3;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            gridBagConstraints.ipady = 4;
-            gridBagConstraints.weightx = 0.3;
-            gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
-            add(jScrollPane1, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 4;
+        gridBagConstraints.weightx = 0.3;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
+        add(jScrollPane1, gridBagConstraints);
 
-            loginLabel.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-            loginLabel.setText("Log In");
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 0;
-            gridBagConstraints.ipady = 10;
-            gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-            add(loginLabel, gridBagConstraints);
-            gridBagConstraints = new java.awt.GridBagConstraints();
-            gridBagConstraints.gridx = 0;
-            gridBagConstraints.gridy = 1;
-            gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-            add(jSeparator2, gridBagConstraints);
-        }// </editor-fold>//GEN-END:initComponents
+        loginLabel.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        loginLabel.setText("Log In");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        add(loginLabel, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        add(jSeparator2, gridBagConstraints);
+    }// </editor-fold>//GEN-END:initComponents
 
     private void nicknameSearchInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nicknameSearchInputActionPerformed
         // search nickname on the db and return results
@@ -128,6 +137,12 @@ public class LogInPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_nicknameSearchInputActionPerformed
 
+    private void resultsJListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_resultsJListValueChanged
+        // TODO add your handling code here:
+        // code to do when selecting a player from the list
+    }//GEN-LAST:event_resultsJListValueChanged
+
+    private AbstractListModel listModeForJList;
     private GUIHandler myGuiHandler;
     private ArrayList<Person> resultsToShare;
     // Variables declaration - do not modify//GEN-BEGIN:variables
