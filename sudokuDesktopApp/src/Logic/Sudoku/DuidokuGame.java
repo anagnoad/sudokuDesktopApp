@@ -78,10 +78,10 @@ public class DuidokuGame    extends BaseGame // this can be easily extended to b
 
     @Override
     public boolean addNumber(int value, Coord_2D coordinates) {
-            boolean isValid = mySudoku.setCell(value, coordinates.x, coordinates.y);
-            if (isValid)
-                    stepCounter++;
-            return isValid;
+        boolean isValid = mySudoku.setCell(value, coordinates.x, coordinates.y);
+        if (isValid)
+                stepCounter++;
+        return isValid;
     }
     
     public boolean computerAddNumber(){

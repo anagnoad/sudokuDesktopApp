@@ -6,6 +6,7 @@
 
 package sudokudesktopapp;
 
+import Logic.Sudoku.BaseGame;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -57,6 +58,36 @@ public class SudokuPanel extends JPanel {
         setVisible(true);
     }
     
+    public SudokuPanel(GUIHandler handler, int[][] sudokuMatrix, boolean[][] isEditableMatrix, int rows, int columns)
+    {
+        this(handler, rows,columns);
+        loadValues(sudokuMatrix);
+        lockValues(isEditableMatrix);
+    }
+    
+    private void lockValues(boolean[][] isEditableMatrix)
+    {
+        for (int i = 0; i < isEditableMatrix.length; i++) {
+            boolean[] bs = isEditableMatrix[i];
+            for (int j = 0; j < bs.length; j++) {
+                if(!bs[j])
+                    labels[i][j].setFont(new Font("Serif",Font.BOLD,20));
+                labels[i][j].setEnabled(bs[j]);
+            }
+        }
+    }
+    
+    private void loadValues(int[][] sudokuMatrix)
+    {
+        for (int i = 0; i < sudokuMatrix.length; i++) {
+            int[] row = sudokuMatrix[i];
+            for (int j = 0; j < row.length; j++) {
+                if(row[j]!=0)
+                    labels[i][j].setText(Integer.toString(row[j]));
+            }
+        }
+    }
+    
     private class CellAdapter extends MouseAdapter
     {
         private int i, j;
@@ -67,11 +98,15 @@ public class SudokuPanel extends JPanel {
         }
         
         public void mouseClicked(MouseEvent ev) {
-            if(selected!=null)
-                selected.setBackground(Color.getHSBColor(26, 0, 88));
-            myGuiHandler.showSudokuCellOptions();
-            selected = labels[i][j];
-            selected.setBackground(Color.getHSBColor(26, 0, 20));
+            JLabel label = (JLabel) ev.getSource();
+            if(label.isEnabled())
+            {
+                if(selected!=null)
+                    selected.setBackground(Color.getHSBColor(26, 0, 88));
+                myGuiHandler.showSudokuCellOptions();
+                selected = labels[i][j];
+                selected.setBackground(Color.getHSBColor(26, 0, 20));
+            }
         }
     }
 }

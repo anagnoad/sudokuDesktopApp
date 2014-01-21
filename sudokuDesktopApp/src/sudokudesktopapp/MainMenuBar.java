@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,8 +27,7 @@ public class MainMenuBar extends JMenuBar{
     private JMenuItem hyperSudokuItem;
     private JMenuItem duidokuItem;
     private JMenuItem restorePreviousItem;
-    
-    private JMenu editMenu;
+    private JMenuItem exitItem;
     
     private JMenu userMenu;
     private JMenuItem loginItem;
@@ -79,14 +79,38 @@ public class MainMenuBar extends JMenuBar{
         newGameMenu.add(duidokuItem);
         fileMenu.add(newGameMenu);
         restorePreviousItem = new JMenuItem("Restore previous game");
+        restorePreviousItem.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Foo");
+            }
+            
+        });
         fileMenu.add(restorePreviousItem);
+        exitItem = new JMenuItem("Exit");
+        exitItem.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Foo");
+            }
+            
+        });
+        fileMenu.add(exitItem);
         add(fileMenu);
         
-        editMenu = new JMenu("Edit");
-        add(editMenu);
         
         userMenu = new JMenu("User");
         loginItem = new JMenuItem("Login");
+        loginItem.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Foo");
+            }
+            
+        });
         newUserItem = new JMenuItem("Create new user");
         newUserItem.addActionListener(new ActionListener(){
 
@@ -97,7 +121,23 @@ public class MainMenuBar extends JMenuBar{
         
         });
         showStatsItem = new JMenuItem("Show stats");
+        showStatsItem.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Foo");
+            }
+            
+        });
         deleteHistoryItem = new JMenuItem("Delete history");
+        deleteHistoryItem.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Foo");
+            }
+            
+        });
         userMenu.add(loginItem);
         userMenu.add(newUserItem);
         userMenu.add(showStatsItem);
@@ -106,8 +146,32 @@ public class MainMenuBar extends JMenuBar{
         
         helpMenu = new JMenu("Help");
         sudokuRulesItem = new JMenuItem("Show sudoku rules");
+        sudokuRulesItem.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Foo");
+            }
+            
+        });
         showHintsItem = new JMenuItem("Show hints");
+        showHintsItem.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Foo");
+            }
+            
+        });
         aboutItem = new JMenuItem("About..");
+        aboutItem.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Foo");
+            }
+            
+        });
         helpMenu.add(sudokuRulesItem);
         helpMenu.add(showHintsItem);
         helpMenu.add(aboutItem);
