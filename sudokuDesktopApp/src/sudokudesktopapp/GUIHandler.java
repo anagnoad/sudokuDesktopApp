@@ -32,6 +32,7 @@ public class GUIHandler {
     private NewUserPanel newUserPanel;
     private LogInPanel loginPanel;
     private SudokuHelpDialog sudokuHelpDialog;
+    private StatsPanel statsPanel;
     
     /*--------------------------Methods------------------------------*/
     //ctor
@@ -102,10 +103,14 @@ public class GUIHandler {
 
     }
     
-        public void closeAddNewUserPanel()
+        public void hideAddNewUserPanel()
     {
-        this.newUserPanel.setVisible(false); // hide the panel
-        this.newUserPanel = null; // let the GC delete the Panel
+        if (this.newUserPanel!=null)
+        {
+            this.newUserPanel.setVisible(false); // hide the panel
+            this.myApp.remove(this.newUserPanel); // remove it from the JFrame
+            this.newUserPanel = null; // let the GC delete the Panel
+        }
     }
     
  //------------------------------------------------------------------------------------------------
@@ -133,7 +138,8 @@ public class GUIHandler {
         if (this.gettingStartedPanel.isVisible())
             this.gettingStartedPanel.setVisible(false);
         
-        this.loginPanel = new LogInPanel(this);
+        if (this.loginPanel == null)
+            this.loginPanel = new LogInPanel(this);
         this.myApp.add(loginPanel);
         this.loginPanel.setVisible(true);
         
@@ -152,6 +158,32 @@ public class GUIHandler {
         this.sudokuHelpDialog = new SudokuHelpDialog(myApp, true, this);
         this.sudokuHelpDialog.setVisible(true);
     }
+    
+    
+    public void showStatsPanel()
+    {
+        if (this.statsPanel == null)
+        {
+            this.statsPanel = new StatsPanel(this, appInstance.loggedInUser);
+            this.myApp.add(statsPanel);
+        }
+        if (!this.statsPanel.isVisible())
+            this.statsPanel.setVisible(true);
+        
+        this.myApp.repaint();
+    }
+    
+    public void hideStatsPanel()
+    {
+        if (this.statsPanel != null && this.statsPanel.isVisible())
+        {
+            this.statsPanel.setVisible(false);
+            this.myApp.remove(this.statsPanel);
+            this.myApp.repaint();
+            this.statsPanel = null;
+        }
+    }
+    
     
     public void newClassicSudoku()
     {

@@ -37,6 +37,7 @@ public class GettingStartedPanel extends javax.swing.JPanel {
         logInLabel = new javax.swing.JLabel();
         playSudokuLabel = new javax.swing.JLabel();
         showRulesLabel = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
 
         jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -50,11 +51,13 @@ public class GettingStartedPanel extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(200, 350));
         setLayout(new java.awt.GridBagLayout());
 
-        gettingStartedLabel.setFont(new java.awt.Font("Lucida Grande", 1, 16)); // NOI18N
+        gettingStartedLabel.setFont(new java.awt.Font("Lucida Grande", 1, 22)); // NOI18N
         gettingStartedLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         gettingStartedLabel.setText("Getting Started");
         gettingStartedLabel.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.ipadx = 17;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.insets = new java.awt.Insets(9, 9, 9, 9);
@@ -77,8 +80,8 @@ public class GettingStartedPanel extends javax.swing.JPanel {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.ipady = 11;
         gridBagConstraints.insets = new java.awt.Insets(9, 9, 9, 9);
         add(newUserLabel, gridBagConstraints);
@@ -100,8 +103,8 @@ public class GettingStartedPanel extends javax.swing.JPanel {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.ipady = 11;
         gridBagConstraints.insets = new java.awt.Insets(9, 9, 9, 9);
         add(logInLabel, gridBagConstraints);
@@ -123,8 +126,8 @@ public class GettingStartedPanel extends javax.swing.JPanel {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.ipady = 11;
         gridBagConstraints.insets = new java.awt.Insets(9, 9, 9, 9);
         add(playSudokuLabel, gridBagConstraints);
@@ -145,11 +148,20 @@ public class GettingStartedPanel extends javax.swing.JPanel {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.ipady = 11;
         gridBagConstraints.insets = new java.awt.Insets(9, 9, 9, 9);
         add(showRulesLabel, gridBagConstraints);
+
+        jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipady = 8;
+        add(jSeparator1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void newUserClick(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newUserClick
@@ -220,6 +232,7 @@ public class GettingStartedPanel extends javax.swing.JPanel {
     private javax.swing.JLabel gettingStartedLabel;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel logInLabel;
     private javax.swing.JLabel newUserLabel;
     private javax.swing.JLabel playSudokuLabel;

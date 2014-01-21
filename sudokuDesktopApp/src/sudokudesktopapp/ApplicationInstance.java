@@ -17,7 +17,7 @@ public final class ApplicationInstance {
             loggedInUser = null;
             game = null;
             anonymousUser = true;
-            if (!loadPlayersDB(" "))// enter filename containing the PlayersDB
+            if (!loadPlayersDB(" "))// TO BE DONE: enter filename containing the PlayersDB
             {
                     this.playersDB = new PersonDB();
             }
