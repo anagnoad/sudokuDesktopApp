@@ -107,7 +107,7 @@ public class MainMenuBar extends JMenuBar{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Foo");
+                myGuiHandler.showLogInPanel();
             }
             
         });
@@ -125,7 +125,7 @@ public class MainMenuBar extends JMenuBar{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Foo");
+                myGuiHandler.showStatsPanel();
             }
             
         });
@@ -133,8 +133,8 @@ public class MainMenuBar extends JMenuBar{
         deleteHistoryItem.addActionListener(new ActionListener(){
 
             @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Foo");
+            public void actionPerformed(ActionEvent e) {//
+                
             }
             
         });
@@ -150,7 +150,7 @@ public class MainMenuBar extends JMenuBar{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Foo");
+                myGuiHandler.showHelpDialog();
             }
             
         });
@@ -168,7 +168,7 @@ public class MainMenuBar extends JMenuBar{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Foo");
+                myGuiHandler.showAboutDialog();
             }
             
         });
@@ -178,5 +178,21 @@ public class MainMenuBar extends JMenuBar{
         add(helpMenu);
     }
 
+    
+    public void disableUserSpecificItems()
+    {
+        this.deleteHistoryItem.setEnabled(false);
+        this.showStatsItem.setEnabled(false);
+        this.newUserItem.setEnabled(true);
+        this.restorePreviousItem.setEnabled(false);
+    }
+    
+    public void enableUserSpecificItems()
+    {
+        this.loginItem.setEnabled(false);
+        this.deleteHistoryItem.setEnabled(true);
+        this.showStatsItem.setEnabled(true);
+        this.restorePreviousItem.setEnabled(true);
+    }
 }
 

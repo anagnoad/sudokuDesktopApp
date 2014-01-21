@@ -24,16 +24,17 @@ public class GUIHandler {
     /*---------------------Member vars--------------------------*/
     /*--------------------Logic elements ----------------------*/
     private ApplicationInstance appInstance; // knows the application instance
-    private static final String helpPath = "./resources/sudoku_help.html";
     
     /* -------------------GUI elements-------------------------*/
     private Application myApp; // access modifier may need to change
+    private MainMenuBar mainMenuBar;
     private GettingStartedPanel gettingStartedPanel;
     private NewUserPanel newUserPanel;
     private LogInPanel loginPanel;
     private LoggedInPanel loggedInPanel;
     private SudokuHelpDialog sudokuHelpDialog;
     private StatsPanel statsPanel;
+    private AboutDialog aboutDialog;
     
     /*--------------------------Methods------------------------------*/
     //ctor
@@ -47,9 +48,38 @@ public class GUIHandler {
         
         this.appInstance = appInstance;
         this.myApp = new Application(this);
+        // add the menuBar to the app
+        this.mainMenuBar = new MainMenuBar(this);
+        this.menuLoggedInEnabler();
+        myApp.setJMenuBar(this.mainMenuBar);
         
         this.showGettingStartedPanel();
         this.myApp.setVisible(true);
+    }
+    
+    public void cleanMainPanel(boolean toBeNulled)
+    {
+        if (this.myApp.mainPanel != null)
+        {
+            this.myApp.mainPanel.setVisible(false);
+            if (toBeNulled)
+            {
+                this.myApp.mainPanel = null;
+            }
+        }
+    }
+    
+    public void cleanSidePanel(boolean toBeNulled)
+    {
+        if (this.myApp.sideBarPanel != null)
+        {
+            this.myApp.sideBarPanel.setVisible(false);
+            if (toBeNulled)
+            {
+                this.myApp.sideBarPanel = null;
+            }
+        }
+        this.myApp.repaint();
     }
     
     
@@ -72,12 +102,13 @@ public class GUIHandler {
        {/* Nothing to be done */}
        else
        {
-           if(this.gettingStartedPanel.isVisible())
-           {
-               myApp.sideBarPanel.setVisible(false);
-               myApp.sideBarPanel.remove(this.gettingStartedPanel);
-               myApp.sideBarPanel.repaint();
-           }
+           this.cleanSidePanel(false);
+//           if(this.gettingStartedPanel.isVisible())
+//           {
+//               myApp.sideBarPanel.setVisible(false);
+//               myApp.sideBarPanel.remove(this.gettingStartedPanel);
+//               myApp.sideBarPanel.repaint();
+//           }
        }
     }
 
@@ -86,19 +117,19 @@ public class GUIHandler {
         /*
          * To-do:
          * 1. hide the gettingStartedPanel
-         * 2. Show the logInPanel to the mainPanel of the application frame
+         * 2. Show the newUser to the mainPanel of the application frame
          */
         
         
         // 1)
-        if (this.gettingStartedPanel.isVisible())
-            this.hideGettingStartedPanel();
+        this.hideGettingStartedPanel();
         
         // 2)
+        this.cleanMainPanel(true);
         this.newUserPanel = new NewUserPanel(this);
         
         this.myApp.mainPanel = newUserPanel;
-        this.myApp.mainPanel.setBounds(120, 120, 250, 250);
+        this.myApp.mainPanel.setBounds(120, 120, 350, 350);
         this.myApp.add(myApp.mainPanel);
         this.myApp.setVisible(true);
         this.myApp.repaint();
@@ -108,9 +139,7 @@ public class GUIHandler {
         {
             if (this.newUserPanel!=null)
             {
-                this.newUserPanel.setVisible(false); // hide the panel
-                this.myApp.remove(myApp.mainPanel);
-                this.myApp.repaint();
+                this.cleanMainPanel(true);
                 this.newUserPanel = null;
             }
         }
@@ -124,6 +153,7 @@ public class GUIHandler {
         {
             // login to the current user
             this.appInstance.login(player);
+            menuLoggedInEnabler();
             //DEBUGING: System.out.println(this.appInstance.loggedInUser.toString());
         }
         else
@@ -134,24 +164,36 @@ public class GUIHandler {
     }
     
     
-    public void showLogInPanel()
+    public void showLogInPanel()//
     {
-        // if the action is coming from the gettingStartedPanel
-        if (this.gettingStartedPanel.isVisible())
-            this.gettingStartedPanel.setVisible(false);
+        /*
+         * To-do:
+         * 1. hide the gettingStartedPanel
+         * 2. Show the logInPanel to the mainPanel of the application frame
+         */
         
-        if (this.loginPanel == null)
-            this.loginPanel = new LogInPanel(this);
-        this.myApp.add(loginPanel);
-        this.loginPanel.setVisible(true);
         
+        // 1)
+        this.hideGettingStartedPanel();
+        
+        // 2)
+        this.cleanMainPanel(true);
+        this.loginPanel = new LogInPanel(this);
+        
+        this.myApp.mainPanel = loginPanel;
+        this.myApp.mainPanel.setBounds(120, 120, 250, 250);
+        this.myApp.add(myApp.mainPanel);
+        this.myApp.setVisible(true);
         this.myApp.repaint();
     }
     
     public void hideLoginPanel() //
     {
-        if (this.loginPanel != null)
-        {}
+         if (this.loginPanel!=null)
+            {
+                this.cleanMainPanel(true);
+                this.newUserPanel = null;
+            }
     }
     
     
@@ -163,16 +205,14 @@ public class GUIHandler {
         }
         // make it visible to the sidebar
         myApp.sideBarPanel = this.loggedInPanel;
-        myApp.sideBarPanel.setBounds(600, 140, 200, 250);
+        myApp.sideBarPanel.setBounds(600, 140, 250, 250);
         myApp.add(myApp.sideBarPanel);
         myApp.sideBarPanel.setVisible(true);
     }
     
     public void hideLoggedInPanel()
     {
-        myApp.sideBarPanel.setVisible(false);
-        myApp.sideBarPanel.remove(this.gettingStartedPanel);
-        myApp.sideBarPanel.repaint();
+        this.cleanSidePanel(false);
     }
     
     
@@ -187,6 +227,12 @@ public class GUIHandler {
     {
         this.sudokuHelpDialog = new SudokuHelpDialog(myApp, true, this);
         this.sudokuHelpDialog.setVisible(true);
+    }
+    
+    public void showAboutDialog()
+    {
+        this.aboutDialog = new AboutDialog(myApp, true);
+        this.aboutDialog.setVisible(true);
     }
     
     
@@ -205,6 +251,7 @@ public class GUIHandler {
                 return;
             }
         }
+        this.cleanMainPanel(true);
         this.myApp.mainPanel = this.statsPanel;
         this.myApp.mainPanel.setBounds(30, 30, 400, 400);
         this.myApp.add(myApp.mainPanel);
@@ -214,15 +261,23 @@ public class GUIHandler {
     
     public void hideStatsPanel()
     {
-        if (this.statsPanel != null && this.statsPanel.isVisible())
-        {
-            this.statsPanel.setVisible(false);
-            this.myApp.remove(this.statsPanel);
-            this.myApp.repaint();
-            this.statsPanel = null;
-        }
+        if (this.statsPanel!=null)
+            {
+                this.cleanMainPanel(true);
+                this.statsPanel = null;
+            }
     }
     
+    
+    public void menuLoggedInEnabler()
+    {
+        if (this.appInstance.anonymousUser)
+        {
+            this.mainMenuBar.disableUserSpecificItems();
+        }
+        else
+            this.mainMenuBar.enableUserSpecificItems();
+    }
     
     public void newClassicSudoku()
     {
@@ -306,7 +361,7 @@ public class GUIHandler {
     public String loadHelpFromHTML()
     {
         // define somewhere the constant of the file
-        try(BufferedReader input = new BufferedReader(new FileReader(helpPath));)
+        try(BufferedReader input = new BufferedReader(new FileReader(GlobalConstants.SUDOKUHELP_PATH));)
         {
             String temp;
             StringBuilder s = new StringBuilder();

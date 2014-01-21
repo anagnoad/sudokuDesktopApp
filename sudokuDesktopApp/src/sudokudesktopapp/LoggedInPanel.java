@@ -37,7 +37,7 @@ public class LoggedInPanel extends javax.swing.JPanel {
         showStatsLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(193, 220, 255));
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setPreferredSize(new java.awt.Dimension(250, 300));
         setLayout(new java.awt.GridBagLayout());
 
         optionsLabel.setFont(new java.awt.Font("Lucida Grande", 1, 22)); // NOI18N

@@ -48,7 +48,7 @@ public class GettingStartedPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(193, 220, 255));
         setBorder(new javax.swing.border.MatteBorder(null));
-        setPreferredSize(new java.awt.Dimension(200, 350));
+        setPreferredSize(new java.awt.Dimension(250, 300));
         setLayout(new java.awt.GridBagLayout());
 
         gettingStartedLabel.setFont(new java.awt.Font("Lucida Grande", 1, 22)); // NOI18N
@@ -170,7 +170,8 @@ public class GettingStartedPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_newUserClick
 
     private void logInClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logInClicked
-        // this will redirect you to a JFrame to choose with which nickname to log in
+        // this will redirect you to a JPanel to choose with which nickname to log in
+        this.myGuiHandler.showLogInPanel();
         
     }//GEN-LAST:event_logInClicked
 

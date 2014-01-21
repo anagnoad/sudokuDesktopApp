@@ -68,8 +68,8 @@ public class LogInPanel extends javax.swing.JPanel {
             .add(searchPanelLayout.createSequentialGroup()
                 .add(searchIconLabel)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(nicknameSearchInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 401, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 146, Short.MAX_VALUE))
+                .add(nicknameSearchInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 205, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(0, 211, Short.MAX_VALUE))
         );
         searchPanelLayout.setVerticalGroup(
             searchPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -78,7 +78,7 @@ public class LogInPanel extends javax.swing.JPanel {
                 .add(searchPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(searchIconLabel)
                     .add(nicknameSearchInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -108,7 +108,7 @@ public class LogInPanel extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
         add(jScrollPane1, gridBagConstraints);
 
-        loginLabel.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        loginLabel.setFont(new java.awt.Font("Lucida Grande", 1, 22)); // NOI18N
         loginLabel.setText("Log In");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

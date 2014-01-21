@@ -30,23 +30,6 @@ public class Application extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setLayout(null);
-        setJMenuBar(new MainMenuBar(myGuiHandler));
         
-//        sideBarPanel = new GettingStartedPanel(myGuiHandler);
-//        sideBarPanel.setBounds(600, 140, 200, 250);
-//        add(sideBarPanel);
-//        sideBarPanel.setVisible(true);
-       
-        sideBarPanel = new GettingStartedPanel(myGuiHandler);
-        sideBarPanel.setBounds(600, 140, 200, 250);
-        add(sideBarPanel);
-        sideBarPanel.setVisible(true);
-        
-        /*
-        mainPanel = new SudokuPanel(myGuiHandler,9,9);
-        mainPanel.setBounds(20, 20, 520, 520);
-        add(mainPanel);
-        setVisible(true);
-        */
     }
 }
