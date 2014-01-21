@@ -89,6 +89,7 @@ public class GUIHandler {
         this.newUserPanel = new NewUserPanel(this);
         this.myApp.add(this.newUserPanel);
         this.newUserPanel.setVisible(true);
+<<<<<<< HEAD
         
         this.myApp.repaint();
     }
