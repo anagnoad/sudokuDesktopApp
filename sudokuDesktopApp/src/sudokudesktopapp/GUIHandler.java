@@ -263,6 +263,7 @@ public class GUIHandler {
         this.myApp.mainPanel.setBounds(30, 30, 400, 400);
         this.myApp.add(myApp.mainPanel);
         this.myApp.setVisible(true);
+        this.myApp.mainPanel.setVisible(true);
         this.myApp.repaint();
     }
     
