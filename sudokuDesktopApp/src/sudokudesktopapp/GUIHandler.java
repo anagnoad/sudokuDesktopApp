@@ -323,6 +323,8 @@ public class GUIHandler {
                     HyperSudokuGame hyperGame = (HyperSudokuGame) game;
                     label.setText(String.valueOf(hyperGame.getMatrixValue(i, j)));
                 }
+                if (label.getText().equals("0"))
+                    label.setText("");
             }
         }
     }
@@ -339,35 +341,31 @@ public class GUIHandler {
         for (int i = 0; i < isEditableMatrix.length; i++) {
             boolean[] bs = isEditableMatrix[i];
             for (int j = 0; j < bs.length; j++) {
+               if (!bs[j])
                 lockValue(i,j);
             }
         }
     }
-//    
-//    private void loadValues(int[][] sudokuMatrix)
-//    {
-//        for (int i = 0; i < sudokuMatrix.length; i++) {
-//            int[] row = sudokuMatrix[i];
-//            for (int j = 0; j < row.length; j++) {
-//                if(row[j]!=0)
-//                    labels[i][j].setText(Integer.toString(row[j]));
-//            }
-//        }
-//    }
+
     
     public void newHyperSudoku()
     {
         this.cleanSidePanel(true);
+        this.appInstance.loadNewGame(TypeOfGame.HYPERDOKU);
         if(this.myApp.mainPanel!=null)
         {
             this.myApp.mainPanel.setVisible(false);
             this.myApp.remove(myApp.mainPanel);
         }
-        this.myApp.mainPanel = new SudokuPanel(this,TypeOfGame.HYPERDOKU, 9, 9);
+        this.sudokuPanel = new SudokuPanel(this,TypeOfGame.HYPERDOKU, 9, 9);
+        this.myApp.mainPanel = sudokuPanel;
         this.myApp.mainPanel.setBounds(20, 20, 520, 520);
+        loadValuesFromGame(this.appInstance.game);
+        HyperSudokuGame hyperGame = (HyperSudokuGame) this.appInstance.game;
+        lockValues(hyperGame.getIsEditableMatrix());
         this.myApp.add(myApp.mainPanel);
-        this.myApp.getContentPane().validate();
-        this.myApp.getContentPane().repaint();
+//        this.myApp.getContentPane().validate();
+//        this.myApp.getContentPane().repaint();
         this.myApp.mainPanel.setVisible(true);
     }
     

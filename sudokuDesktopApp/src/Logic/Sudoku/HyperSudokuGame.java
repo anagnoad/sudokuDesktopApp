@@ -115,4 +115,9 @@ public class HyperSudokuGame extends BaseGame {
     {
         return this.mySudoku.getMatrix()[i][j];
     }
+    
+    public boolean[][] getIsEditableMatrix()
+    {
+        return this.mySudoku.isEditableArray;
+    }
 }

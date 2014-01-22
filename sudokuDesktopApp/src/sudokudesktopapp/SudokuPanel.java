@@ -61,8 +61,6 @@ public class SudokuPanel extends JPanel {
     public SudokuPanel(GUIHandler handler, TypeOfGame type,int[][] sudokuMatrix, boolean[][] isEditableMatrix, int rows, int columns)
     {
         this(handler,type, rows,columns);
-        loadValues(sudokuMatrix);
-        lockValues(isEditableMatrix);
     }
     
     

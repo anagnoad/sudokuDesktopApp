@@ -45,7 +45,7 @@ public class HyperSudoku extends ClassicSudoku {
 	{
 		this();
 		loadFromArray(arrayToLoad);
-                this.id = id;
+                                        this.id = id;
 	}
 	
 	/**

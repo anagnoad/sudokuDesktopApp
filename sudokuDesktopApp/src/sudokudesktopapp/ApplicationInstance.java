@@ -89,6 +89,13 @@ public final class ApplicationInstance {
                         break;
                     case HYPERDOKU:
                         game = new HyperSudokuGame(array,filename);
+                        System.out.println(filename);
+                        for (int i=0;i<9;i++)
+                        {
+                            for (int j=0;j<9;j++)
+                                System.out.printf("%d", array[i][j]);
+                            System.out.printf("\n");
+                        }
                         break;
                 }
                 return true;
