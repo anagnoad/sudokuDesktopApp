@@ -16,7 +16,6 @@ public class Duidoku extends ClassicSudoku
 		this.setDimX(4);
 		this.setDimY(4);
 		this.matrix = new int[getX()][getY()];
-		this.id = hashCode();
 	}
 	
 	/**

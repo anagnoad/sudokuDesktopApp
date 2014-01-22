@@ -5,7 +5,7 @@ public abstract class BasePuzzle {
     /**
      * id of the current puzzle. Must be unique.
      */
-    protected int id;
+    protected String id;
     /**
      * The x-dimension size of the matrix representing the game.
      */

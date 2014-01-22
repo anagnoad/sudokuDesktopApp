@@ -41,10 +41,11 @@ public class HyperSudoku extends ClassicSudoku {
 	 * Constructor taking a sudoku matrix as a parameter, so as to load it on start.
 	 * @param arrayToLoad
 	 */
-	public HyperSudoku(int[][] arrayToLoad)
+	public HyperSudoku(int[][] arrayToLoad, String id)
 	{
 		this();
 		loadFromArray(arrayToLoad);
+                this.id = id;
 	}
 	
 	/**

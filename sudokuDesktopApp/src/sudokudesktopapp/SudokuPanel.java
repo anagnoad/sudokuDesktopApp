@@ -65,27 +65,11 @@ public class SudokuPanel extends JPanel {
         lockValues(isEditableMatrix);
     }
     
-    private void lockValues(boolean[][] isEditableMatrix)
-    {
-        for (int i = 0; i < isEditableMatrix.length; i++) {
-            boolean[] bs = isEditableMatrix[i];
-            for (int j = 0; j < bs.length; j++) {
-                if(!bs[j])
-                    labels[i][j].setFont(new Font("Serif",Font.BOLD,20));
-                labels[i][j].setEnabled(bs[j]);
-            }
-        }
-    }
     
-    private void loadValues(int[][] sudokuMatrix)
+    
+    public JLabel getJLabel(int i, int j)
     {
-        for (int i = 0; i < sudokuMatrix.length; i++) {
-            int[] row = sudokuMatrix[i];
-            for (int j = 0; j < row.length; j++) {
-                if(row[j]!=0)
-                    labels[i][j].setText(Integer.toString(row[j]));
-            }
-        }
+        return labels[i][j];
     }
     
     private class CellAdapter extends MouseAdapter

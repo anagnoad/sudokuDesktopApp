@@ -25,6 +25,12 @@ public class ClassicSudokuGame extends BaseGame
             this.isAnonymous = true;
     }
 
+    public ClassicSudokuGame(int[][] array, String id)
+    {
+            this();
+            mySudoku = new ClassicSudoku(array,id);
+    }
+    
     /**
      * Constructor with parameters only one player and the type of game.
      * Used mainly ClassicSudoku, or any other Sudoku that is played by a single player.
@@ -73,5 +79,15 @@ public class ClassicSudokuGame extends BaseGame
             this.players.get(0).addSudokuSolved(this.mySudoku.id);
         }
         return tempRes;
+    }
+    
+    public int getMatrixValue(int i, int j)
+    {
+        return this.mySudoku.getMatrix()[i][j];
+    }
+    
+    public boolean[][] getIsEditableMatrix()
+    {
+        return this.mySudoku.isEditableArray;
     }
 }

@@ -18,7 +18,6 @@ public class ClassicSudoku extends BasePuzzle {
             this.setDimY(9);
             matrix = new int[getX()][getY()];
             isEditableArray = new boolean[getX()][getY()];
-            this.id = this.hashCode();
             this.type = TypeOfGame.CLASSIC;
 
             //DEBUG ONLY
@@ -36,10 +35,11 @@ public class ClassicSudoku extends BasePuzzle {
      * Constructor taking a sudoku matrix as a parameter, so as to load it on start.
      * @param arrayToLoad
      */
-    public ClassicSudoku(int[][] arrayToLoad)
+    public ClassicSudoku(int[][] arrayToLoad, String id)
     {
             this();
             loadFromArray(arrayToLoad);
+            this.id = id;
     }
 
     @Override
@@ -216,5 +216,10 @@ public class ClassicSudoku extends BasePuzzle {
                     }
             }
             return true;
+    }
+    
+    public boolean[][] getIsEditable()
+    {
+        return this.isEditableArray;
     }
 }

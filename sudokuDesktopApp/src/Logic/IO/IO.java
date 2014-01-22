@@ -18,6 +18,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import javax.naming.Context;
+import sudokudesktopapp.GlobalConstants;
 
 
 public class IO {
@@ -101,7 +102,7 @@ public class IO {
 
             try {
                     BufferedReader bufferedReader = new BufferedReader(new FileReader(new 
-                            File("MyFile.txt")));
+                            File(GlobalConstants.RESOURCES_PATH+filename)));
                     for (int i=0;i<dimensions.x;i++)
                     {
                             int[] lineElements = new int[9];

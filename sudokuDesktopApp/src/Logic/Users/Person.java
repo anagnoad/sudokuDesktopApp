@@ -22,7 +22,7 @@ public class Person {
     /**
      * Saves the IDs of the sudokus having been solved by the user
      */
-    protected HashSet<Integer> sudokuSolved;
+    protected HashSet<String> sudokuSolved;
     /**
      * Saves the statistics of the current user.
      */
@@ -117,9 +117,9 @@ public class Person {
      * @param idOfSudokuSolved
      * @return true if added successfully, false if already in
      */
-    public boolean addSudokuSolved(int idOfSudokuSolved)
+    public boolean addSudokuSolved(String idOfSudokuSolved)
     {
-            return this.sudokuSolved.add(Integer.valueOf(idOfSudokuSolved));
+            return this.sudokuSolved.add(idOfSudokuSolved);
     }
     /**
      * Updates the timestamp of last login.
@@ -197,6 +197,11 @@ public class Person {
     public int getGamesPlayed()
     {
         return this.sudokuSolved.size();
+    }
+    
+    public HashSet<String> getSudokusSolved()
+    {
+        return this.sudokuSolved;
     }
 }
 /**

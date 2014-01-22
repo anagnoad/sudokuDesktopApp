@@ -4,9 +4,13 @@
  */
 package sudokudesktopapp;
 
+import Logic.Sudoku.BaseGame;
+import Logic.Sudoku.ClassicSudoku;
 import Logic.Sudoku.ClassicSudokuGame;
+import Logic.Sudoku.HyperSudokuGame;
 import Logic.Sudoku.TypeOfGame;
 import Logic.Users.Person;
+import java.awt.Font;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -14,6 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 
 
 /**
@@ -30,6 +35,7 @@ public class GUIHandler {
     private Application myApp; // access modifier may need to change
     private MainMenuBar mainMenuBar;
     private GettingStartedPanel gettingStartedPanel;
+    private SudokuPanel sudokuPanel;
     private NewUserPanel newUserPanel;
     private LogInPanel loginPanel;
     private LoggedInPanel loggedInPanel;
@@ -283,19 +289,70 @@ public class GUIHandler {
     public void newClassicSudoku()
     {
         this.cleanSidePanel(true);
-        this.appInstance.game = new ClassicSudokuGame();
+        this.appInstance.loadNewGame(TypeOfGame.CLASSIC);
         if(this.myApp.mainPanel!=null)
         {
             this.myApp.mainPanel.setVisible(false);
             this.myApp.remove(myApp.mainPanel);
         }
-        this.myApp.mainPanel = new SudokuPanel(this,TypeOfGame.CLASSIC, 9, 9);
+        this.sudokuPanel = new SudokuPanel(this,TypeOfGame.CLASSIC, 9, 9);
+        this.myApp.mainPanel = this.sudokuPanel;
+        loadValuesFromGame(this.appInstance.game);
+        ClassicSudokuGame classicGame = (ClassicSudokuGame) this.appInstance.game;
+        lockValues(classicGame.getIsEditableMatrix());
         this.myApp.mainPanel.setBounds(20, 20, 520, 520);
         this.myApp.add(myApp.mainPanel);
         this.myApp.getContentPane().validate();
         this.myApp.getContentPane().repaint();
         this.myApp.mainPanel.setVisible(true);
     }
+    
+    private void loadValuesFromGame(BaseGame game)
+    {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                JLabel label = sudokuPanel.getJLabel(i, j);
+                if (game instanceof ClassicSudokuGame)
+                {
+                    ClassicSudokuGame classicGame = (ClassicSudokuGame) game;
+                    label.setText(String.valueOf(classicGame.getMatrixValue(i, j)));
+                }
+                else if(game instanceof HyperSudokuGame)
+                {
+                    HyperSudokuGame hyperGame = (HyperSudokuGame) game;
+                    label.setText(String.valueOf(hyperGame.getMatrixValue(i, j)));
+                }
+            }
+        }
+    }
+    
+    public void lockValue(int i, int j)
+    {
+        JLabel label = sudokuPanel.getJLabel(i,j);
+        label.setFont(new Font("Serif",Font.BOLD,20));
+        label.setEnabled(false);
+    }
+    
+    private void lockValues(boolean[][] isEditableMatrix)
+    {
+        for (int i = 0; i < isEditableMatrix.length; i++) {
+            boolean[] bs = isEditableMatrix[i];
+            for (int j = 0; j < bs.length; j++) {
+                lockValue(i,j);
+            }
+        }
+    }
+//    
+//    private void loadValues(int[][] sudokuMatrix)
+//    {
+//        for (int i = 0; i < sudokuMatrix.length; i++) {
+//            int[] row = sudokuMatrix[i];
+//            for (int j = 0; j < row.length; j++) {
+//                if(row[j]!=0)
+//                    labels[i][j].setText(Integer.toString(row[j]));
+//            }
+//        }
+//    }
     
     public void newHyperSudoku()
     {
