@@ -3,6 +3,7 @@ package sudokudesktopapp;
 import Logic.IO.IO;
 import Logic.Sudoku.BaseGame;
 import Logic.Sudoku.ClassicSudokuGame;
+import Logic.Sudoku.DuidokuGame;
 import Logic.Sudoku.HyperSudokuGame;
 import Logic.Sudoku.TypeOfGame;
 import Logic.Users.Person;
@@ -74,6 +75,12 @@ public final class ApplicationInstance {
             case HYPERDOKU:
                 suffix = ".hypersudoku";
                 break;
+            case DUIDOKU:
+                if (this.anonymousUser)
+                    this.game = new DuidokuGame();
+                else
+                    this.game = new DuidokuGame(this.loggedInUser);
+                return true;
         }
         if (this.anonymousUser)
         {
@@ -89,14 +96,6 @@ public final class ApplicationInstance {
                         break;
                     case HYPERDOKU:
                         game = new HyperSudokuGame(array,filename);
-                        System.out.println(filename);
-                        for (int i=0;i<9;i++)
-                        {
-                            for (int j=0;j<9;j++)
-                                System.out.printf("%d", array[i][j]);
-                            System.out.printf("\n");
-                        }
-                        break;
                 }
                 return true;
             }

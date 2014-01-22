@@ -129,6 +129,7 @@ public class LoggedInPanel extends javax.swing.JPanel {
 
     private void newGameLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newGameLabelMouseClicked
         // TODO add your handling code here:
+        this.myGuiHandler.showNewGameOptionsPanel();
         
     }//GEN-LAST:event_newGameLabelMouseClicked
 

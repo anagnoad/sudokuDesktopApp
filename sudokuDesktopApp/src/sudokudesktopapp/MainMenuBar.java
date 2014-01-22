@@ -9,6 +9,7 @@ package sudokudesktopapp;
 import java.awt.MenuBar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -154,13 +155,18 @@ public class MainMenuBar extends JMenuBar{
             }
             
         });
-        showHintsItem = new JMenuItem("Show hints");
+        showHintsItem = new JCheckBoxMenuItem("Show hints");
+        showHintsItem.getModel().setSelected(true);
         showHintsItem.addActionListener(new ActionListener(){
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Foo");
-            }
+                if (showHintsItem.getModel().isEnabled())
+                    myGuiHandler.toggleShowHints();
+                myGuiHandler.updateHintsFromSudokuCellOptionsPanel();
+                    
+                }
+                    
             
         });
         aboutItem = new JMenuItem("About..");
@@ -193,6 +199,7 @@ public class MainMenuBar extends JMenuBar{
         this.deleteHistoryItem.setEnabled(true);
         this.showStatsItem.setEnabled(true);
         this.restorePreviousItem.setEnabled(true);
+        this.newUserItem.setEnabled(false);
     }
 }
 

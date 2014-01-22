@@ -90,8 +90,8 @@ public class IO {
                     // read a 9x9 matrix from a file
                     // note that there is no break on purpose. The same code is executed, whether a classic or a hyper sudoku is being
                     // loaded
-                    dimensions.setXY(9, 9);
             case HYPERDOKU:
+                    dimensions.setXY(9, 9);
                     break;
             case DUIDOKU: // decided to implement this in order to raise the difficulty for the players of this type of game
                     dimensions.setXY(4, 4);

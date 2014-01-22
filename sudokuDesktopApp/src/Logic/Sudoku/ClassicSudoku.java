@@ -78,11 +78,11 @@ public class ClassicSudoku extends BasePuzzle {
             int rootDimX = (int) Math.sqrt(getX());
             int rootDimY = (int) Math.sqrt(getY());
 
-            if (value==0)
-                    return true;
-
             if(!isEditableArray[x][y])
                     return false;
+            
+            if (value==0)
+                    return true;
 
             for (int i=0;i<getX();i++)
             {
@@ -200,21 +200,21 @@ public class ClassicSudoku extends BasePuzzle {
      */
     protected boolean isValidArray(int[][] arrayToCheck) // this function is the same for all the child classes
     {
-            // there may be needed checks for arrayTocheck dimensions
-            for (int i =0;i<getX();i++)
-            {
-                    for (int j=0;j<getY();j++)
-                    {
-                            try {
-                            if (!this.checkRules(arrayToCheck[i][j], i, j))
-                                    return false;
-                            }
-                            catch(ArrayIndexOutOfBoundsException e)
-                            {
-                                    // handle the exception here ...
-                            }
-                    }
-            }
+//            // there may be needed checks for arrayTocheck dimensions
+//            for (int i =0;i<getX();i++)
+//            {
+//                    for (int j=0;j<getY();j++)
+//                    {
+//                            try {
+//                            if (!this.checkRules(arrayToCheck[i][j], i, j))
+//                                    return false;
+//                            }
+//                            catch(ArrayIndexOutOfBoundsException e)
+//                            {
+//                                    // handle the exception here ...
+//                            }
+//                    }
+//            }
             return true;
     }
     

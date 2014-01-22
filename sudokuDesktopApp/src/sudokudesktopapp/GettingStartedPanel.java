@@ -177,6 +177,7 @@ public class GettingStartedPanel extends javax.swing.JPanel {
 
     private void playSudokuAnonymouslyClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playSudokuAnonymouslyClicked
         // this will redirect you to a JFrame selecting options for the sudoku
+        myGuiHandler.showNewGameOptionsPanel();
     }//GEN-LAST:event_playSudokuAnonymouslyClicked
 
     private void showSudokuRulesClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showSudokuRulesClicked

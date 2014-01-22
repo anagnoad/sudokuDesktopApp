@@ -36,7 +36,6 @@ public class NewGameOptionsPanel extends javax.swing.JPanel {
         classicSudokuLabel = new javax.swing.JLabel();
         hyperSudokuLabel = new javax.swing.JLabel();
         duidokuLabel = new javax.swing.JLabel();
-        cancelLabel = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
 
         jList1.setModel(new javax.swing.AbstractListModel() {
@@ -70,13 +69,13 @@ public class NewGameOptionsPanel extends javax.swing.JPanel {
         classicSudokuLabel.setText("Classic Sudoku");
         classicSudokuLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                newUserClick(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                classicSudokuLabelMouseEntered(evt);
+                classicSudokuLabelClicked(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 classicSudokuLabelMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                classicSudokuLabelMouseEntered(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -93,13 +92,13 @@ public class NewGameOptionsPanel extends javax.swing.JPanel {
         hyperSudokuLabel.setText("Hyper Sudoku");
         hyperSudokuLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                logInClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                hyperSudokuLabelMouseEntered(evt);
+                hyperSudokuLabelClicked(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 hyperSudokuLabelMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                hyperSudokuLabelMouseEntered(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -116,13 +115,13 @@ public class NewGameOptionsPanel extends javax.swing.JPanel {
         duidokuLabel.setToolTipText("Play sudoku anonymously");
         duidokuLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                playSudokuAnonymouslyClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                duidokuLabelMouseEntered(evt);
+                duidokuLabelClicked(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 duidokuLabelMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                duidokuLabelMouseEntered(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -131,28 +130,6 @@ public class NewGameOptionsPanel extends javax.swing.JPanel {
         gridBagConstraints.ipady = 11;
         gridBagConstraints.insets = new java.awt.Insets(9, 9, 9, 9);
         add(duidokuLabel, gridBagConstraints);
-
-        cancelLabel.setFont(new java.awt.Font("Lucida Grande", 3, 12)); // NOI18N
-        cancelLabel.setForeground(new java.awt.Color(255, 255, 255));
-        cancelLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        cancelLabel.setText("Cancel");
-        cancelLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                showSudokuRulesClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                cancelLabelMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                cancelLabelMouseExited(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.ipady = 11;
-        gridBagConstraints.insets = new java.awt.Insets(9, 9, 9, 9);
-        add(cancelLabel, gridBagConstraints);
 
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -164,24 +141,20 @@ public class NewGameOptionsPanel extends javax.swing.JPanel {
         add(jSeparator1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void newUserClick(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newUserClick
+    private void classicSudokuLabelClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_classicSudokuLabelClicked
         // this will redirect you to a JFrame To Add a new user
-        this.myGuiHandler.showAddNewUserPanel();
-    }//GEN-LAST:event_newUserClick
+        this.myGuiHandler.newClassicSudoku();
+    }//GEN-LAST:event_classicSudokuLabelClicked
 
-    private void logInClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logInClicked
+    private void hyperSudokuLabelClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hyperSudokuLabelClicked
         // this will redirect you to a JFrame to choose with which nickname to log in
-        
-    }//GEN-LAST:event_logInClicked
+        this.myGuiHandler.newHyperSudoku();
+    }//GEN-LAST:event_hyperSudokuLabelClicked
 
-    private void playSudokuAnonymouslyClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playSudokuAnonymouslyClicked
+    private void duidokuLabelClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_duidokuLabelClicked
         // this will redirect you to a JFrame selecting options for the sudoku
-    }//GEN-LAST:event_playSudokuAnonymouslyClicked
-
-    private void showSudokuRulesClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showSudokuRulesClicked
-        // this will open up a JPanel showing help from a file for sudoku
-        myGuiHandler.showHelpDialog();
-    }//GEN-LAST:event_showSudokuRulesClicked
+        this.myGuiHandler.newDuidoku();
+    }//GEN-LAST:event_duidokuLabelClicked
 
     private void classicSudokuLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_classicSudokuLabelMouseEntered
         // TODO add your handling code here:
@@ -214,22 +187,11 @@ public class NewGameOptionsPanel extends javax.swing.JPanel {
         this.duidokuLabel.setForeground(defaultFontColor);
     }//GEN-LAST:event_duidokuLabelMouseExited
 
-    private void cancelLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelLabelMouseEntered
-        // TODO add your handling code here:
-        this.cancelLabel.setForeground(alternativeFontColor);
-    }//GEN-LAST:event_cancelLabelMouseEntered
-
-    private void cancelLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelLabelMouseExited
-        // TODO add your handling code here:
-        this.cancelLabel.setForeground(defaultFontColor);
-    }//GEN-LAST:event_cancelLabelMouseExited
-
     
     private static final Color defaultFontColor = new Color(255, 255, 255);
     private static final Color alternativeFontColor = new Color(204, 204, 204);
     private GUIHandler myGuiHandler;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel cancelLabel;
     private javax.swing.JLabel classicSudokuLabel;
     private javax.swing.JLabel duidokuLabel;
     private javax.swing.JLabel hyperSudokuLabel;

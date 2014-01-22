@@ -1,8 +1,7 @@
 package sudokudesktopapp;
 
 
-import sudokudesktopapp.GUIHandler;
-import sudokudesktopapp.SudokuCellOptionsPanel;
+import Logic.Sudoku.Coord_2D;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,9 +15,9 @@ import sudokudesktopapp.SudokuCellOptionsPanel;
  */
 public class DuidokuCellOptionsPanel extends SudokuCellOptionsPanel{
     
-    public DuidokuCellOptionsPanel(GUIHandler handler)
+    public DuidokuCellOptionsPanel(GUIHandler handler, Coord_2D coords)
     {
-        super(handler);
+        super(handler, coords);
         this.getChoicesComboBox().setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4"}));
         
     }

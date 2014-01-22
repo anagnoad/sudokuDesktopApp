@@ -56,6 +56,13 @@ public class ClassicSudokuGame extends BaseGame
     @Override
     public boolean addNumber(int value, Coord_2D coordinates)
     {
+        for(int i=0;i<9;i++)
+        {
+            for (int j=0;j<9;j++)
+                System.out.printf("%d ", this.mySudoku.matrix[i][j]);
+            System.out.println("");
+        }
+        System.out.println("--------------");
             return mySudoku.setCell(value, coordinates.x, coordinates.y);
     }	
 

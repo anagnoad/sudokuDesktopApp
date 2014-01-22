@@ -102,6 +102,10 @@ public class DuidokuGame    extends BaseGame // this can be easily extended to b
     }
 
 
+    public int[] getHelp(Coord_2D coords)
+    {
+        return mySudoku.returnHint(coords);
+    }
     @Override
     public Person whoWon() { // returns the winner for updating statistics
         

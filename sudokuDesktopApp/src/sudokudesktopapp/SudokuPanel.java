@@ -6,6 +6,7 @@
 
 package sudokudesktopapp;
 
+import Logic.Sudoku.Coord_2D;
 import Logic.Sudoku.TypeOfGame;
 import java.awt.Color;
 import java.awt.Font;
@@ -28,13 +29,30 @@ public class SudokuPanel extends JPanel {
     
     public JLabel selected;
     
+    public Coord_2D selectedCoordinates;
+    
     private TypeOfGame type;
-    public SudokuPanel(GUIHandler handler, TypeOfGame type, int rows, int columns)
+    
+    
+    public SudokuPanel(GUIHandler handler, TypeOfGame type)
     {
         super();
         selected = null;
         this.myGuiHandler = handler;
         this.type = type;
+        int rows = 0;
+        int columns = 0;
+        switch(type)
+        {
+            case CLASSIC:
+            case HYPERDOKU:
+                rows = columns = 9;
+                break;
+            case DUIDOKU:
+                rows = columns = 4;
+                break;
+        }
+        
         labels = new JLabel[rows][columns];
         setLayout(new GridLayout(rows,columns,10,10));
         for (int i = 0; i < rows; i++) {
@@ -58,12 +76,6 @@ public class SudokuPanel extends JPanel {
         setVisible(true);
     }
     
-    public SudokuPanel(GUIHandler handler, TypeOfGame type,int[][] sudokuMatrix, boolean[][] isEditableMatrix, int rows, int columns)
-    {
-        this(handler,type, rows,columns);
-    }
-    
-    
     
     public JLabel getJLabel(int i, int j)
     {
@@ -85,10 +97,11 @@ public class SudokuPanel extends JPanel {
             {
                 if(selected!=null)
                     selected.setBackground(Color.getHSBColor(26, 0, 88));
-                
-                myGuiHandler.showSudokuCellOptions(type);
+                selectedCoordinates = new Coord_2D(i,j);
+                myGuiHandler.showSudokuCellOptionsPanel(type, selectedCoordinates);
                 selected = labels[i][j];
-                selected.setBackground(Color.getHSBColor(26, 0, 20));
+                
+                selected.setBackground(Color.getHSBColor(26, 0, 20));   
             }
         }
     }
