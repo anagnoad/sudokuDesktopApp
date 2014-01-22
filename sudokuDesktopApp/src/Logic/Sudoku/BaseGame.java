@@ -4,6 +4,7 @@ import Logic.IO.IO;
 import Logic.Users.Person;
 import java.io.Serializable;
 import java.util.ArrayList;
+import sudokudesktopapp.GlobalConstants;
 
 
 /**
@@ -69,7 +70,7 @@ public abstract class BaseGame implements Serializable{
             // save the state of the game
             if (!this.isAnonymous && toSave) // if he player wants to save the game
             {
-                return IO.saveToFile(this.players.get(0).getId()+"_prev", this);
+                return IO.saveToFile(GlobalConstants.SAVES_PATH + this.players.get(0).getId()+"_prev", this);
             }
             else return true;
         }

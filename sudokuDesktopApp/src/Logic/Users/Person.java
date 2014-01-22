@@ -1,5 +1,6 @@
 package Logic.Users;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
@@ -9,7 +10,7 @@ import java.util.Objects;
  * @author Steve
  *
  */
-public class Person {
+public class Person implements Serializable{
     /* -------------- Member vars --------------*/
     /**
      * Unique identifier of each object. Takes its value from the hashValue of the object.
@@ -209,7 +210,7 @@ public class Person {
 * @author Steve
 *
 */
-class Stats // implemented as a class because Java does not have native support of structs
+class Stats implements Serializable // implemented as a class because Java does not have native support of structs
 {
     /**
      * Represents the sum of victories of the current player

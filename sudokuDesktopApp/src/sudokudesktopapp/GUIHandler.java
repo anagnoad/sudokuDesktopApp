@@ -238,7 +238,7 @@ public class GUIHandler {
         this.loginPanel = new LogInPanel(this);
         
         this.myApp.mainPanel = loginPanel;
-        this.myApp.mainPanel.setBounds(120, 120, 250, 250);
+        this.myApp.mainPanel.setBounds(120, 120, 400, 300);
         this.myApp.add(myApp.mainPanel);
         this.myApp.setVisible(true);
         this.myApp.repaint();
@@ -253,6 +253,11 @@ public class GUIHandler {
             }
     }
     
+    public void login(Person person)
+    {
+        this.appInstance.login(person);
+        System.out.println(this.appInstance.loggedInUser);
+    }
     
     public void showNewGameOptionsPanel()
     {
@@ -383,22 +388,46 @@ public class GUIHandler {
     
     private void loadValuesFromGame(BaseGame game)
     {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                JLabel label = sudokuPanel.getJLabel(i, j);
-                if (game instanceof ClassicSudokuGame)
-                {
-                    ClassicSudokuGame classicGame = (ClassicSudokuGame) game;
+        int dim = 0;
+        if(game instanceof ClassicSudokuGame)
+        {
+            ClassicSudokuGame classicGame = (ClassicSudokuGame) game;
+            dim = 9;
+            for (int i = 0; i < dim; i++) {
+                for (int j = 0; j < dim; j++) {
+                    JLabel label = sudokuPanel.getJLabel(i, j);
                     label.setText(String.valueOf(classicGame.getMatrixValue(i, j)));
+                    if (label.getText().equals("0"))
+                        label.setText("");
                 }
-                else if(game instanceof HyperSudokuGame)
-                {
-                    HyperSudokuGame hyperGame = (HyperSudokuGame) game;
+            }
+        }
+        else if(game instanceof HyperSudokuGame)
+        {
+            dim = 9;
+            HyperSudokuGame hyperGame = (HyperSudokuGame) game;                    
+            for (int i = 0; i < dim; i++) {
+                for (int j = 0; j < dim; j++) {
+                    JLabel label = sudokuPanel.getJLabel(i, j);
                     label.setText(String.valueOf(hyperGame.getMatrixValue(i, j)));
-                    System.out.println(hyperGame.getMatrixValue(i, j));
+                    if (label.getText().equals("0"))
+                        label.setText("");
                 }
-                if (label.getText().equals("0"))
-                    label.setText("");
+            }
+        }
+        else if(game instanceof DuidokuGame)
+        {
+            dim = 4;
+            DuidokuGame duiGame = (DuidokuGame) game;                    
+            for (int i = 0; i < dim; i++) {
+                for (int j = 0; j < dim; j++) {
+                    if(sudokuPanel==null)
+                        JOptionPane.showMessageDialog(null,"FOO!");
+                    JLabel label = sudokuPanel.getJLabel(i, j);
+                    label.setText(String.valueOf(duiGame.getMatrixValue(i, j)));
+                    if (label.getText().equals("0"))
+                        label.setText("");
+                }
             }
         }
     }
@@ -451,7 +480,8 @@ public class GUIHandler {
             this.myApp.mainPanel.setVisible(false);
             this.myApp.remove(myApp.mainPanel);
         }
-        this.myApp.mainPanel = new SudokuPanel(this,TypeOfGame.DUIDOKU);
+        this.sudokuPanel = new SudokuPanel(this,TypeOfGame.DUIDOKU);
+        this.myApp.mainPanel = sudokuPanel;
         this.myApp.mainPanel.setBounds(20, 20, 520, 520);
         this.myApp.add(myApp.mainPanel);
         this.myApp.mainPanel.setVisible(true);
@@ -496,11 +526,26 @@ public class GUIHandler {
             SudokuPanel panel = (SudokuPanel) this.myApp.mainPanel;
             if (this.appInstance.game.addNumber(value, coords))
             {
-                panel.selected.setText(Integer.toString(value));
-                if (this.appInstance.game.isCompleted())
+                if (this.appInstance.game instanceof DuidokuGame)
                 {
-                    JOptionPane.showMessageDialog(myApp, "You Won!");
-                    this.cleanUpFinishedGame();
+                    this.loadValuesFromGame(this.appInstance.game);
+                    DuidokuGame game = (DuidokuGame) this.appInstance.game;
+                    this.lockValues(game.getIsEditableMatrix());
+                    Person winner;
+                    if((winner = game.whoWon())!=null)
+                    {
+                        JOptionPane.showMessageDialog(myApp, "Congratulations to " + winner.getNickname());
+                        this.cleanUpFinishedGame();
+                    }
+                }
+                else
+                {
+                    panel.selected.setText(Integer.toString(value));
+                    if (this.appInstance.game.isCompleted())
+                    {
+                        JOptionPane.showMessageDialog(myApp, "You Won!");
+                        this.cleanUpFinishedGame();
+                    }
                 }
             }
             else

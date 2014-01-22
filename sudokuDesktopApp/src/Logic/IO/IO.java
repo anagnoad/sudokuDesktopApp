@@ -27,30 +27,30 @@ public class IO {
     // Remember to close the streams opened for files.
 
 
-    static public boolean loadPlayers(String filename, PersonDB playersDB)
+    static public PersonDB loadPlayers(String filename, PersonDB playersDB)
     {
             try {
                     ObjectInputStream input = new ObjectInputStream(new FileInputStream(filename));
-                    playersDB = (PersonDB) input.readObject();
+                    return (PersonDB) input.readObject();
             } catch (ClassNotFoundException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
-                    return false;
+                    return null;
             } 
             catch (StreamCorruptedException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
-                    return false;
+                    return null;
             } catch (FileNotFoundException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
-                    return false;
+                    return null;
             } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
-                    return false;
+                    return null;
             }
-            return true;
+
     }
 
     static public boolean savePlayers(String filename, PersonDB playersDB)

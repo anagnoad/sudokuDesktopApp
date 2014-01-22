@@ -30,11 +30,6 @@ public class DuidokuGame    extends BaseGame // this can be easily extended to b
     protected boolean computerPlays;
     
     /**
-     * Member variable showing the number of players of the game.
-     */
-    protected int numberOfPlayers;
-    
-    /**
      * Random generator in case we play against the computer.
      */
     private Random randGenerator;
@@ -48,8 +43,8 @@ public class DuidokuGame    extends BaseGame // this can be easily extended to b
             super();
             this.mySudoku = new Duidoku();
             this.computerPlays = true;
-        this.numberOfPlayers = 2;
         this.randGenerator = new Random();
+        this.players.add(new Person("CPU"));
     }
     
     /**
@@ -63,39 +58,57 @@ public class DuidokuGame    extends BaseGame // this can be easily extended to b
         
     }
 
-    /**
-     * Ctor initializing the game to a two-player game (default for duidoku)
-     * @param Player1 the main player of the game (logged in)
-     * @param Player2 the second player of the game
-     */
-    public DuidokuGame(Person Player1, Person Player2)
-    {
-            this();
-            this.players.add(Player1);
-            this.players.add(Player2);
-            this.computerPlays = false;
-            this.numberOfPlayers = this.players.size();
-    }
+//    /**
+//     * Ctor initializing the game to a two-player game (default for duidoku)
+//     * @param Player1 the main player of the game (logged in)
+//     * @param Player2 the second player of the game
+//     */
+//    public DuidokuGame(Person Player1, Person Player2)
+//    {
+//            this();
+//            this.players.add(Player1);
+//            this.players.add(Player2);
+//            this.computerPlays = false;
+//    }
 
-    @Override
-    public boolean addNumber(int value, Coord_2D coordinates) {
+
+    public boolean commonAddNumber(int value, Coord_2D coordinates) {
         boolean isValid = mySudoku.setCell(value, coordinates.x, coordinates.y);
         if (isValid)
-                stepCounter++;
+        {
+            stepCounter++;
+            this.mySudoku.isEditableArray[coordinates.x][coordinates.y] = false;
+        }
+        for(int i=0;i<4;i++)
+        {
+            for (int j=0;j<4;j++)
+                System.out.printf("%d ", this.mySudoku.matrix[i][j]);
+            System.out.println("");
+        }
+        System.out.println("--------------");
         return isValid;
+    }
+    
+    @Override
+    public boolean addNumber(int value, Coord_2D coordinates)
+    {
+        boolean flag = commonAddNumber(value, coordinates);
+        if(!flag)
+            return false;
+        return computerAddNumber() || flag;
     }
     
     public boolean computerAddNumber(){
         int value;
         Coord_2D coords;
-        if (!this.isCompleted())
+        if (!this.isCompleted() && this.getSudokuStatus() != sudokuStatus.FAILED)
         {
             do
             {
                 value = this.randGenerator.nextInt(9)+1; // it cannot put 0
                 coords = new Coord_2D(this.randGenerator.nextInt(9), this.randGenerator.nextInt(9));
             }
-            while (!addNumber(value, coords));
+            while (!commonAddNumber(value, coords));
             return true;
         }
         return false;
@@ -108,17 +121,17 @@ public class DuidokuGame    extends BaseGame // this can be easily extended to b
     }
     @Override
     public Person whoWon() { // returns the winner for updating statistics
-        
-            if (this.isCompleted())
-                if (!this.computerPlays && !this.isAnonymous)
-                    return this.players.get(this.stepCounter%this.numberOfPlayers); // this will not work on an anonymous game
+        if(this.getSudokuStatus()== sudokuStatus.FAILED || this.getSudokuStatus() == sudokuStatus.FINISHED)
+        {
+            return this.players.get(this.stepCounter%players.size());
+        }
             
-            return null;
+        return null;
     }
 
     @Override
     public int getNumberOfPlayers() {
-            return this.numberOfPlayers;
+            return this.players.size();
     }
 
     @Override
@@ -140,7 +153,7 @@ public class DuidokuGame    extends BaseGame // this can be easily extended to b
     {
         boolean tempRes = super.onQuitGame(toSave);
        // update stats
-        if (!this.isAnonymous && this.isCompleted())
+        if (this.isCompleted())
         {
             Person winner = this.whoWon();
             winner.incrementVictories();
@@ -153,5 +166,14 @@ public class DuidokuGame    extends BaseGame // this can be easily extended to b
             }
         }
         return tempRes;
+    }
+    public int getMatrixValue(int i, int j)
+    {
+        return this.mySudoku.getMatrix()[i][j];
+    }
+    
+    public boolean[][] getIsEditableMatrix()
+    {
+        return this.mySudoku.isEditableArray;
     }
 }

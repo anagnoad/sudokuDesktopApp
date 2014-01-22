@@ -24,10 +24,13 @@ public final class ApplicationInstance {
             loggedInUser = null;
             game = null;
             anonymousUser = true;
-            if (!loadPlayersDB(GlobalConstants.PERSONDB_PATH))
+//            if (!loadPlayersDB(GlobalConstants.PERSONDB_PATH))
+            if (!loadPlayersDB("db.txt"))
             {
+                
                     this.playersDB = new PersonDB();
             }
+            System.out.println(this.playersDB.searchByNickName("Antonis"));
             rand = new Random();
     }
 
@@ -45,8 +48,10 @@ public final class ApplicationInstance {
 
     private boolean loadPlayersDB(String filename)
     {
-        return false;
-           // return IO.loadPlayers(filename, playersDB);
+            this.playersDB = IO.loadPlayers(filename, playersDB);
+            if(this.playersDB ==null)
+                return false;
+            return true;
     }
 
     public static ApplicationInstance getInstance()

@@ -6,7 +6,9 @@ package sudokudesktopapp;
 
 import Logic.Users.Person;
 import java.util.ArrayList;
-import javax.swing.AbstractListModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+
 
 /**
  *
@@ -19,18 +21,30 @@ public class LogInPanel extends javax.swing.JPanel {
      */
     public LogInPanel(GUIHandler guiHandler) {
         this.myGuiHandler = guiHandler;
-        this.resultsToShare = new ArrayList<>(); // so as not to have null ptr exception
-        listModeForJList = new javax.swing.AbstractListModel()
-        {
-                ArrayList<Person> listToShow = resultsToShare;
-                @Override
-                public int getSize() {return listToShow.size();}
-                @Override
-                public Object getElementAt(int i) {return listToShow.get(i);}
-        };
+        
+//        listModeForJList = new javax.swing.AbstractListModel()
+//        listModeForJList = new DefaultListModel()
+//        {
+//                ArrayList<Person> listToShow = resultsToShare;
+//                @Override
+//                public int getSize() {return listToShow.size();}
+//                @Override
+//                public Object getElementAt(int i) {return listToShow.get(i);}
+//        };
         initComponents();
+        this.resultsToShare = new ArrayList<>(); // so as not to have null ptr exception
     }
-
+    private void updateJList()
+    {
+        DefaultListModel<Person> model = new DefaultListModel<>();
+        for(Person p : resultsToShare)
+        {
+            model.addElement(p);
+        }
+        resultsJList.setModel(model);
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -90,8 +104,9 @@ public class LogInPanel extends javax.swing.JPanel {
         jScrollPane1.setBackground(new java.awt.Color(192, 192, 192));
 
         resultsJList.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        resultsJList.setModel(listModeForJList);
         resultsJList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        resultsJList.setMinimumSize(new java.awt.Dimension(70, 50));
+        resultsJList.setPreferredSize(new java.awt.Dimension(100, 100));
         resultsJList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 resultsJListValueChanged(evt);
@@ -102,7 +117,7 @@ public class LogInPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipady = 4;
         gridBagConstraints.weightx = 0.3;
         gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
@@ -130,6 +145,7 @@ public class LogInPanel extends javax.swing.JPanel {
         if (results != null)
         {
             this.resultsToShare = results;
+            updateJList();
         }
         else
         {
@@ -138,11 +154,12 @@ public class LogInPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_nicknameSearchInputActionPerformed
 
     private void resultsJListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_resultsJListValueChanged
-        // TODO add your handling code here:
-        // code to do when selecting a player from the list
+        JList list = (JList) evt.getSource();
+        
+        Person person = (Person) list.getSelectedValue();
+        this.myGuiHandler.login(person);
     }//GEN-LAST:event_resultsJListValueChanged
 
-    private AbstractListModel listModeForJList;
     private GUIHandler myGuiHandler;
     private ArrayList<Person> resultsToShare;
     // Variables declaration - do not modify//GEN-BEGIN:variables
