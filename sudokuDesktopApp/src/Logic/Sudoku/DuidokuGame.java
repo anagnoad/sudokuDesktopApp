@@ -121,7 +121,7 @@ public class DuidokuGame    extends BaseGame // this can be easily extended to b
     }
     @Override
     public Person whoWon() { // returns the winner for updating statistics
-        if(this.getSudokuStatus()== sudokuStatus.FAILED || this.getSudokuStatus() == sudokuStatus.FINISHED)
+        if(this.getSudokuStatus() == sudokuStatus.FINISHED)
         {
             return this.players.get(this.stepCounter%players.size());
         }

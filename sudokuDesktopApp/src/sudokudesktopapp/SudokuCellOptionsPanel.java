@@ -21,6 +21,8 @@ public class SudokuCellOptionsPanel extends javax.swing.JPanel {
         this.myGuiHandler = guiHandler; //save the instance of the guiHandler
         this.selectedCoordinates = coords;
         initComponents();
+        myGuiHandler.updateHintsFromSudokuCellOptionsPanel();
+        System.out.println(this.myGuiHandler.showHints);
     }
 
     /**

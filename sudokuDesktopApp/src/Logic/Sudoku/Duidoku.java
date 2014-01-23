@@ -74,6 +74,29 @@ public class Duidoku extends ClassicSudoku
             return true;
     }
 
+    
+    @Override
+    public sudokuStatus getSudokuStatus()
+    {
+            int counter = 0;
+            for (int i=0; i<this.getX(); i++)
+            {
+                    for(int j=0; j<this.getY(); j++)
+                    {
+                            if (matrix[i][j] == 0 && returnHint(new Coord_2D(i,j)).length!=0)
+                            {
+                                return sudokuStatus.NOTFINISHED;
+                            }
+                            else if (matrix[i][j]==0)
+                            {
+                                counter++;
+                            }
+                    }                
+            }
+            return sudokuStatus.FINISHED;
+    }
+    
+    
     @Override
     public int[] returnHint(Coord_2D cell)
     {

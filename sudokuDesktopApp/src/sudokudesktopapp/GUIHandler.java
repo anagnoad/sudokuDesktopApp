@@ -47,7 +47,7 @@ public class GUIHandler {
     private StatsPanel statsPanel;
     private AboutDialog aboutDialog;
     
-    private boolean showHints;
+    public boolean showHints;
     
     /*--------------------------Methods------------------------------*/
     //ctor
@@ -75,13 +75,13 @@ public class GUIHandler {
     public void toggleShowHints()
     {
         this.showHints = !this.showHints;
-        System.out.println(this.showHints);
+        JOptionPane.showMessageDialog(newUserPanel, showHints);
     }
     
     public void updateHintsFromSudokuCellOptionsPanel()
     {
         if (this.sudokuCellOptionsPanel!=null)
-            this.sudokuCellOptionsPanel.getShowHintsLabel().setEnabled(showHints);
+            this.sudokuCellOptionsPanel.getShowHintsLabel().setVisible(this.showHints);
     }
     
     public void showHintsOnSudokuGame(Coord_2D selectedCoordinates)
@@ -139,6 +139,7 @@ public class GUIHandler {
         this.myApp.repaint();
     }
     
+
     
     public void showGettingStartedPanel() // is supposed to be called on launch
     {
@@ -568,6 +569,7 @@ public class GUIHandler {
     public void cleanUpFinishedGame()
     {
         this.cleanMainPanel(true);
+        this.cleanSidePanel(true);
         this.appInstance.game.onQuitGame(false);
         if (this.appInstance.anonymousUser)
         {
