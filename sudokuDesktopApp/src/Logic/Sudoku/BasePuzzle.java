@@ -34,9 +34,9 @@ public abstract class BasePuzzle implements Serializable
     /**
      * Makes the necessary checks when inserting a value in the matrix.
      * Checks dimensions, input and rules of the puzzle.
-     * @param value
-     * @param x
-     * @param y
+     * @param value the value of the cell
+     * @param x the x coordinate of the cell
+     * @param y the y coordinate of the cell
      * @return true if valid; false otherwise.
      */
     public boolean checkValue(int value, int x, int y)
@@ -47,9 +47,9 @@ public abstract class BasePuzzle implements Serializable
 
     /**
      * Makes the necessary checks, based on the rules of the puzzle.
-     * @param value
-     * @param x
-     * @param y
+     * @param value the value of the cell
+     * @param x the x coordinate of the cell
+     * @param y the y coordinate of the cell
      * @return true if valid; false otherwise.
      */
     protected abstract boolean checkRules(int value, int x, int y); // called by hints() and checkValue()
@@ -57,15 +57,15 @@ public abstract class BasePuzzle implements Serializable
     /**
      * Makes the necessary checks on the value to be inserted in the matrix.
      * It's body depends on the rules of the game.
-     * @param value
+     * @param value the value that needs to be checked.
      * @return true if valid; false otherwise.
      */
     protected abstract boolean inputCheck(int value); // depends on the game's rules
 
     /**
      * Makes the necessary bound checks for the position in the matrix, when inserting a value.
-     * @param x
-     * @param y
+     * @param x the x coordinate of the cell
+     * @param y the y coordinate of the cell
      * @return true if valid; false otherwise.
      */
     protected boolean dimensionCheck(int x, int y) // checking if the input ecxeeds the dimensions of the puzzle
@@ -78,12 +78,11 @@ public abstract class BasePuzzle implements Serializable
             return true;
     }
 
-    // setters
     /**
      * Sets the value of a cell.
-     * @param value
-     * @param x
-     * @param y
+     * @param value the value of the cell
+     * @param x the x coordinate of the cell
+     * @param y the y coordinate of the cell
      * @return true if valid; false otherwise.
      */
 
@@ -100,7 +99,7 @@ public abstract class BasePuzzle implements Serializable
     /* for extendibility purposes */
     /**
      * Sets the x-dimension of the matrix.
-     * @param x
+     * @param x the x dimension
      */
     protected boolean setDimX(int x)
     {
@@ -114,7 +113,7 @@ public abstract class BasePuzzle implements Serializable
 
     /**
      * Sets the y-dimension of the matrix.
-     * @param y
+     * @param y the y-dimension
      */
     protected boolean setDimY(int y)
     {
@@ -155,22 +154,18 @@ public abstract class BasePuzzle implements Serializable
             return this.matrix;
     }
 
-    // %%%%%%%%%%%%% NOT FOR LOADING SAVED STATES OF SUDOKU GAMES!!! 
-    // %%%%%%%%%%%%% JUST FOR NEW ONES!!!
-    // Called from constructor.
-
     /**
      * Loads loaded new games of the application.
      * 
-     * @param array
-     * @return
+     * @param array the array to be loaded
+     * @return true if the operation was successful; false otherwise.
      */
     public abstract boolean loadFromArray(int[][] array);
 
 
     /**
      * Gives the possible inputs for a specific cell. Depends on the game.
-     * @param cell
+     * @param cell the coordinates of the cell you would like help for.
      * @return all the possible inputs for cell
      */
     public abstract int[] returnHint(Coord_2D cell);

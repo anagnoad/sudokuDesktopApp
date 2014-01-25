@@ -39,22 +39,23 @@ public class HyperSudoku extends ClassicSudoku {
 
     /**
      * Constructor taking a sudoku matrix as a parameter, so as to load it on start.
-     * @param arrayToLoad
+     * @param arrayToLoad the array to be loaded
+     * @param id the id of the puzzle.
      */
     public HyperSudoku(int[][] arrayToLoad, String id)
     {
-            this();
-            loadFromArray(arrayToLoad);
-                                    this.id = id;
+        this();
+        loadFromArray(arrayToLoad);
+        this.id = id;
     }
 
     /**
      * Constructor of HyperSudoku.
      * Requires 4 parameters of the inner sudokus' upper left corner.
-     * @param topLeft
-     * @param topRight
-     * @param bottomRight
-     * @param bottomLeft
+     * @param topLeft first block
+     * @param topRight second block
+     * @param bottomRight third block
+     * @param bottomLeft fourth block
      */
     public HyperSudoku(Coord_2D topLeft, Coord_2D topRight, Coord_2D bottomRight, Coord_2D bottomLeft)
     {
@@ -72,7 +73,7 @@ public class HyperSudoku extends ClassicSudoku {
 
     /**
      * Helper function that checks if everything is valid with the inner sudokus provided.
-     * @return
+     * @return true if valid; false otherwise.
      */
     private boolean checkIfBlocksAreValid()
     {
@@ -124,7 +125,7 @@ public class HyperSudoku extends ClassicSudoku {
                 return false;
             
             if (value== 0)
-            return true;
+                return true;
             int rootDimX = (int) Math.sqrt(getX());
             int rootDimY = (int) Math.sqrt(getY());
 

@@ -6,6 +6,7 @@
 
 package Logic.Sudoku;
 
+import Logic.Users.Person;
 import java.util.Arrays;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -46,6 +47,14 @@ public class ClassicSudokuGameTest {
     }
     
     @Test
+    public void testingConstructor()
+    {
+        Person p = new Person("Test");
+        g = new ClassicSudokuGame(dummyMatrix(),String.valueOf(1), p);
+        assertEquals(p,g.players.get(0));
+    }
+    
+    @Test
     public void testingHintsPerColumn() {            
             int[] r = g.getHelp(new Coord_2D(3,0));
             assertTrue(Arrays.equals(r, new int[]{1,3,4,5,6,7,8,9}));
@@ -60,9 +69,29 @@ public class ClassicSudokuGameTest {
             int[] r = g.getHelp(new Coord_2D(1,1));
             assertTrue(Arrays.equals(r, new int[]{1,4,5,6,7,8,9}));
     }
+    
     @Test
     public void testingIfCompleted(){
             assertFalse(g.isCompleted());
     }
 
+    @Test
+    public void testingIsEditable()
+    {
+        g = new ClassicSudokuGame(dummyMatrix(),String.valueOf(1));
+        assertFalse(g.getIsEditableMatrix()[1][1]);
+        assertTrue(g.getIsEditableMatrix()[1][2]);
+    }
+    
+    private int[][] dummyMatrix()
+    {
+        int[][] array = new int[9][9];
+        array[1][1] = 2;
+        array[2][7] = 9;
+        array[4][0] = 1;
+        array[4][5] = 3;
+        array[8][7] = 4;
+        return array;
+    }
+    
 }

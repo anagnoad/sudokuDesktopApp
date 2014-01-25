@@ -28,7 +28,7 @@ public class HyperSudokuGame extends BaseGame {
 
     /**
      * Constructor that takes the Person who plays the Sudoku as parameter.
-     * @param p
+     * @param p the Person that plays the Sudoku puzzle.
      */
     public HyperSudokuGame(Person p)
     {
@@ -37,12 +37,24 @@ public class HyperSudokuGame extends BaseGame {
             this.isAnonymous = false;
     }
 
+    /**
+     * Constructor taking as parameters the array of the sudoku to load and its id.
+     * @param array the array of the sudoku
+     * @param id the id of the puzzle.
+     */
     public HyperSudokuGame(int[][] array, String id)
     {
         this();
         this.mySudoku = new HyperSudoku(array,id);
     }
     
+    /**
+     * Constructor taking as parameters the array to load for the sudoku, its id
+     * and the Person who is playing it.
+     * @param array the array of the sudoku puzzle.
+     * @param id the id of the sudoku being played.
+     * @param p the Person who is playing the sudoku.
+     */
     public HyperSudokuGame(int[][] array, String id, Person p)
     {
         this();
@@ -104,6 +116,10 @@ public class HyperSudokuGame extends BaseGame {
             return this.mySudoku.isCompleted();
     }
     
+    /**
+     * Method returning current sudoku status
+     * @return FINISHED, NOTFINISHED or FAILED.
+     */
     public sudokuStatus getSudokuStatus() // this may go to an abstract class sudoku
     {
             return this.mySudoku.getSudokuStatus();
@@ -120,11 +136,24 @@ public class HyperSudokuGame extends BaseGame {
         return tempRes;
     }
     
+    /**
+     * Function returning the value of the sudoku in a particular cell [i,j]
+     * @param i the 'x' coordinate of the cell
+     * @param j the 'y' coordinate of the cell
+     * @return value in the sudoku puzzle.
+     */
     public int getMatrixValue(int i, int j)
     {
         return this.mySudoku.getMatrix()[i][j];
     }
     
+    /**
+     * Function returning the 2D array of editable cells.
+     * Used mainly from the GUI, and in order to determine whether the user has the
+     * right to change the value 
+     * of a particular cell or not.
+     * @return the 2d boolean array of the editable cells.
+     */
     public boolean[][] getIsEditableMatrix()
     {
         return this.mySudoku.isEditableArray;

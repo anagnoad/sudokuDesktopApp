@@ -26,12 +26,23 @@ public class ClassicSudokuGame extends BaseGame
             this.isAnonymous = true;
     }
 
+    /**
+     * Constructor that takes as parameters the array of the puzzle and the puzzle's id.
+     * @param array the 2D array of the puzzle
+     * @param id the id of the puzzle
+     */
     public ClassicSudokuGame(int[][] array, String id)
     {
             this();
             mySudoku = new ClassicSudoku(array,id);
     }
     
+    /**
+     * Constructor taking as parameters the array of the puzzle, the puzzle's id and the Person playing it.
+     * @param array the 2D array of the puzzle
+     * @param id the id of the puzzle
+     * @param p the Person playing it.
+     */
     public ClassicSudokuGame(int[][] array, String id, Person p)
     {
             this();
@@ -55,7 +66,7 @@ public class ClassicSudokuGame extends BaseGame
 
     /**
      * Returns hints for a particular cell of the puzzle.
-     * @param cell
+     * @param cell the coordinates of the cell that you would like help on.
      * @return int array with all possible integers values.
      */
     public int[] getHelp(Coord_2D cell)
@@ -66,14 +77,7 @@ public class ClassicSudokuGame extends BaseGame
     @Override
     public boolean addNumber(int value, Coord_2D coordinates)
     {
-        for(int i=0;i<9;i++)
-        {
-            for (int j=0;j<9;j++)
-                System.out.printf("%d ", this.mySudoku.matrix[i][j]);
-            System.out.println("");
-        }
-        System.out.println("--------------");
-            return mySudoku.setCell(value, coordinates.x, coordinates.y);
+        return mySudoku.setCell(value, coordinates.x, coordinates.y);
     }	
 
     @Override
@@ -82,6 +86,10 @@ public class ClassicSudokuGame extends BaseGame
             return this.mySudoku.isCompleted();
     }
     
+    /**
+     * Method returning current sudoku status: FINISHED, NOTFINISHED and FAILED.
+     * @return the current status of sudoku.
+     */
     public sudokuStatus getSudokuStatus() // this may go to an abstract class sudoku
     {
             return this.mySudoku.getSudokuStatus();
@@ -98,11 +106,23 @@ public class ClassicSudokuGame extends BaseGame
         return tempRes;
     }
     
+    /**
+     * Function returning the value of the sudoku in a particular cell [i,j]
+     * @param i the 'x' coordinate of the cell
+     * @param j the 'y' coordinate of the cell
+     * @return value in the sudoku puzzle.
+     */
     public int getMatrixValue(int i, int j)
     {
         return this.mySudoku.getMatrix()[i][j];
     }
     
+    /**
+     * Function returning the 2D array of editable cells.
+     * Used mainly from the GUI, and in order to determine whether the user has the right to change the value 
+     * of a particular cell or not.
+     * @return the 2d boolean array of the editable cells.
+     */
     public boolean[][] getIsEditableMatrix()
     {
         return this.mySudoku.isEditableArray;

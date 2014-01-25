@@ -3,8 +3,21 @@ package Logic.Sudoku;
 import java.util.HashSet;
 import java.util.Iterator;
 
+/**
+ * Class of ClassicSudoku, extending BasePuzzle.
+ * It contains the basic classic 9x9 sudoku puzzle and its basic functions.
+ * @author Anthony
+ */
 public class ClassicSudoku extends BasePuzzle {
+    
+    /**
+     * Boolean matrix, showing if a cell can be editable, or if it was loaded by default.
+     */
     protected boolean [][] isEditableArray; //inner checking of this
+    
+    /**
+     * Used for inheritance, showing what type of game this puzzle is.
+     */
     public TypeOfGame type; // is needed in order to know with smaller code in which class we are in.
 
     //ctor
@@ -20,8 +33,6 @@ public class ClassicSudoku extends BasePuzzle {
             isEditableArray = new boolean[getX()][getY()];
             this.type = TypeOfGame.CLASSIC;
 
-            //DEBUG ONLY
-            //isEditableArray = new boolean[9][9];
             for (int i=0; i<getX(); i++)
             {
                     for(int j=0; j<getY(); j++)
@@ -32,7 +43,7 @@ public class ClassicSudoku extends BasePuzzle {
     }
 
     /**
-     * Constructor taking a sudoku matrix as a parameter, so as to load it on start.
+     * Constructor taking a sudoku matrix as a parameter, so as to load it on start, as well as the puzzle's id.
      * @param arrayToLoad
      */
     public ClassicSudoku(int[][] arrayToLoad, String id)
@@ -57,7 +68,11 @@ public class ClassicSudoku extends BasePuzzle {
             }
             return false; // this won't be executed anyway.
     }
-
+    
+    /**
+     * Function that calculates sudoku status (FINISHED, UNFINISHED or FAILED)
+     * @return sudoku's status
+     */
     public sudokuStatus getSudokuStatus()
     {
             boolean flag = false;
@@ -122,6 +137,7 @@ public class ClassicSudoku extends BasePuzzle {
             // Steve: changed 9-->dimX and value>=0, which means deletion
     }
 
+    @Override
     public int[] returnHint(Coord_2D cell)
     {
             int x = cell.x;
@@ -200,24 +216,28 @@ public class ClassicSudoku extends BasePuzzle {
      */
     protected boolean isValidArray(int[][] arrayToCheck) // this function is the same for all the child classes
     {
-//            // there may be needed checks for arrayTocheck dimensions
-//            for (int i =0;i<getX();i++)
-//            {
-//                    for (int j=0;j<getY();j++)
-//                    {
-//                            try {
-//                            if (!this.checkRules(arrayToCheck[i][j], i, j))
-//                                    return false;
-//                            }
-//                            catch(ArrayIndexOutOfBoundsException e)
-//                            {
-//                                    // handle the exception here ...
-//                            }
-//                    }
-//            }
+            // there may be needed checks for arrayTocheck dimensions
+            for (int i =0;i<getX();i++)
+            {
+                    for (int j=0;j<getY();j++)
+                    {
+                            try {
+                            if (!this.checkRules(arrayToCheck[i][j], i, j) || !this.inputCheck(arrayToCheck[i][j]))
+                                    return false;
+                            }
+                            catch(ArrayIndexOutOfBoundsException e)
+                            {
+                                    // handle the exception here ...
+                            }
+                    }
+            }
             return true;
     }
     
+    /**
+     * Getter function, that returns the matrix containing which cells are editable or not.
+     * @return 
+     */
     public boolean[][] getIsEditable()
     {
         return this.isEditableArray;
