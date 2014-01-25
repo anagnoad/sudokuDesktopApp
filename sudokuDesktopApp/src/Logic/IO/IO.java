@@ -138,36 +138,31 @@ public class IO {
             return true;
     }
 
-    /**
-     * Reads saved game from file.
-     * @param filename
-     * @param gameLoadedFromFile
-     * @param appContext
-     * @return
-     */
+   /**
+    * Reads saved (serialized game) from the specified file.
+    * @param filename The file from which to load the file.
+    * @return  The game loaded, if successful, null otherwise.
+    */
     public static BaseGame readFromFile(String filename)
     {
         BaseGame gameLoadedFromFile = null;
-            try {
-                    ObjectInputStream input = new ObjectInputStream(new FileInputStream(filename));
+            try (ObjectInputStream input = new ObjectInputStream(new FileInputStream(filename));){
                     try {
                             gameLoadedFromFile = (BaseGame) input.readObject(); // at this time, you don't know the type of the game
                     } catch (ClassNotFoundException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
+                            System.err.println("The class has not been found.");
                             return null;
                     }
-                    input.close(); // important!!
             } catch (StreamCorruptedException e) {
-                    // TODO Auto-generated catch block
+                    System.err.println("Stream corrupted while loading game.");
                     e.printStackTrace();
                     return null;
             } catch (FileNotFoundException e) {
-                    // TODO Auto-generated catch block
+                    System.err.println("File not found while loading saved game session");
                     e.printStackTrace();
                     return null;
             } catch (IOException e) {
-                    // TODO Auto-generated catch block
+                    System.err.println("General IO exception error while loading saved game session");
                     e.printStackTrace();
                     return null;
             }
@@ -176,11 +171,10 @@ public class IO {
     }
 
     /**
-     * Saves current game to file.
-     * @param filename
-     * @param gameToSave
-     * @param appContext
-     * @return
+     * Saves the current game to the specified file via serialization.
+     * @param filename The filename to which the current game will be serialized
+     * @param gameToSave The game we want to serialize
+     * @return  Returns true if saved successfully, false otherwise.
      */
     static public boolean saveToFile(String filename, BaseGame gameToSave)
     {
@@ -189,10 +183,12 @@ public class IO {
                     output.writeObject(gameToSave);
                     output.close();
             } catch (FileNotFoundException e) {
-                    // TODO Auto-generated catch block
+                    System.err.println("File not found while saving game session");
+                    e.printStackTrace();
                     return false;
             } catch (IOException e) {
-                    // TODO Auto-generated catch block
+                    System.err.println("General IO exception error while saving game session");
+                    e.printStackTrace();
                     return false;
             }
             return true;

@@ -46,36 +46,6 @@ public class IOTest {
     @After
     public void tearDown() {
     }
-//    /**
-//     * Test of readFromFile method, of class IO.
-//     */
-//    @Test
-//    public void testReadFromFile() {
-//        System.out.println("readFromFile");
-//        String filename = "";
-//        BaseGame gameLoadedFromFile = null;
-//        boolean expResult = false;
-//        boolean result = IO.readFromFile(filename, gameLoadedFromFile);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of saveToFile method, of class IO.
-//     */
-//    @Test
-//    public void testSaveToFile() {
-//        ClassicSudokuGame game = new ClassicSudokuGame();
-//        System.out.println("saveToFile");
-//        String filename = "";
-//        BaseGame gameToSave = null;
-//        boolean expResult = false;
-//        boolean result = IO.saveToFile(filename, gameToSave);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
     
     @Test
     public void saveLoadPlayersDBTest()
@@ -130,6 +100,6 @@ public class IOTest {
     }
     
     
-    
+// Methods readFromFile and saveToFile will be tested in the relevant contexts.    
 
 }
