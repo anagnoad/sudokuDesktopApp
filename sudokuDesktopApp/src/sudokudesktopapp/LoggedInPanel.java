@@ -7,12 +7,14 @@ package sudokudesktopapp;
 import java.awt.Color;
 
 /**
- *
+ * Custom JPanel class used when the user is logged in the application.
+ * This panel is loaded in the sidebar of the main application frame.
  * @author Steve
  */
 public class LoggedInPanel extends javax.swing.JPanel {
 
     /**
+     * Default constructor.
      * Creates new form LoggedInPanel
      */
     public LoggedInPanel(GUIHandler guiHandler) {
@@ -123,50 +125,99 @@ public class LoggedInPanel extends javax.swing.JPanel {
         add(showStatsLabel, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Event handling for "Continue Last Game" JLabel.
+     * The previous game is loaded and the user is redirected to the main sudoku screen.
+     * @param evt 
+     */
     private void continueLastGameLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_continueLastGameLabelMouseClicked
         this.myGuiHandler.continueGame();
     }//GEN-LAST:event_continueLastGameLabelMouseClicked
 
+    /**
+     * Event handling for the "New Game" JLabel.
+     * Loads the New Game Options panel in sidebar, so as for the user to decide the type
+     * of sudoku that they want to play.
+     * @param evt 
+     */
     private void newGameLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newGameLabelMouseClicked
         // TODO add your handling code here:
         this.myGuiHandler.showNewGameOptionsPanel();
         
     }//GEN-LAST:event_newGameLabelMouseClicked
 
+    /**
+     * Event handling for the Show Stats JLabel.
+     * Loads user's statistics in the main panel of the screen.
+     * @param evt 
+     */
     private void showStatsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showStatsLabelMouseClicked
         // TODO add your handling code here:
         this.myGuiHandler.showStatsPanel();
     }//GEN-LAST:event_showStatsLabelMouseClicked
 
+    /**
+     * Event handling for hovering over the JLabel of Continue Last Game (entering)
+     * @param evt 
+     */
     private void continueLastGameLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_continueLastGameLabelMouseEntered
         this.continueLastGameLabel.setForeground(alternativeFontColor);
     }//GEN-LAST:event_continueLastGameLabelMouseEntered
 
+    /**
+     * Event handling for hovering over the JLabel of Continue Last Game (exiting)
+     * @param evt 
+     */
     private void continueLastGameLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_continueLastGameLabelMouseExited
         // TODO add your handling code here:
         this.continueLastGameLabel.setForeground(defaultFontColor);
     }//GEN-LAST:event_continueLastGameLabelMouseExited
 
+    /**
+     * Event handling for hovering over the JLabel of New Game(entering)
+     * @param evt 
+     */
     private void newGameLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newGameLabelMouseEntered
         this.newGameLabel.setForeground(alternativeFontColor);
     }//GEN-LAST:event_newGameLabelMouseEntered
 
+    /**
+     * Event handling for hovering over the JLabel of New Game(exiting)
+     * @param evt 
+     */
     private void newGameLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newGameLabelMouseExited
         this.newGameLabel.setForeground(defaultFontColor);
     }//GEN-LAST:event_newGameLabelMouseExited
 
+    /**
+     * Event handling for hovering over the JLabel of Show Stats(entering)
+     * @param evt 
+     */
     private void showStatsLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showStatsLabelMouseEntered
         this.showStatsLabel.setForeground(alternativeFontColor);
     }//GEN-LAST:event_showStatsLabelMouseEntered
 
+    /**
+     * Event handling for hovering over the JLabel of Show Stats (exiting)
+     * @param evt 
+     */
     private void showStatsLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showStatsLabelMouseExited
         this.showStatsLabel.setForeground(defaultFontColor);
     }//GEN-LAST:event_showStatsLabelMouseExited
 
-    
+    /**
+     * Color constant for JLabels.
+     */
     private static final Color defaultFontColor = new Color(255, 255, 255);
+    /**
+     * Color constant for novered over JLabels.
+     */
     private static final Color alternativeFontColor = new Color(204, 204, 204);
-    GUIHandler myGuiHandler;
+    
+    /**
+     * An instance of the GUIHandler.
+     */
+    private GUIHandler myGuiHandler;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel continueLastGameLabel;
     private javax.swing.JSeparator jSeparator1;

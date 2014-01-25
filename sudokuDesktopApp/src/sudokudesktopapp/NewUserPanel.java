@@ -6,12 +6,14 @@
 package sudokudesktopapp;
 
 /**
- *
+ * Custom JPanel class used to create a new user.
+ * It is loaded in the mainpanel of the application.
  * @author Steve
  */
 public class NewUserPanel extends javax.swing.JPanel {
 
     /**
+     * Default constructor.
      * Creates new form NewUserPanel
      */
     public NewUserPanel(GUIHandler guiHandler) {
@@ -86,21 +88,39 @@ public class NewUserPanel extends javax.swing.JPanel {
         add(buttonsPanel);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Event handling for when the user cliks on the TextField.
+     * Clears the value, so that they can write something else.
+     * @param evt 
+     */
     private void onTextFieldEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_onTextFieldEntered
         // TODO add your handling code here:
         this.nicknameInput.setText("");
     }//GEN-LAST:event_onTextFieldEntered
 
+    /**
+     * Event handling for pressing Enter key after typing.
+     * Creates a new user in the PersonDB, using the nickname provided.
+     * @param evt 
+     */
     private void onEnterPressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onEnterPressed
         this.myGuiHandler.addNewUser(this.nicknameInput.getText());
         this.myGuiHandler.hideAddNewUserPanel();
     }//GEN-LAST:event_onEnterPressed
 
+    /**
+     * Event handling for clicking the ok button after typing.
+     * Creates a new user in the PersonDB, using the nickname provided.
+     * @param evt 
+     */
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         this.myGuiHandler.addNewUser(this.nicknameInput.getText());
         this.myGuiHandler.hideAddNewUserPanel();
     }//GEN-LAST:event_okButtonActionPerformed
 
+    /**
+     * Instance of the GUIHandler controller.
+     */
     private GUIHandler myGuiHandler;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel buttonsPanel;

@@ -12,33 +12,26 @@ import javax.swing.event.ListSelectionEvent;
 
 
 /**
- *
+ * Custom JPanel class for the Log In panel.
+ * It is used in the main application frame, in main panel.
  * @author Steve
  */
 public class LogInPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form LogInPanel
+     * Default constructor.
+     * Creates new form LogInPanel.
      */
     public LogInPanel(GUIHandler guiHandler) {
         this.myGuiHandler = guiHandler;
-        
-//        listModeForJList = new javax.swing.AbstractListModel()
-//        listModeForJList = new DefaultListModel()
-//        {
-//                ArrayList<Person> listToShow = resultsToShare;
-//                @Override
-//                public int getSize() {return listToShow.size();}
-//                @Override
-//                public Object getElementAt(int i) {return listToShow.get(i);}
-//        };
         initComponents();
-        addListAdapter();
         this.resultsToShare = new ArrayList<>(); // so as not to have null ptr exception
     }
+    /**
+     * Function that updates the JList values, according to search.
+     */
     private void updateJList()
     {
-        
         DefaultListModel<Person> model = new DefaultListModel<>();
         for(Person p : resultsToShare)
         {
@@ -46,11 +39,6 @@ public class LogInPanel extends javax.swing.JPanel {
         }
         resultsJList.setModel(model);
         System.out.println(resultsToShare);
-    }
-    
-    private void addListAdapter()
-    {
-        
     }
     
     /**
@@ -143,6 +131,11 @@ public class LogInPanel extends javax.swing.JPanel {
         add(jScrollPane1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Event handling for when the user searches for a particular nickname.
+     * Searching personDB and updating the list.
+     * @param evt 
+     */
     private void nicknameSearchInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nicknameSearchInputActionPerformed
         // search nickname on the db and return results
         ArrayList<Person> results;
@@ -158,6 +151,11 @@ public class LogInPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_nicknameSearchInputActionPerformed
 
+    /**
+     * Event handling for when the user selects a value off the JList.
+     * The user is logged in, and the logged in panel is set to visible.
+     * @param evt 
+     */
     private void resultsJListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_resultsJListValueChanged
         ListSelectionEvent event = (ListSelectionEvent) evt;
         JList list = (JList) evt.getSource();
@@ -168,7 +166,13 @@ public class LogInPanel extends javax.swing.JPanel {
         this.myGuiHandler.showLoggedInPanel();
     }//GEN-LAST:event_resultsJListValueChanged
 
+    /**
+     * Instance of the GUIHandler of the app.
+     */
     private GUIHandler myGuiHandler;
+    /**
+     * ArrayList containing all Person objects, returned from the user's search.
+     */
     private ArrayList<Person> resultsToShare;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;

@@ -11,17 +11,34 @@ import javax.swing.JPanel;
  * @author Steve
  */
 public class Application extends JFrame{
+    /**
+     * Instance of a GUIHandler object.
+     * Needed for reference to any other handler function or member.
+     */
     private GUIHandler myGuiHandler;
     
+    /**
+     * Instance of a JPanel object, that contains the sidebar panel of the app.
+     */
     public JPanel sideBarPanel;
+    /**
+     * Instance of a JPanel object, that contains the main panel of the app.
+     */
     public JPanel mainPanel;
     
+    /**
+     * Default constructor, taking the GUIHandler as a parameter.
+     * @param guiHandler 
+     */
     public Application(GUIHandler guiHandler)
     {
         this.myGuiHandler = guiHandler;
         init();
     }
     
+    /**
+     * Initializating function for the JFrame.
+     */
     private void init()
     {
         setTitle("SudokuApp");

@@ -8,7 +8,8 @@ import Logic.IO.IO;
 import Logic.Users.PersonDB;
 
 /**
- *
+ * Main starting class of the application.
+ * The GUIHandler and the Application Instance are initialized.
  * @author Steve
  */
 public class SudokuDesktopApp {
@@ -19,15 +20,6 @@ public class SudokuDesktopApp {
     public static void main(String[] args) {
         // Start the appInstance and the GuiHandler of the application.
         ApplicationInstance appInstance = ApplicationInstance.getInstance();
-//        PersonDB db = new PersonDB();
-//        db.addNewPerson("Antonis");
-//        db.addNewPerson("Steve");
-//        db.addNewPerson("Greg");
-//        db.addNewPerson("Dask");
-//        db.addNewPerson("Antonis");
-//        IO.savePlayers("db.txt", db);
-//        
-        
         GUIHandler guiHandler = new GUIHandler(appInstance);
     }
 }

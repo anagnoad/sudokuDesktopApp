@@ -10,11 +10,18 @@ import Logic.Sudoku.Coord_2D;
  */
 
 /**
- *
+ * Custom JPanel class, that extends from SudokuCellOptionsPanel.
+ * It is used a sidebar panel when playing Duidoku. 
  * @author Anthony
  */
 public class DuidokuCellOptionsPanel extends SudokuCellOptionsPanel{
     
+    /**
+     * Default constructor, that initializes the variables and 
+     * sets the combobox value to the appropriate ones for Duidoku.
+     * @param handler
+     * @param coords 
+     */
     public DuidokuCellOptionsPanel(GUIHandler handler, Coord_2D coords)
     {
         super(handler, coords);

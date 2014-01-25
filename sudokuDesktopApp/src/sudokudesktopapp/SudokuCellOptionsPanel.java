@@ -9,23 +9,22 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
 /**
- *
+ * Custom JPanel class used for when a user clicks on a particular Sudoku Cell.
+ * It is loaded in the sidebar of the application window.
  * @author Steve
  */
 public class SudokuCellOptionsPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form GettingStartedPanel
+     * Default constructor.
+     * Creates new form GettingStartedPanel.
      */
     public SudokuCellOptionsPanel(GUIHandler guiHandler, Coord_2D coords) {
         
         initComponents();
         this.myGuiHandler = guiHandler; //save the instance of the guiHandler
         this.selectedCoordinates = coords;        
-//        this.jComboBox1.revalidate();
-//        this.jComboBox1.repaint();
         myGuiHandler.updateHintsFromSudokuCellOptionsPanel();
-        //System.out.println(this.myGuiHandler.showHints);
     }
 
     /**
@@ -65,7 +64,7 @@ public class SudokuCellOptionsPanel extends javax.swing.JPanel {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                valuesComboBoxActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -83,7 +82,7 @@ public class SudokuCellOptionsPanel extends javax.swing.JPanel {
         clearLabel.setText("Clear");
         clearLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                showSudokuRulesClicked(evt);
+                clearLabelClicked(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -112,16 +111,31 @@ public class SudokuCellOptionsPanel extends javax.swing.JPanel {
         add(showHintsLabel, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void showSudokuRulesClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showSudokuRulesClicked
+    /**
+     * Event handling for clicking the "Clear" JLabel.
+     * Clears the value of the cell, if allowed.
+     * @param evt 
+     */
+    private void clearLabelClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearLabelClicked
         this.myGuiHandler.clearSudokuCell(selectedCoordinates);
-    }//GEN-LAST:event_showSudokuRulesClicked
+    }//GEN-LAST:event_clearLabelClicked
 
+    /**
+     * Event handling for clicking the "Show Hints" JLabel
+     * Shows hints on the same JLabel, if any.
+     * @param evt 
+     */
     private void showHintsLabelClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showHintsLabelClicked
         // TODO add your handling code here:
         this.myGuiHandler.showHintsOnSudokuGame(selectedCoordinates);
     }//GEN-LAST:event_showHintsLabelClicked
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    /**
+     * Event handling for picking another value from the combobox.
+     * The value is loaded in the particular sudoku cell, if allowed.
+     * @param evt 
+     */
+    private void valuesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valuesComboBoxActionPerformed
         JComboBox cb = (JComboBox)evt.getSource();
         String value = (String)cb.getSelectedItem();
         Integer intvalue;
@@ -131,19 +145,33 @@ public class SudokuCellOptionsPanel extends javax.swing.JPanel {
         else
             intvalue = Integer.parseInt(value);
         this.myGuiHandler.changeSudokuCell(intvalue, this.selectedCoordinates);
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_valuesComboBoxActionPerformed
 
+    /**
+     * Getter function for choices combobox.
+     * @return the choices combobox
+     */
     public JComboBox getChoicesComboBox()
     {
         return jComboBox1;
     }
     
+    /**
+     * Getter function for show hints JLabel.
+     * @return the show hints JLabel.
+     */
     public JLabel getShowHintsLabel()
     {
         return this.showHintsLabel;
     }
     
+    /**
+     * Instance of a Coord_2D object, representing current active cell.
+     */
     private Coord_2D selectedCoordinates;
+    /**
+     * Instance of the GUIHandler controller.
+     */
     private GUIHandler myGuiHandler;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel cellOptionsLabel;

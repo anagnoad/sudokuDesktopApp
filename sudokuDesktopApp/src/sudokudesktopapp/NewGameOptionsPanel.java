@@ -7,12 +7,14 @@ package sudokudesktopapp;
 import java.awt.Color;
 
 /**
- *
+ * Custom JPanel class used when the user wants to create a new Sudoku game from sidebar.
+ * It presents the different kinds of games that are available.
  * @author Steve
  */
 public class NewGameOptionsPanel extends javax.swing.JPanel {
 
     /**
+     * Default constructor.
      * Creates new form GettingStartedPanel
      */
     public NewGameOptionsPanel(GUIHandler guiHandler) {
@@ -157,59 +159,111 @@ public class NewGameOptionsPanel extends javax.swing.JPanel {
         add(wordokuCheckBox, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Event handling for clicking the "Classic Sudoku" JLabel.
+     * Creates a new Classic Sudoku game.
+     * @param evt 
+     */
     private void classicSudokuLabelClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_classicSudokuLabelClicked
         // this will redirect you to a JFrame To Add a new user
         this.myGuiHandler.newClassicSudoku();
     }//GEN-LAST:event_classicSudokuLabelClicked
 
+    /**
+     * Event handling for clicking the "HyperSudoku" JLabel.
+     * Creates a new HyperSudoku game.
+     * @param evt 
+     */
     private void hyperSudokuLabelClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hyperSudokuLabelClicked
         // this will redirect you to a JFrame to choose with which nickname to log in
         this.myGuiHandler.newHyperSudoku();
     }//GEN-LAST:event_hyperSudokuLabelClicked
 
+    /**
+     * Event handling for clicking the "Duidoku" JLabel.
+     * Creates a new Duidoku game.
+     * @param evt 
+     */
     private void duidokuLabelClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_duidokuLabelClicked
         // this will redirect you to a JFrame selecting options for the sudoku
         this.myGuiHandler.newDuidoku();
     }//GEN-LAST:event_duidokuLabelClicked
 
+    /**
+     * Event handling for hovering over the JLabel of Classic Sudoku (entering)
+     * @param evt 
+     */
     private void classicSudokuLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_classicSudokuLabelMouseEntered
         // TODO add your handling code here:
         this.classicSudokuLabel.setForeground(alternativeFontColor);
     }//GEN-LAST:event_classicSudokuLabelMouseEntered
 
+    /**
+     * Event handling for hovering over the JLabel of Classic Sudoku (exiting)
+     * @param evt 
+     */
     private void classicSudokuLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_classicSudokuLabelMouseExited
         // TODO add your handling code here:
         this.classicSudokuLabel.setForeground(defaultFontColor);
         
     }//GEN-LAST:event_classicSudokuLabelMouseExited
 
+    /**
+     * Event handling for hovering over the JLabel of HyperSudoku (entering)
+     * @param evt 
+     */
     private void hyperSudokuLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hyperSudokuLabelMouseEntered
         // TODO add your handling code here:
         this.hyperSudokuLabel.setForeground(alternativeFontColor);
     }//GEN-LAST:event_hyperSudokuLabelMouseEntered
 
+    /**
+     * Event handling for hovering over the JLabel of HyperSudoku (exiting)
+     * @param evt 
+     */
     private void hyperSudokuLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hyperSudokuLabelMouseExited
         // TODO add your handling code here:
         this.hyperSudokuLabel.setForeground(defaultFontColor);
     }//GEN-LAST:event_hyperSudokuLabelMouseExited
 
+    /**
+     * Event handling for hovering over the JLabel of Duidoku (entering)
+     * @param evt 
+     */
     private void duidokuLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_duidokuLabelMouseEntered
         // TODO add your handling code here:
         this.duidokuLabel.setForeground(alternativeFontColor);
     }//GEN-LAST:event_duidokuLabelMouseEntered
 
+    /**
+     * Event handling for hovering over the JLabel of Duidoku (exiting)
+     * @param evt 
+     */
     private void duidokuLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_duidokuLabelMouseExited
         // TODO add your handling code here:
         this.duidokuLabel.setForeground(defaultFontColor);
     }//GEN-LAST:event_duidokuLabelMouseExited
 
+    /**
+     * Event handling for clicking the "wordoku" checkbox.
+     * It toggles the wordoku visibility.
+     * @param evt 
+     */
     private void wordokuCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wordokuCheckBoxActionPerformed
         this.myGuiHandler.toggleWordoku();
     }//GEN-LAST:event_wordokuCheckBoxActionPerformed
 
-    
+    /**
+     * Color constant for JLabels.
+     */
     private static final Color defaultFontColor = new Color(255, 255, 255);
+    /**
+     * Color constant for hovered over JLabels.
+     */
     private static final Color alternativeFontColor = new Color(204, 204, 204);
+    /**
+     * Instance of the GUIHandler controller.
+     */
     private GUIHandler myGuiHandler;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel classicSudokuLabel;
