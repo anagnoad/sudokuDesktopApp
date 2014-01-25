@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Anthony
+ * @author Steve
  */
 public class PersonDBTest {
     
@@ -27,6 +27,7 @@ public class PersonDBTest {
     
     @BeforeClass
     public static void setUpClass() {
+        
         db.addNewPerson("Antonis");
         db.addNewPerson("Steve");
         db.addNewPerson("Greg");
@@ -51,6 +52,7 @@ public class PersonDBTest {
     public void testSearchByNickName() {
         String nicknameToSearch = "Antonis";
         ArrayList<Person> result = db.searchByNickName(nicknameToSearch);
+        System.out.println(result.toString());
         for(Person p: result)
         {
             System.out.println(p);
@@ -58,6 +60,21 @@ public class PersonDBTest {
         assertTrue(result.get(0).getNickname().equals(nicknameToSearch));
     }
 
+    /**
+     * Test of searchById method, of class PersonDB.
+     */
+    @Test
+    public void testSearchById()
+    {
+        ArrayList<Person> res = db.searchByNickName("Steve");
+        Person p = res.get(0);
+        
+        Person p2 = db.searchById(p.getId());
+        
+        assertEquals(p, p2);
+        
+    }
+    
     /**
      * Test of addNewPerson method, of class PersonDB.
      */
@@ -73,10 +90,10 @@ public class PersonDBTest {
      */
     @Test
     public void testDeleteExistentPerson() {
-        String nicknameToDelete = "Antonis";
+        String nicknameToDelete = "Greg";
         ArrayList<Person> result = db.searchByNickName(nicknameToDelete);
         boolean flag = true;
-        if(result.size()==0)
+        if(result.isEmpty())
             flag = false;
         else
         {
@@ -102,5 +119,25 @@ public class PersonDBTest {
             flag = db.deletePerson(p.getId());
         }
         assertFalse(flag);
+    }
+    
+    /**
+     * Test of equals method, of class PersonDB
+     */
+    public void testEquals()
+    {
+        Person p1 = new Person("Steve");
+        Person p2 = new Person ("Antonis");
+        
+        PersonDB db1 = new PersonDB();
+        PersonDB db2 = new PersonDB();
+        // add the people to the db1
+        db1.addNewPerson(p1);
+        db1.addNewPerson(p2);
+        // add the people to the db2
+        db2.addNewPerson(p1);
+        db2.addNewPerson(p2);
+        
+        assertEquals(db1, db2);
     }
 }

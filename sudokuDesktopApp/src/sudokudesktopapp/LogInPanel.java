@@ -8,7 +8,6 @@ import Logic.Users.Person;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
-import javax.swing.event.ListSelectionEvent;
 
 
 /**
@@ -33,23 +32,16 @@ public class LogInPanel extends javax.swing.JPanel {
 //                public Object getElementAt(int i) {return listToShow.get(i);}
 //        };
         initComponents();
-        addListAdapter();
         this.resultsToShare = new ArrayList<>(); // so as not to have null ptr exception
     }
     private void updateJList()
     {
-        
         DefaultListModel<Person> model = new DefaultListModel<>();
         for(Person p : resultsToShare)
         {
             model.addElement(p);
         }
         resultsJList.setModel(model);
-        System.out.println(resultsToShare);
-    }
-    
-    private void addListAdapter()
-    {
         
     }
     
@@ -66,15 +58,20 @@ public class LogInPanel extends javax.swing.JPanel {
         searchPanel = new javax.swing.JPanel();
         nicknameSearchInput = new javax.swing.JTextField();
         searchIconLabel = new javax.swing.JLabel();
-        loginLabel = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         resultsJList = new javax.swing.JList();
+        loginLabel = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
 
         setLayout(new java.awt.GridBagLayout());
 
-        nicknameSearchInput.setText("nickname");
+        nicknameSearchInput.setText("enter nickname");
         nicknameSearchInput.setToolTipText("Enter nickname to search");
+        nicknameSearchInput.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nicknameSearchInputMouseClicked(evt);
+            }
+        });
         nicknameSearchInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nicknameSearchInputActionPerformed(evt);
@@ -91,7 +88,7 @@ public class LogInPanel extends javax.swing.JPanel {
                 .add(searchIconLabel)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(nicknameSearchInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 205, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 0, Short.MAX_VALUE))
+                .add(0, 211, Short.MAX_VALUE))
         );
         searchPanelLayout.setVerticalGroup(
             searchPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -104,26 +101,14 @@ public class LogInPanel extends javax.swing.JPanel {
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         add(searchPanel, gridBagConstraints);
 
-        loginLabel.setFont(new java.awt.Font("Lucida Grande", 1, 22)); // NOI18N
-        loginLabel.setText("Log In");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipady = 10;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        add(loginLabel, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        add(jSeparator2, gridBagConstraints);
-
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.setBackground(new java.awt.Color(192, 192, 192));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(200, 150));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(260, 200));
 
         resultsJList.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         resultsJList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -137,10 +122,27 @@ public class LogInPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(resultsJList);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipady = 4;
+        gridBagConstraints.weightx = 0.3;
+        gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
         add(jScrollPane1, gridBagConstraints);
+
+        loginLabel.setFont(new java.awt.Font("Lucida Grande", 1, 22)); // NOI18N
+        loginLabel.setText("Log In");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        add(loginLabel, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        add(jSeparator2, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void nicknameSearchInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nicknameSearchInputActionPerformed
@@ -159,7 +161,6 @@ public class LogInPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_nicknameSearchInputActionPerformed
 
     private void resultsJListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_resultsJListValueChanged
-        ListSelectionEvent event = (ListSelectionEvent) evt;
         JList list = (JList) evt.getSource();
         
         Person person = (Person) list.getSelectedValue();
@@ -167,6 +168,10 @@ public class LogInPanel extends javax.swing.JPanel {
         this.myGuiHandler.hideLoginPanel();
         this.myGuiHandler.showLoggedInPanel();
     }//GEN-LAST:event_resultsJListValueChanged
+
+    private void nicknameSearchInputMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nicknameSearchInputMouseClicked
+        this.nicknameSearchInput.setText("");
+    }//GEN-LAST:event_nicknameSearchInputMouseClicked
 
     private GUIHandler myGuiHandler;
     private ArrayList<Person> resultsToShare;

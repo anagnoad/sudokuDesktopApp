@@ -50,9 +50,6 @@ public final class ApplicationInstance {
     private boolean loadPlayersDB(String filename)
     {
             this.playersDB = IO.loadPlayers(filename);
-            for (int i = 0; i < 15; i++) {
-            playersDB.addNewPerson("foo");
-        }
             
             if(this.playersDB ==null)
                 return false;
