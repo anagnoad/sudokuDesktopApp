@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
-import javax.naming.Context;
 import sudokudesktopapp.GlobalConstants;
 
 
@@ -26,44 +25,55 @@ public class IO {
     // Remember that Android is using Java 6. You cannot use the try(Reader) ... catch syntax.
     // Remember to close the streams opened for files.
 
-
-    static public PersonDB loadPlayers(String filename, PersonDB playersDB)
+    /**
+     * Load the saved Database from the specified file.
+     * @param filename The filename containing the Database
+     * @return The PersonDB read from the file, if found, otherwise false.
+     */
+    static public PersonDB loadPlayers(String filename)
     {
-            try {
-                    ObjectInputStream input = new ObjectInputStream(new FileInputStream(filename));
+            try (ObjectInputStream input = new ObjectInputStream(new FileInputStream(filename));){
                     return (PersonDB) input.readObject();
             } catch (ClassNotFoundException e) {
                     // TODO Auto-generated catch block
+                    System.err.println("Wrong class exception.");
                     e.printStackTrace();
                     return null;
             } 
             catch (StreamCorruptedException e) {
-                    // TODO Auto-generated catch block
+                    System.err.println("Stream corrupted exception raised while loading the PersonDB");
                     e.printStackTrace();
                     return null;
             } catch (FileNotFoundException e) {
+                System.err.println("File not found while loading the PersonDB");
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                     return null;
             } catch (IOException e) {
                     // TODO Auto-generated catch block
+                System.err.println("General IO Exception while loading the PersonDB");
                     e.printStackTrace();
                     return null;
             }
 
     }
-
+    /**
+     * Save the current player database to the specified file.
+     * @param filename the filename to which the database will be saved.
+     * @param playersDB the database to be saved
+     * @return true if saved, false otherwise
+     */
     static public boolean savePlayers(String filename, PersonDB playersDB)
     {
             try {
                     ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(filename));
                     output.writeObject(playersDB);
             } catch (FileNotFoundException e) {
-                    // TODO Auto-generated catch block
+                    System.err.println("File not found.");
                     e.printStackTrace();
                     return false;
             } catch (IOException e) {
-                    // TODO Auto-generated catch block
+                    System.err.println("General IO Exception while saving the PersonDB");
                     e.printStackTrace();
                     return false;
             }
@@ -71,19 +81,18 @@ public class IO {
     }
 
     /**
-     * Loads a presaved sudoku from internal memory
-     * @param filename
-     * @param type
-     * @param array
-     * @param appContext
-     * @return true if read successfully, false otherwise
+     * Load an incomplete pre-saved sudoku from the file specified.
+     * The file should be saved in text format and will be implementation unaware.
+     * The delimeter of the sudoku value will be a " " for elements in the same line and %n for different lines.
+     * @param filename the filename of the sudoku file to load
+     * @param type the type of the sudoku to load [CLASSIC, HYPERDOKU, DUIDOKU]
+     * @param array the array in which to save the matrix of the sudoku read.
+     * @return 
      */
-    static public boolean loadSudokuFromFile(String filename, TypeOfGame type, int[][] array)
+    static public boolean loadSudokuFromFile(String filename, TypeOfGame type, int[][] array) throws NoSuchFieldException
     {
-            // the file should be saved in text format and will be implementation unaware.
-            // we set a space char as the delimeter for each element and \n as a delimeter for different lines.
-            // no supplementary checks have been implemented as to what the file may have.
             Coord_2D dimensions = new Coord_2D();
+            // Set the correct dimensions according to the type of sudoku read from file.
             switch (type)
             {
             case CLASSIC:
@@ -97,12 +106,12 @@ public class IO {
                     dimensions.setXY(4, 4);
                     break;
             default:
-                    return false;
+                    throw new NoSuchFieldException();
             }
 
-            try {
-                    BufferedReader bufferedReader = new BufferedReader(new FileReader(new 
-                            File(GlobalConstants.RESOURCES_PATH+filename)));
+            // Read the file
+            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(new 
+                            File(GlobalConstants.RESOURCES_PATH+filename)));){
                     for (int i=0;i<dimensions.x;i++)
                     {
                             int[] lineElements = new int[9];
@@ -117,21 +126,18 @@ public class IO {
                                     array[i][j] = lineElements[j];
                             }
                     }
-                    bufferedReader.close();
             } catch (FileNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                System.err.println("File not found while loading presaved sudoku");
+                e.printStackTrace();
+                return false;
             } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                System.err.println("General IO exception while loading presaved sudoku");
+                e.printStackTrace();
+                return false;
             }
-
             return true;
     }
 
-
-
-    // needs checking definitely
     /**
      * Reads saved game from file.
      * @param filename
@@ -191,4 +197,4 @@ public class IO {
             }
             return true;
     }
-}
+    }

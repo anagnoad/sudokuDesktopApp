@@ -8,19 +8,25 @@ package Logic.IO;
 
 import Logic.Sudoku.BaseGame;
 import Logic.Sudoku.ClassicSudokuGame;
+import Logic.Sudoku.TypeOfGame;
 import Logic.Users.Person;
+import Logic.Users.PersonDB;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import sudokudesktopapp.GlobalConstants;
 
 /**
  *
  * @author Anthony
  */
 public class IOTest {
+    private String GlobalVariables;
     
     public IOTest() {
     }
@@ -54,21 +60,76 @@ public class IOTest {
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
 //    }
-
-    /**
-     * Test of saveToFile method, of class IO.
-     */
+//
+//    /**
+//     * Test of saveToFile method, of class IO.
+//     */
+//    @Test
+//    public void testSaveToFile() {
+//        ClassicSudokuGame game = new ClassicSudokuGame();
+//        System.out.println("saveToFile");
+//        String filename = "";
+//        BaseGame gameToSave = null;
+//        boolean expResult = false;
+//        boolean result = IO.saveToFile(filename, gameToSave);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+    
     @Test
-    public void testSaveToFile() {
-        ClassicSudokuGame game = new ClassicSudokuGame();
-        System.out.println("saveToFile");
-        String filename = "";
-        BaseGame gameToSave = null;
-        boolean expResult = false;
-        boolean result = IO.saveToFile(filename, gameToSave);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void saveLoadPlayersDBTest()
+    {
+        PersonDB theDB = new PersonDB();
+        theDB.addNewPerson("Stefanos");
+        theDB.addNewPerson("Antonis");
+        theDB.addNewPerson("Greg");
+        
+        if (!IO.savePlayers(GlobalConstants.PERSONDB_PATH_TESTING, theDB))
+        {
+            assertFalse(true);
+        }
+        
+        PersonDB newDB = IO.loadPlayers(GlobalConstants.PERSONDB_PATH_TESTING);
+        assertEquals(theDB, newDB);
     }
     
+    @Test
+    public void loadSudokuFromFIle()
+    {
+        // suppose that we have created a file containing the following puzzle
+        /*
+            1 0 0 0 0 0 0 0 0
+            0 2 0 0 0 0 0 0 0
+            0 0 3 0 0 0 0 0 0
+            0 0 0 4 0 0 0 0 0
+            0 0 0 0 5 0 0 0 0
+            0 0 0 0 0 6 0 0 0
+            0 0 0 0 0 0 7 0 0
+            0 0 0 0 0 0 0 8 0
+            0 0 0 0 0 0 0 0 9
+        */
+        
+        int[][] sudokuToBeLoadedHere = new int[9][9];
+        try {
+            IO.loadSudokuFromFile(GlobalConstants.TESTING_PATH+"testSudokuArray.txt", TypeOfGame.CLASSIC, sudokuToBeLoadedHere);
+        } catch (NoSuchFieldException ex) {
+            System.err.println("Invalid type");
+            int [][] modelArray = new int[9][9];
+            for (int i=0;i<9;i++)
+                for (int j=0;j<9;j++)
+                {
+                    if (i==j)
+                        modelArray[i][j] = i;
+                    else
+                        modelArray[i][j] = 0;
+                }
+            assertArrayEquals(modelArray, sudokuToBeLoadedHere);
+        }
+        
+    }
+    
+    
+    
+
 }

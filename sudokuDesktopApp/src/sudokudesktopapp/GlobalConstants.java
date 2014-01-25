@@ -40,4 +40,10 @@ public final class GlobalConstants {
         wordokuMap.put("H","8");
         wordokuMap.put("I","9");
     }
+    
+    
+    
+    // Testing constants
+    public static final String PERSONDB_PATH_TESTING = "./testing_Resources/testDB";
+    public static final String TESTING_PATH ="/testing/";
 }

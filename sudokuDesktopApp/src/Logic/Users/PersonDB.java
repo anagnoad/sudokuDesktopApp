@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Objects;
 
 /**
  * Represent the Database class for all the players.
@@ -109,5 +110,35 @@ public class PersonDB implements Serializable {
             {
                     return theDB.remove(toBeDeleted);
             }
+    }
+    
+    public String toString()
+    {
+        StringBuilder toBeReturned = new StringBuilder();
+        for (Person i : this.theDB)
+        {
+            toBeReturned.append(i.getNickname());
+            toBeReturned.append(" ");
+        }
+        return toBeReturned.toString();
+    }
+    
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof PersonDB))
+            return false;
+        if (this.hashCode() == obj.hashCode())
+            return true;
+        return false;
+    }
+
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.theDB);
+        return hash;
     }
 }
