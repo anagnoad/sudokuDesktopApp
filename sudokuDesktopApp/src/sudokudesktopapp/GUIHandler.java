@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -48,6 +50,7 @@ public class GUIHandler {
     private AboutDialog aboutDialog;
     
     public boolean showHints;
+    public boolean showWordoku;
     
     /*--------------------------Methods------------------------------*/
     //ctor
@@ -70,13 +73,20 @@ public class GUIHandler {
         this.myApp.setVisible(true);
         
         this.showHints = true;
+        this.showWordoku = false;
     }
     
     public void toggleShowHints()
     {
         this.showHints = !this.showHints;
-        JOptionPane.showMessageDialog(newUserPanel, showHints);
+        //JOptionPane.showMessageDialog(newUserPanel, showHints);
     }
+    public void toggleWordoku()
+    {
+        this.showWordoku = !this.showWordoku;
+    }
+    
+    
     
     public void updateHintsFromSudokuCellOptionsPanel()
     {
@@ -105,10 +115,21 @@ public class GUIHandler {
                 playableNumbers = duiGame.getHelp(selectedCoordinates);
             }
             StringBuilder str = new StringBuilder();
-            for (int i=0;i<playableNumbers.length;i++)
+            if(this.showWordoku)
             {
-                str.append(String.valueOf(playableNumbers[i]));
-                str.append(" ");
+                for (int i=0;i<playableNumbers.length;i++)
+                {
+                    str.append(String.valueOf(GlobalConstants.wordokuMap.get(String.valueOf(playableNumbers[i]))));
+                    str.append(" ");
+                }
+            }
+            else
+            {
+                for (int i=0;i<playableNumbers.length;i++)
+                {
+                    str.append(String.valueOf(playableNumbers[i]));
+                    str.append(" ");
+                }
             }
             this.sudokuCellOptionsPanel.getShowHintsLabel().setText(str.toString());
         }
@@ -285,6 +306,7 @@ public class GUIHandler {
     
     public void showLoggedInPanel()
     {
+        this.cleanSidePanel(true);
         if (this.loggedInPanel == null)
         {
             this.loggedInPanel = new LoggedInPanel(this);
@@ -379,12 +401,34 @@ public class GUIHandler {
         this.myApp.mainPanel = this.sudokuPanel;
         loadValuesFromGame(this.appInstance.game);
         ClassicSudokuGame classicGame = (ClassicSudokuGame) this.appInstance.game;
+        if(this.showWordoku)
+            changeToWordoku(classicGame);
         lockValues(classicGame.getIsEditableMatrix());
         this.myApp.mainPanel.setBounds(20, 20, 520, 520);
         this.myApp.add(myApp.mainPanel);
         this.myApp.getContentPane().validate();
         this.myApp.getContentPane().repaint();
         this.myApp.mainPanel.setVisible(true);
+    }
+    
+    private void changeToWordoku(BaseGame game)
+    {
+        int dim = 0;
+        if (game instanceof ClassicSudokuGame || game instanceof HyperSudokuGame)
+        {
+            dim = 9;
+        }
+        else if(game instanceof DuidokuGame)
+        {
+            dim = 4;
+        }
+        for (int i = 0; i < dim; i++) {
+            for (int j = 0; j < dim; j++) {
+                JLabel label = sudokuPanel.getJLabel(i,j);
+                if (!label.getText().equals(""))
+                    label.setText(GlobalConstants.wordokuMap.get(label.getText()));
+            }
+        }
     }
     
     private void loadValuesFromGame(BaseGame game)
@@ -466,6 +510,8 @@ public class GUIHandler {
         this.myApp.mainPanel.setBounds(20, 20, 520, 520);
         loadValuesFromGame(this.appInstance.game);
         HyperSudokuGame hyperGame = (HyperSudokuGame) this.appInstance.game;
+        if(this.showWordoku)
+            changeToWordoku(hyperGame);
         lockValues(hyperGame.getIsEditableMatrix());
         this.myApp.add(myApp.mainPanel);
 
@@ -490,7 +536,14 @@ public class GUIHandler {
     
     public void showSudokuCellOptionsPanel(TypeOfGame type, Coord_2D coords)
     {
+        // TODOS:
+        // 1) clear the sidepanel
+        // 2) show the newGameOptionsPanel
+        
+        // 1)
         this.cleanSidePanel(true);
+        
+        //2
         if(type == TypeOfGame.CLASSIC || type == TypeOfGame.HYPERDOKU)
         {
             this.sudokuCellOptionsPanel = new SudokuCellOptionsPanel(this, coords);
@@ -499,11 +552,25 @@ public class GUIHandler {
         {
             this.sudokuCellOptionsPanel = new DuidokuCellOptionsPanel(this, coords);
         }
+        JComboBox choicesComboBox = this.sudokuCellOptionsPanel.getChoicesComboBox();
+        if(this.showWordoku)
+        {
+            if(this.sudokuCellOptionsPanel instanceof DuidokuCellOptionsPanel)
+                choicesComboBox.setModel(new DefaultComboBoxModel(new String[] { 
+                    "A", "B", "C", "D"
+                }));
+            else
+                choicesComboBox.setModel(new DefaultComboBoxModel(new String[] { 
+                    "A", "B", "C", "D", "E", "F", "G", "H", "I"
+                }));
+        }
         this.myApp.sideBarPanel = this.sudokuCellOptionsPanel;
         this.myApp.add(myApp.sideBarPanel);
-        this.myApp.sideBarPanel.setBounds(600, 140, 200, 250);
-        this.myApp.sideBarPanel.setVisible(true);
+        myApp.sideBarPanel.setBounds(600, 140, 200, 250);
+        this.updateHintsFromSudokuCellOptionsPanel();
+        this.myApp.sideBarPanel.revalidate();
         this.myApp.sideBarPanel.repaint();
+        this.myApp.sideBarPanel.setVisible(true);    
     }
     
 //    public void showDuidokuCellOptions()
@@ -530,6 +597,8 @@ public class GUIHandler {
                 if (this.appInstance.game instanceof DuidokuGame)
                 {
                     this.loadValuesFromGame(this.appInstance.game);
+                    if(this.showWordoku)
+                        this.changeToWordoku(this.appInstance.game);
                     DuidokuGame game = (DuidokuGame) this.appInstance.game;
                     this.lockValues(game.getIsEditableMatrix());
                     Person winner;
@@ -541,7 +610,12 @@ public class GUIHandler {
                 }
                 else
                 {
-                    panel.selected.setText(Integer.toString(value));
+                    String numvalue =Integer.toString(value);
+                    if(this.showWordoku)
+                    {
+                        numvalue = GlobalConstants.wordokuMap.get(numvalue);
+                    }
+                    panel.selected.setText(numvalue);
                     if (this.appInstance.game.isCompleted())
                     {
                         JOptionPane.showMessageDialog(myApp, "You Won!");

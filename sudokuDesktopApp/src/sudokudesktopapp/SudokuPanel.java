@@ -97,11 +97,10 @@ public class SudokuPanel extends JPanel {
             {
                 if(selected!=null)
                     selected.setBackground(Color.getHSBColor(26, 0, 88));
+                selected = labels[i][j];
+                selected.setBackground(Color.getHSBColor(26, 0, 20));   
                 selectedCoordinates = new Coord_2D(i,j);
                 myGuiHandler.showSudokuCellOptionsPanel(type, selectedCoordinates);
-                selected = labels[i][j];
-                
-                selected.setBackground(Color.getHSBColor(26, 0, 20));   
             }
         }
     }

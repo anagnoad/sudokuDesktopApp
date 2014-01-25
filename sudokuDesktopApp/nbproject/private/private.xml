@@ -3,13 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Anthony/myworkspace0201/swing/sudokuDesktopApp/src/sudokudesktopapp/AboutDialog.java</file>
+            <file>file:/C:/Users/Anthony/myworkspace0201/swing/sudokuDesktopApp/src/Logic/Users/Person.java</file>
+            <file>file:/C:/Users/Anthony/myworkspace0201/swing/sudokuDesktopApp/src/Logic/IO/IO.java</file>
+            <file>file:/C:/Users/Anthony/myworkspace0201/swing/sudokuDesktopApp/src/sudokudesktopapp/LogInPanel.java</file>
+            <file>file:/C:/Users/Anthony/myworkspace0201/swing/sudokuDesktopApp/src/sudokudesktopapp/ApplicationInstance.java</file>
+            <file>file:/C:/Users/Anthony/myworkspace0201/swing/sudokuDesktopApp/src/Logic/Users/PersonDB.java</file>
             <file>file:/C:/Users/Anthony/myworkspace0201/swing/sudokuDesktopApp/src/sudokudesktopapp/SudokuDesktopApp.java</file>
-            <file>file:/C:/Users/Anthony/myworkspace0201/swing/sudokuDesktopApp/src/sudokudesktopapp/Application.java</file>
-            <file>file:/C:/Users/Anthony/myworkspace0201/swing/sudokuDesktopApp/src/sudokudesktopapp/MainMenuBar.java</file>
-            <file>file:/C:/Users/Anthony/myworkspace0201/swing/sudokuDesktopApp/src/sudokudesktopapp/SudokuPanel.java</file>
             <file>file:/C:/Users/Anthony/myworkspace0201/swing/sudokuDesktopApp/src/sudokudesktopapp/GUIHandler.java</file>
-            <file>file:/C:/Users/Anthony/myworkspace0201/swing/sudokuDesktopApp/src/sudokudesktopapp/SudokuHelpDialog.java</file>
         </group>
     </open-files>
 </project-private>

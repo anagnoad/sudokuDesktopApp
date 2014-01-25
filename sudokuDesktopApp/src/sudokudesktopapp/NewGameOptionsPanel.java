@@ -18,6 +18,7 @@ public class NewGameOptionsPanel extends javax.swing.JPanel {
     public NewGameOptionsPanel(GUIHandler guiHandler) {
         this.myGuiHandler = guiHandler; //save the instance of the guiHandler
         initComponents();
+        
     }
 
     /**
@@ -37,6 +38,7 @@ public class NewGameOptionsPanel extends javax.swing.JPanel {
         hyperSudokuLabel = new javax.swing.JLabel();
         duidokuLabel = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        wordokuCheckBox = new javax.swing.JCheckBox();
 
         jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -139,6 +141,20 @@ public class NewGameOptionsPanel extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipady = 8;
         add(jSeparator1, gridBagConstraints);
+
+        wordokuCheckBox.setSelected(myGuiHandler.showWordoku);
+        wordokuCheckBox.setText("Wordoku");
+        wordokuCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                wordokuCheckBoxActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.ipady = 11;
+        gridBagConstraints.insets = new java.awt.Insets(9, 9, 9, 9);
+        add(wordokuCheckBox, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void classicSudokuLabelClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_classicSudokuLabelClicked
@@ -187,6 +203,10 @@ public class NewGameOptionsPanel extends javax.swing.JPanel {
         this.duidokuLabel.setForeground(defaultFontColor);
     }//GEN-LAST:event_duidokuLabelMouseExited
 
+    private void wordokuCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wordokuCheckBoxActionPerformed
+        this.myGuiHandler.toggleWordoku();
+    }//GEN-LAST:event_wordokuCheckBoxActionPerformed
+
     
     private static final Color defaultFontColor = new Color(255, 255, 255);
     private static final Color alternativeFontColor = new Color(204, 204, 204);
@@ -199,5 +219,6 @@ public class NewGameOptionsPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel newGameLabel;
+    private javax.swing.JCheckBox wordokuCheckBox;
     // End of variables declaration//GEN-END:variables
 }

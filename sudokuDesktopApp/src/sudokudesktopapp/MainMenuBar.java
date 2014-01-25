@@ -166,9 +166,9 @@ public class MainMenuBar extends JMenuBar{
                 myGuiHandler.updateHintsFromSudokuCellOptionsPanel();
                     
                 }
-                    
-            
         });
+        
+        
         aboutItem = new JMenuItem("About..");
         aboutItem.addActionListener(new ActionListener(){
 

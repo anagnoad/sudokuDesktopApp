@@ -18,11 +18,14 @@ public class SudokuCellOptionsPanel extends javax.swing.JPanel {
      * Creates new form GettingStartedPanel
      */
     public SudokuCellOptionsPanel(GUIHandler guiHandler, Coord_2D coords) {
-        this.myGuiHandler = guiHandler; //save the instance of the guiHandler
-        this.selectedCoordinates = coords;
+        
         initComponents();
+        this.myGuiHandler = guiHandler; //save the instance of the guiHandler
+        this.selectedCoordinates = coords;        
+//        this.jComboBox1.revalidate();
+//        this.jComboBox1.repaint();
         myGuiHandler.updateHintsFromSudokuCellOptionsPanel();
-        System.out.println(this.myGuiHandler.showHints);
+        //System.out.println(this.myGuiHandler.showHints);
     }
 
     /**
@@ -35,19 +38,10 @@ public class SudokuCellOptionsPanel extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
         cellOptionsLabel = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
         clearLabel = new javax.swing.JLabel();
         showHintsLabel = new javax.swing.JLabel();
-
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
 
         setBackground(new java.awt.Color(193, 220, 255));
         setBorder(new javax.swing.border.MatteBorder(null));
@@ -130,11 +124,16 @@ public class SudokuCellOptionsPanel extends javax.swing.JPanel {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         JComboBox cb = (JComboBox)evt.getSource();
         String value = (String)cb.getSelectedItem();
-        Integer intvalue = new Integer(value);
+        Integer intvalue;
+        
+        if(this.myGuiHandler.showWordoku)
+            intvalue = Integer.parseInt(GlobalConstants.wordokuMap.get(value));
+        else
+            intvalue = Integer.parseInt(value);
         this.myGuiHandler.changeSudokuCell(intvalue, this.selectedCoordinates);
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    protected JComboBox getChoicesComboBox()
+    public JComboBox getChoicesComboBox()
     {
         return jComboBox1;
     }
@@ -150,8 +149,6 @@ public class SudokuCellOptionsPanel extends javax.swing.JPanel {
     private javax.swing.JLabel cellOptionsLabel;
     private javax.swing.JLabel clearLabel;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JList jList1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel showHintsLabel;
     // End of variables declaration//GEN-END:variables
 }
