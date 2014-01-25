@@ -41,11 +41,11 @@ public class Person implements Serializable{
      */
     public Person()
     {
-            this.id = this.hashCode();
             this.nickname = null;
             this.sudokuSolved = new HashSet<>();
             this.statistics = new Stats();
             this.lastLoggedIn = new Date(); // gets the current date. The first time of login is when the user is created.
+            this.id = this.hashCode();
     }
 	
     /**
@@ -57,6 +57,7 @@ public class Person implements Serializable{
     {
             this(); // calls the ctor without arguments
             this.nickname = nickname; // assign the given nickname
+            this.id = this.hashCode();
     }
 
     public boolean equals(Object obj)

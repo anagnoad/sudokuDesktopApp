@@ -24,13 +24,11 @@ public final class ApplicationInstance {
             loggedInUser = null;
             game = null;
             anonymousUser = true;
-//            if (!loadPlayersDB(GlobalConstants.PERSONDB_PATH))
-            if (!loadPlayersDB("db.txt"))
+            if (!loadPlayersDB(GlobalConstants.PERSONDB_PATH))
             {
-                
                     this.playersDB = new PersonDB();
             }
-            System.out.println(this.playersDB.searchByNickName("Antonis"));
+//            System.out.println(this.playersDB.searchByNickName("Antonis"));
             rand = new Random();
     }
 
@@ -40,11 +38,12 @@ public final class ApplicationInstance {
         this.loggedInUser = person;
     }
 
-    public void logout()
-    {
-        this.anonymousUser = true;
-        this.loggedInUser = null;
-    }
+//    |--notsupported--|
+//    public void logout()
+//    {
+//        this.anonymousUser = true;
+//        this.loggedInUser = null;
+//    }
 
     private boolean loadPlayersDB(String filename)
     {
@@ -122,10 +121,10 @@ public final class ApplicationInstance {
                         switch(type)
                         {
                             case CLASSIC:
-                                game = new ClassicSudokuGame(array, id);
+                                game = new ClassicSudokuGame(array, id, this.loggedInUser);
                                 break;
                             case HYPERDOKU:
-                                game = new HyperSudokuGame(array,id);
+                                game = new HyperSudokuGame(array,id, this.loggedInUser);
                                 break;
                         }
                     }
@@ -134,5 +133,27 @@ public final class ApplicationInstance {
             }
             return false;
         }
+    }
+    
+    public boolean loadGame()
+    {
+        BaseGame temp = IO.readFromFile(GlobalConstants.SAVES_PATH+this.loggedInUser.getId()+"_prev");
+        if (temp!=null)
+        {
+            this.game = temp;
+            return true;
+        }
+        else
+            return false;
+    }
+    
+    public boolean saveOnClose(boolean answer)
+    {
+        boolean toBeReturned = false;
+        if(!this.anonymousUser && this.game!=null)
+        {
+            toBeReturned = this.game.onQuitGame(answer);
+        }
+        return (IO.savePlayers(GlobalConstants.PERSONDB_PATH, playersDB) && toBeReturned);
     }
 }

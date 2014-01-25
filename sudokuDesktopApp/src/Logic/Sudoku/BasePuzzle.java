@@ -1,6 +1,9 @@
 package Logic.Sudoku;
 
-public abstract class BasePuzzle {
+import java.io.Serializable;
+
+public abstract class BasePuzzle implements Serializable
+{
     /* --------------- Member vars ----------------*/
     /**
      * id of the current puzzle. Must be unique.

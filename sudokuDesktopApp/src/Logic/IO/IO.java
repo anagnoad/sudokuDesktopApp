@@ -139,8 +139,9 @@ public class IO {
      * @param appContext
      * @return
      */
-    static public boolean readFromFile(String filename, BaseGame gameLoadedFromFile)
+    public static BaseGame readFromFile(String filename)
     {
+        BaseGame gameLoadedFromFile = null;
             try {
                     ObjectInputStream input = new ObjectInputStream(new FileInputStream(filename));
                     try {
@@ -148,24 +149,24 @@ public class IO {
                     } catch (ClassNotFoundException e) {
                             // TODO Auto-generated catch block
                             e.printStackTrace();
-                            return false;
+                            return null;
                     }
                     input.close(); // important!!
             } catch (StreamCorruptedException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
-                    return false;
+                    return null;
             } catch (FileNotFoundException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
-                    return false;
+                    return null;
             } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
-                    return false;
+                    return null;
             }
 
-            return true;
+            return gameLoadedFromFile;
     }
 
     /**

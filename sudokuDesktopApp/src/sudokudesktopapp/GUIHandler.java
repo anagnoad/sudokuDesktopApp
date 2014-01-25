@@ -12,6 +12,8 @@ import Logic.Sudoku.HyperSudokuGame;
 import Logic.Sudoku.TypeOfGame;
 import Logic.Users.Person;
 import java.awt.Font;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -49,6 +51,8 @@ public class GUIHandler {
     private StatsPanel statsPanel;
     private AboutDialog aboutDialog;
     
+    private WindowAdapter myAppWindowAdapter;
+    
     public boolean showHints;
     public boolean showWordoku;
     
@@ -64,6 +68,9 @@ public class GUIHandler {
         
         this.appInstance = appInstance;
         this.myApp = new Application(this);
+        this.myAppWindowAdapter = new customizedWindowAdapter(this);
+        this.myApp.addWindowListener(myAppWindowAdapter);
+                
         // add the menuBar to the app
         this.mainMenuBar = new MainMenuBar(this);
         this.menuLoggedInEnabler();
@@ -74,6 +81,43 @@ public class GUIHandler {
         
         this.showHints = true;
         this.showWordoku = false;
+    }
+    
+    public boolean continueGame()
+    {
+        if (this.appInstance.loadGame())
+        {
+            if (this.appInstance.game instanceof ClassicSudokuGame)
+            {
+                this.showClassicSudokuGame();
+            }
+            else if (this.appInstance.game instanceof HyperSudokuGame)
+            {
+                this.showHyperSudokuGame();
+            }
+            else if (this.appInstance.game instanceof DuidokuGame)
+            {
+                this.showDuidokuGame();
+            }
+            return true;
+        }
+        return false;
+        
+    }
+    
+    public boolean showOnCloseDialog()
+    {
+        boolean toSave = false;
+        System.out.println("ShowOnCloseDialog --outside");
+        if (!this.appInstance.anonymousUser && this.appInstance.game!=null)
+        {
+//            System.out.println("ShowOnCloseDialog--inside");
+            toSave = JOptionPane.showConfirmDialog(myApp, "Save state?","Really",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION;
+        }
+//        System.out.println("ToSave?");
+//        System.out.println(toSave);
+        return appInstance.saveOnClose(toSave);
     }
     
     public void toggleShowHints()
@@ -390,8 +434,13 @@ public class GUIHandler {
     
     public void newClassicSudoku()
     {
+       this.appInstance.loadNewGame(TypeOfGame.CLASSIC);
+       this.showClassicSudokuGame();
+    }
+    
+    private void showClassicSudokuGame()
+    {
         this.cleanSidePanel(true);
-        this.appInstance.loadNewGame(TypeOfGame.CLASSIC);
         if(this.myApp.mainPanel!=null)
         {
             this.myApp.mainPanel.setVisible(false);
@@ -498,8 +547,13 @@ public class GUIHandler {
     
     public void newHyperSudoku()
     {
+            this.appInstance.loadNewGame(TypeOfGame.HYPERDOKU);
+            this.showHyperSudokuGame();
+    }
+    
+    private void showHyperSudokuGame()
+    {
         this.cleanSidePanel(true);
-        this.appInstance.loadNewGame(TypeOfGame.HYPERDOKU);
         if(this.myApp.mainPanel!=null)
         {
             this.myApp.mainPanel.setVisible(false);
@@ -520,8 +574,13 @@ public class GUIHandler {
     
     public void newDuidoku()
     {
-        this.cleanSidePanel(true);
         this.appInstance.loadNewGame(TypeOfGame.DUIDOKU);
+        this.showDuidokuGame();
+    }
+    
+    private void showDuidokuGame()
+    {
+        this.cleanSidePanel(true);
         if(this.myApp.mainPanel!=null)
         {
             this.myApp.mainPanel.setVisible(false);

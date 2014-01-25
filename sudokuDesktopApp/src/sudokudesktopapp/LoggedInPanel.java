@@ -124,7 +124,7 @@ public class LoggedInPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void continueLastGameLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_continueLastGameLabelMouseClicked
-        // TODO add your handling code here:
+        this.myGuiHandler.continueGame();
     }//GEN-LAST:event_continueLastGameLabelMouseClicked
 
     private void newGameLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newGameLabelMouseClicked

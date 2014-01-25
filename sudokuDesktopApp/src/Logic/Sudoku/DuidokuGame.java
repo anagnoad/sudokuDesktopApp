@@ -176,4 +176,5 @@ public class DuidokuGame    extends BaseGame // this can be easily extended to b
     {
         return this.mySudoku.isEditableArray;
     }
+    
 }

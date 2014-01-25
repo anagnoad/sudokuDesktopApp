@@ -1,6 +1,7 @@
 package Logic.Sudoku;
 
 import Logic.Users.Person;
+import java.io.Serializable;
 
 /**
  * Represents the instance of a ClassicSudokuGame started by the Player
@@ -30,6 +31,15 @@ public class ClassicSudokuGame extends BaseGame
             this();
             mySudoku = new ClassicSudoku(array,id);
     }
+    
+    public ClassicSudokuGame(int[][] array, String id, Person p)
+    {
+            this();
+            mySudoku = new ClassicSudoku(array,id);
+            this.players.add(p);
+            this.isAnonymous = false;
+    }
+    
     
     /**
      * Constructor with parameters only one player and the type of game.

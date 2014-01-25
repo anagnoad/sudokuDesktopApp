@@ -42,6 +42,15 @@ public class HyperSudokuGame extends BaseGame {
         this();
         this.mySudoku = new HyperSudoku(array,id);
     }
+    
+    public HyperSudokuGame(int[][] array, String id, Person p)
+    {
+        this();
+        this.mySudoku = new HyperSudoku(array,id);
+        this.players.add(p);
+        this.isAnonymous=false;
+    }
+    
     /**
      * Constructor that takes as parameters 4 points in the sudoku puzzle, so as to define a new
      * HyperSudoku, with "innersudokus" the ones defined by those points.

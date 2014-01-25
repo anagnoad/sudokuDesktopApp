@@ -65,11 +65,19 @@ public abstract class BaseGame implements Serializable{
      */
     public boolean onQuitGame(boolean toSave)
     {
+        System.out.println("inside onQuitGame");
         if (!this.isCompleted())
         {
+            System.out.println("Inside isCompleted");
             // save the state of the game
+            System.out.println("Anonymous?");
+            System.out.println(isAnonymous);
+            System.out.println("to Save");
+            System.out.println(toSave);
             if (!this.isAnonymous && toSave) // if he player wants to save the game
             {
+                System.out.println("INSIDE QUIT");
+                System.out.println(this.players.get(0));
                 return IO.saveToFile(GlobalConstants.SAVES_PATH + this.players.get(0).getId()+"_prev", this);
             }
             else return true;
