@@ -322,6 +322,7 @@ public class GUIHandler {
     public void login(Person person)
     {
         this.appInstance.login(person);
+        this.mainMenuBar.enableUserSpecificItems();
         System.out.println(this.appInstance.loggedInUser);
     }
     
