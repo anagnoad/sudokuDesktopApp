@@ -1,12 +1,14 @@
 package Logic.Sudoku;
 
+import java.io.Serializable;
+
 /**
  * Basic class for 2-d points in the sudoku.
  * e.g. Cell 4 of Row 1, would be x = 1; y = 4;
  * @author Anthony
  *
  */
-public class Coord_2D {
+public class Coord_2D implements Serializable{
     /**
      * The x-dimension of the coordinates.
      */
