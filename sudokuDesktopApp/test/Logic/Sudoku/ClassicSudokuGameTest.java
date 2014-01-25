@@ -71,6 +71,12 @@ public class ClassicSudokuGameTest {
     }
     
     @Test
+    public void testAddNumber() {
+        assertTrue(g.addNumber(1, new Coord_2D(1,1)));
+        assertFalse(g.addNumber(1, new Coord_2D(0,0)));
+    }
+    
+    @Test
     public void testingIfCompleted(){
             assertFalse(g.isCompleted());
     }

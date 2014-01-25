@@ -74,5 +74,31 @@ public class HyperSudokuGameTest {
             assertFalse(g.isCompleted());
     }
 
+    @Test
+    public void testingIsEditable()
+    {
+        g = new HyperSudokuGame(dummyMatrix(),String.valueOf(1));
+        assertFalse(g.getIsEditableMatrix()[1][1]);
+        assertTrue(g.getIsEditableMatrix()[1][2]);
+    }
+ 
     
+    /**
+     * Test of getMatrixValue method, of class HyperSudokuGame.
+     */
+    @Test
+    public void testGetMatrixValue() {
+        
+    }
+
+    private int[][] dummyMatrix()
+    {
+        int[][] array = new int[9][9];
+        array[1][1] = 2;
+        array[2][7] = 9;
+        array[4][0] = 1;
+        array[4][5] = 3;
+        array[8][7] = 4;
+        return array;
+    }
 }
