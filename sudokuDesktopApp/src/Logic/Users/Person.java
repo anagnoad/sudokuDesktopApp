@@ -177,9 +177,9 @@ public class Person implements Serializable{
      * @param the id of the sudoku in the query.
      * @return true if solved, false otherwise.
      */
-    public boolean hasSolved(String SudokuId)
+    public boolean hasSolved(int SudokuId)
     {
-            if (this.sudokuSolved.contains(SudokuId.toString()))
+            if (this.sudokuSolved.contains(String.valueOf(SudokuId)))
                     return true;
             else
                     return false;

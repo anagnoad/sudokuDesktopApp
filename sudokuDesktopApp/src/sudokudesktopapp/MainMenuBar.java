@@ -9,7 +9,9 @@ package sudokudesktopapp;
 import java.awt.MenuBar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -45,6 +47,7 @@ public class MainMenuBar extends JMenuBar{
      * Instance of the JMenuItem used for "Duidoku", under "New Game".
      */
     private JMenuItem duidokuItem;
+
     /**
      * Instance of the JMenuItem used for "Restore previous game", under "File".
      */
@@ -52,6 +55,7 @@ public class MainMenuBar extends JMenuBar{
     /**
      * Instance of the JMenuItem used for "Exit", under "File".
      */
+
     private JMenuItem exitItem;
     
     /**
@@ -136,22 +140,15 @@ public class MainMenuBar extends JMenuBar{
         newGameMenu.add(hyperSudokuItem);
         newGameMenu.add(duidokuItem);
         fileMenu.add(newGameMenu);
-        restorePreviousItem = new JMenuItem("Restore previous game");
-        restorePreviousItem.addActionListener(new ActionListener(){
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Foo");
-            }
-            
-        });
-        fileMenu.add(restorePreviousItem);
+
         exitItem = new JMenuItem("Exit");
         exitItem.addActionListener(new ActionListener(){
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Foo");
+                myGuiHandler.showOnCloseDialog();
+                System.exit(0);
             }
             
         });
@@ -192,7 +189,7 @@ public class MainMenuBar extends JMenuBar{
 
             @Override
             public void actionPerformed(ActionEvent e) {//
-                
+                myGuiHandler.resetPlayer();
             }
             
         });
@@ -251,7 +248,6 @@ public class MainMenuBar extends JMenuBar{
         this.deleteHistoryItem.setEnabled(false);
         this.showStatsItem.setEnabled(false);
         this.newUserItem.setEnabled(true);
-        this.restorePreviousItem.setEnabled(false);
     }
     
     /**
@@ -264,7 +260,6 @@ public class MainMenuBar extends JMenuBar{
         this.loginItem.setEnabled(false);
         this.deleteHistoryItem.setEnabled(true);
         this.showStatsItem.setEnabled(true);
-        this.restorePreviousItem.setEnabled(true);
         this.newUserItem.setEnabled(false);
     }
 }

@@ -49,7 +49,7 @@ public class PersonDB implements Serializable {
                             toBeReturned.add(currentObject);
                     }
             }
-            if (toBeReturned.size() == 0)
+            if (toBeReturned.isEmpty())
             {
                     // no results found
                     return null;
@@ -89,18 +89,19 @@ public class PersonDB implements Serializable {
                 return null;
     }
 
-    private boolean addNewPerson(Person personToAdd)
+    protected boolean addNewPerson(Person personToAdd)
     {
             return theDB.add(personToAdd); // you have to implement equals, otherwise it fails
     }
 
     /**
-     * Deletes a Person from the Database
+     * Deletes a Person from the Database.
      * @param id the id of the person we want to delete from the database
      * @return true if deleted, false otherwise
      */
     public boolean deletePerson(int id)
     {
+            // Created for library uses. Not implemented in the gui forms.
             Person toBeDeleted = searchById(id);
             if (toBeDeleted == null)
             {
@@ -112,17 +113,23 @@ public class PersonDB implements Serializable {
             }
     }
     
+    /**
+     * Overriden method toString().
+     * @return all the players in the database delimited with an \n.
+     */
+    @Override
     public String toString()
     {
         StringBuilder toBeReturned = new StringBuilder();
         for (Person i : this.theDB)
         {
             toBeReturned.append(i.getNickname());
-            toBeReturned.append(" ");
+            toBeReturned.append("\n");
         }
         return toBeReturned.toString();
     }
     
+    @Override
     public boolean equals(Object obj)
     {
         if (this == obj)
@@ -133,8 +140,7 @@ public class PersonDB implements Serializable {
             return true;
         return false;
     }
-
-
+    
     @Override
     public int hashCode() {
         int hash = 7;

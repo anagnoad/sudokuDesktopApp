@@ -33,30 +33,90 @@ import javax.swing.JOptionPane;
  * @author Steve
  */
 public class GUIHandler {
-    /*---------------------Member vars--------------------------*/
+    /*-------------------------------------------------Member vars-----------------------------------------------------*/
     /*--------------------Logic elements ----------------------*/
+    /**
+     * The application instance of the app.
+     */
     private ApplicationInstance appInstance; // knows the application instance
     
-    /* -------------------GUI elements-------------------------*/
-    private Application myApp; // access modifier may need to change
-    private MainMenuBar mainMenuBar;
-    private GettingStartedPanel gettingStartedPanel;
-    private SudokuPanel sudokuPanel;
-    private SudokuCellOptionsPanel sudokuCellOptionsPanel;
-    private NewUserPanel newUserPanel;
-    private NewGameOptionsPanel newGameOptionsPanel;
-    private LogInPanel loginPanel;
-    private LoggedInPanel loggedInPanel;
-    private SudokuHelpDialog sudokuHelpDialog;
-    private StatsPanel statsPanel;
-    private AboutDialog aboutDialog;
-    
-    private WindowAdapter myAppWindowAdapter;
-    
+    /**
+     * Boolean value to save the preference of the user according to the relevant checkbox in the menu.
+     */
     public boolean showHints;
+    
+    /**
+     * Boolean value to save the preference of the user according to the relevant option of the games.
+     */
     public boolean showWordoku;
     
-    /*--------------------------Methods------------------------------*/
+    /* -------------------GUI elements-------------------------*/
+    /**
+     * Instance of the main frame of the application.
+     * The application is presented in this frame and contains all of the panels listed below.
+     */
+    private Application myApp;
+    /**
+     * Instance of the menuBar in the application frame.
+     * The menu bar that is shown in the applicaiton window.
+     */
+    private MainMenuBar mainMenuBar;
+    /**
+     * Instance of the Getting Started JPanel .
+     * A panel that is shown when the application starts.
+     */
+    private GettingStartedPanel gettingStartedPanel;
+    /**
+     * Instance of the Sudoku Panel.
+     * A panel that is shown when a user (anonymous or not) plays a game.
+     */
+    private SudokuPanel sudokuPanel;
+    /**
+     * Instance of the Sudoku Cell Options panel.
+     * A panel that presents the user with the available actions during a game.
+     */
+    private SudokuCellOptionsPanel sudokuCellOptionsPanel;
+    /**
+     * Instance of the New User panel.
+     * A panel that is shown when a new user is added to the application.
+     */
+    private NewUserPanel newUserPanel;
+    /**
+     * Instance of the New Game Options Panel.
+     * A panel that is shown when the new game is selected from the Getting Started Panel.
+     */
+    private NewGameOptionsPanel newGameOptionsPanel;
+    /**
+     * Instance of the Log in panel.
+     * A panel that is shown when the user tries to login.
+     */
+    private LogInPanel loginPanel;
+    /**
+     * Instance of the Logged In panel.
+     * A panel that is shown when the user logs in the application.
+     */
+    private LoggedInPanel loggedInPanel;
+    /**
+     * Instance of the Sudoku Help Window dialog.
+     * A window that is shown when the relevant option is selected by the main menu bar of the application.
+     */
+    private SudokuHelpDialog sudokuHelpDialog;
+    /**
+     * Instance of the Stats Panel.
+     * A panel that is shown when a user is logged in and ask for their statistics.
+     */
+    private StatsPanel statsPanel;
+    /**
+     * Instance of the about window dialog.
+     * A window that is show when the relevant option is selected from the main menu bar.
+     */
+    private AboutDialog aboutDialog;
+    /**
+     * Window adapter for the main application's frame.
+     */
+    private WindowAdapter myAppWindowAdapter;
+    
+    /*--------------------------------------------------------Methods------------------------------------------------------------*/
     //ctor
     public GUIHandler(ApplicationInstance appInstance)
     {
@@ -388,6 +448,11 @@ public class GUIHandler {
         this.aboutDialog.setVisible(true);
     }
     
+    public void resetPlayer()
+    {
+        if (!this.appInstance.anonymousUser)
+            this.appInstance.loggedInUser.reset();
+    }
     
     public void showStatsPanel()
     {

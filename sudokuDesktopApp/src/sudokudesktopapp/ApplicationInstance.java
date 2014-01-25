@@ -50,7 +50,7 @@ public final class ApplicationInstance {
     private boolean loadPlayersDB(String filename)
     {
             this.playersDB = IO.loadPlayers(filename);
-         
+
             
             if(this.playersDB ==null)
                 return false;
@@ -116,7 +116,7 @@ public final class ApplicationInstance {
         else
         {
             for (int i = 1; i <= GlobalConstants.TOTAL_GAMES_PRESAVED; i++) {
-                if(!this.loggedInUser.hasSolved(String.valueOf(i)))
+                if(!this.loggedInUser.hasSolved(i))
                 {
                     int[][] array = new int[9][9];
                     String id = i+suffix;
