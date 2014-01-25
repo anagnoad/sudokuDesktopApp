@@ -50,9 +50,16 @@ public class ClassicSudokuTest {
         assertFalse(puzzle.isCompleted());
     }
 
-//    /**
-//     * Test of isCompleted method, of class ClassicSudoku, when it is.
-//     */
+  
+    /*
+
+    */
+    
+    /**
+     * Test of isCompleted method, of class ClassicSudoku, when it is.
+     *   This test cannot be evaluated, we need to perform a whole completed sudoku
+     *   in order to pass this test
+     */
 //    @Test
 //    public void testIsCompletedWhenItIs() {
 //        int[][] matrix = new int[9][9];
@@ -66,10 +73,13 @@ public class ClassicSudokuTest {
 //        puzzle = new ClassicSudoku(matrix,String.valueOf(1));
 //        assertTrue(puzzle.isCompleted());
 //    }
-    
-//    /**
-//     * Test of getSudokuStatus method, of a finished ClassicSudoku.
-//     */
+
+
+    /**
+     * Test of getSudokuStatus method, of a finished ClassicSudoku.
+     * This test cannot be evaluated, we need to perform a whole completed sudoku
+     * in order to pass this test    
+     */
 //    @Test
 //    public void testGetSudokuStatusFinished() {
 //        int[][] matrix = new int[9][9];
@@ -108,15 +118,15 @@ public class ClassicSudokuTest {
         assertEquals(puzzle.getSudokuStatus(), sudokuStatus.FAILED);
     }
     /**
-     * Test of checkRules method, of class ClassicSudoku, per line.
+     * Test of checkRules method, of class ClassicSudoku, per row.
      */
     @Test
-    public void testCheckRulesPerLine() {
+    public void testCheckRulesPerRow() {
        puzzle.setCell(3, 0, 0);
        assertFalse(puzzle.setCell(3, 0, 6));  
     }
     /**
-     * Test of checkRules method, of class ClassicSudoku, per line.
+     * Test of checkRules method, of class ClassicSudoku, per column.
      */
     @Test
     public void testCheckRulesPerColumn() {
@@ -124,7 +134,7 @@ public class ClassicSudokuTest {
        assertFalse(puzzle.setCell(3, 6, 0));
     }
     /**
-     * Test of checkRules method, of class ClassicSudoku, per line.
+     * Test of checkRules method, of class ClassicSudoku, per block.
      */
     @Test
     public void testCheckRulesPerBlock() {
@@ -151,7 +161,7 @@ public class ClassicSudokuTest {
         puzzle.setCell(5, 1, 5);
         int[] exp = new int[]{2,4,6,7,8,9,};
         int[] hints = puzzle.returnHint(new Coord_2D(1,1));
-        assertTrue(Arrays.equals(hints, hints));
+        assertTrue(Arrays.equals(hints, exp));
     }
 
     /**

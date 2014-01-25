@@ -81,16 +81,7 @@ public class HyperSudokuGameTest {
         assertFalse(g.getIsEditableMatrix()[1][1]);
         assertTrue(g.getIsEditableMatrix()[1][2]);
     }
- 
     
-    /**
-     * Test of getMatrixValue method, of class HyperSudokuGame.
-     */
-    @Test
-    public void testGetMatrixValue() {
-        
-    }
-
     private int[][] dummyMatrix()
     {
         int[][] array = new int[9][9];
@@ -101,4 +92,14 @@ public class HyperSudokuGameTest {
         array[8][7] = 4;
         return array;
     }
+    
+    /*
+      Test of onQuitGame method, of class DuidokuGame.
+      This test cannot be evaluated, since we cannot have a finished game in tests.
+     
+    @Test
+    public void testOnQuitGame() {
+        
+    }
+    */
 }

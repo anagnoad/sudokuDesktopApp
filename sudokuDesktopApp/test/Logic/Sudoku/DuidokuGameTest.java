@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
  */
 public class DuidokuGameTest {
     
-    private DuidokuGame g = new DuidokuGame();
+    private DuidokuGame g;
     
     public DuidokuGameTest() {
     }
@@ -35,6 +35,7 @@ public class DuidokuGameTest {
     
     @Before
     public void setUp() {
+        g  = new DuidokuGame();
     }
     
     @After
@@ -60,5 +61,46 @@ public class DuidokuGameTest {
         assertFalse(g.isCompleted());
         assertTrue(g.whoWon()==null);
     }
+
+    /**
+     * Test of commonAddNumber method, of class DuidokuGame.
+     */
+    @Test
+    public void testAddNumber() {
+        assertTrue(g.addNumber(3, new Coord_2D(1,1)));
+        assertFalse(g.addNumber(1, new Coord_2D(1,1)));
+    }
+//
+//    This test cannot be evaluated, since we do not know where the 
+//    cpu will play.
+//    /**
+//     * Test of getHelp method, of class DuidokuGame.
+//     */
+//    @Test
+//    public void testGetHelp() {
+//        g.addNumber(1, new Coord_2D(0,0));
+//        
+//    }
+
+    /**
+     * Test of getSudokuStatus method, of class DuidokuGame.
+     * Only available for not finished sudokus, because any other case
+     * cannot be evaluated in tests.
+     */
+    @Test
+    public void testGetSudokuStatus() {
+        g.addNumber(2, new Coord_2D(0,0));
+        assertEquals(g.getSudokuStatus(), sudokuStatus.NOTFINISHED);
+    }
+
+    /*
+      Test of onQuitGame method, of class DuidokuGame.
+      This test cannot be evaluated, since we cannot have a finished game in tests.
+     
+    @Test
+    public void testOnQuitGame() {
+        
+    }
+    */
     
 }

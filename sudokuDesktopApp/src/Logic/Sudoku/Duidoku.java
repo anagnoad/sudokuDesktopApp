@@ -12,6 +12,7 @@ public class Duidoku extends ClassicSudoku
      */
     public Duidoku() //ctor
     {
+            this.id = String.valueOf(hashCode());
             this.type = TypeOfGame.DUIDOKU;
             this.setDimX(4);
             this.setDimY(4);

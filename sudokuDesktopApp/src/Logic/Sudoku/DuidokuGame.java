@@ -40,9 +40,9 @@ public class DuidokuGame    extends BaseGame // this can be easily extended to b
      */
     public DuidokuGame()
     {
-            super();
-            this.mySudoku = new Duidoku();
-            this.computerPlays = true;
+        super();
+        this.mySudoku = new Duidoku();
+        this.computerPlays = true;
         this.randGenerator = new Random();
         this.players.add(new Person("CPU"));
     }
@@ -58,20 +58,13 @@ public class DuidokuGame    extends BaseGame // this can be easily extended to b
         
     }
 
-//    /**
-//     * Ctor initializing the game to a two-player game (default for duidoku)
-//     * @param Player1 the main player of the game (logged in)
-//     * @param Player2 the second player of the game
-//     */
-//    public DuidokuGame(Person Player1, Person Player2)
-//    {
-//            this();
-//            this.players.add(Player1);
-//            this.players.add(Player2);
-//            this.computerPlays = false;
-//    }
-
-
+    /**
+     * Helper function that is both called for user playing the duidoku
+     * as well as the CPU.
+     * @param value the value of the cell in which the current user will play.
+     * @param coordinates the coordinates of the cell in which the user will play.
+     * @return 
+     */
     public boolean commonAddNumber(int value, Coord_2D coordinates) {
         boolean isValid = mySudoku.setCell(value, coordinates.x, coordinates.y);
         if (isValid)
@@ -79,16 +72,16 @@ public class DuidokuGame    extends BaseGame // this can be easily extended to b
             stepCounter++;
             this.mySudoku.isEditableArray[coordinates.x][coordinates.y] = false;
         }
-        for(int i=0;i<4;i++)
-        {
-            for (int j=0;j<4;j++)
-                System.out.printf("%d ", this.mySudoku.matrix[i][j]);
-            System.out.println("");
-        }
-        System.out.println("--------------");
         return isValid;
     }
     
+    /**
+     * Needs to be overriden from basegame, since Duidoku is played against the CPU.
+     * So, in every movement that is being taken, the computer makes one as well.
+     * @param value the value of the cell that the user wants to play.
+     * @param coordinates the coordinates of the cell
+     * @return true if both players played succesfully, false otherwise.
+     */
     @Override
     public boolean addNumber(int value, Coord_2D coordinates)
     {
@@ -98,6 +91,13 @@ public class DuidokuGame    extends BaseGame // this can be easily extended to b
         return computerAddNumber() || flag;
     }
     
+    /**
+     * Helper function that is being called from addNumber.
+     * Ijn every movement that the user plays, the CPU has to
+     * try to play as well. This is when this method is called.
+     * 
+     * @return true if the CPU could play in the puzzle; false otherwise.
+     */
     public boolean computerAddNumber(){
         int value;
         Coord_2D coords;
@@ -114,11 +114,16 @@ public class DuidokuGame    extends BaseGame // this can be easily extended to b
         return false;
     }
 
-
+    /**
+     * Method that returns an array with all possible values for a particular cell
+     * @param coords the coordinates for the asked cell.
+     * @return an array containing all possible values.
+     */
     public int[] getHelp(Coord_2D coords)
     {
         return mySudoku.returnHint(coords);
     }
+    
     @Override
     public Person whoWon() { // returns the winner for updating statistics
         if(this.getSudokuStatus() == sudokuStatus.FINISHED)
@@ -167,11 +172,23 @@ public class DuidokuGame    extends BaseGame // this can be easily extended to b
         }
         return tempRes;
     }
+    
+    /**
+     * Function that returns the value of a particular cell [i,j] in the sudoku matrix.
+     * Is called mainly from the GUI.
+     * @param i the x-coordinate of the cell.
+     * @param j the y-coordinate of the cell.
+     * @return 
+     */
     public int getMatrixValue(int i, int j)
     {
         return this.mySudoku.getMatrix()[i][j];
     }
     
+    /**
+     * Function that returns the matrix containing the editable cells.
+     * @return 2-D boolean matrix, containing which cells can be edited or not.
+     */
     public boolean[][] getIsEditableMatrix()
     {
         return this.mySudoku.isEditableArray;

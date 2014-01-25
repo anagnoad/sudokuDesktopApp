@@ -2,7 +2,11 @@ package Logic.Sudoku;
 
 import Logic.Users.Person;
 
-
+/**
+ * Interface of Multiplaying. Any game that needs to have multiplayer functionality
+ * should implement this interface.
+ * @author Anthony
+ */
 public interface Multiplayer {
  
 	/**

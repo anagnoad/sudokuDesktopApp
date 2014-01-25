@@ -59,6 +59,7 @@ public class HyperSudoku extends ClassicSudoku {
      */
     public HyperSudoku(Coord_2D topLeft, Coord_2D topRight, Coord_2D bottomRight, Coord_2D bottomLeft)
     {
+            this.id = String.valueOf(hashCode());
             sudokuMatrix = new int[getX()][getY()];
             innerSudokus = new ArrayList<Coord_2D>();
             innerSudokus.add(topLeft);

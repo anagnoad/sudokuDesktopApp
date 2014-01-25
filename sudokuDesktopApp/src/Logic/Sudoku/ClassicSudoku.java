@@ -32,7 +32,7 @@ public class ClassicSudoku extends BasePuzzle {
             matrix = new int[getX()][getY()];
             isEditableArray = new boolean[getX()][getY()];
             this.type = TypeOfGame.CLASSIC;
-
+            this.id = String.valueOf(hashCode());
             for (int i=0; i<getX(); i++)
             {
                     for(int j=0; j<getY(); j++)
@@ -133,8 +133,7 @@ public class ClassicSudoku extends BasePuzzle {
     @Override
     protected boolean inputCheck(int value)
     {
-            return value<=Math.max(getX(),getY()) && value>=0; // Antonis: Changed to max(dimX, dimY)
-            // Steve: changed 9-->dimX and value>=0, which means deletion
+            return value<=Math.max(getX(),getY()) && value>=0; 
     }
 
     @Override
@@ -219,17 +218,17 @@ public class ClassicSudoku extends BasePuzzle {
             // there may be needed checks for arrayTocheck dimensions
             for (int i =0;i<getX();i++)
             {
-                    for (int j=0;j<getY();j++)
-                    {
-                            try {
-                            if (!this.checkRules(arrayToCheck[i][j], i, j) || !this.inputCheck(arrayToCheck[i][j]))
-                                    return false;
-                            }
-                            catch(ArrayIndexOutOfBoundsException e)
-                            {
-                                    // handle the exception here ...
-                            }
-                    }
+                for (int j=0;j<getY();j++)
+                {
+                        try {
+                        if (!this.checkRules(arrayToCheck[i][j], i, j) || !this.inputCheck(arrayToCheck[i][j]))
+                                return false;
+                        }
+                        catch(ArrayIndexOutOfBoundsException e)
+                        {
+                                // handle the exception here ...
+                        }
+                }
             }
             return true;
     }

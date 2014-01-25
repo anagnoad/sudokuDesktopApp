@@ -77,6 +77,11 @@ public class ClassicSudokuGameTest {
     }
     
     @Test
+    public void testGetSudokuStatus() {
+        assertEquals(g.getSudokuStatus(), sudokuStatus.NOTFINISHED);
+    }
+
+    @Test
     public void testingIfCompleted(){
             assertFalse(g.isCompleted());
     }
@@ -88,6 +93,16 @@ public class ClassicSudokuGameTest {
         assertFalse(g.getIsEditableMatrix()[1][1]);
         assertTrue(g.getIsEditableMatrix()[1][2]);
     }
+    
+    /*
+      Test of onQuitGame method, of class DuidokuGame.
+      This test cannot be evaluated, since we cannot have a finished game in tests.
+     
+    @Test
+    public void testOnQuitGame() {
+        
+    }
+    */
     
     private int[][] dummyMatrix()
     {

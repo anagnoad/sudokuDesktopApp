@@ -144,7 +144,14 @@ public abstract class BasePuzzle implements Serializable
     {
             return this.dimY;
     }
-
+    
+    /**
+     * Returns the ID of the particular puzzle. 
+     */
+    public String getID()
+    {
+        return this.id;
+    }
     /**
      * Gets the Matrix representing the game.
      * @return matrix[][]
