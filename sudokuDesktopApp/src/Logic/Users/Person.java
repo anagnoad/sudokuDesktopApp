@@ -6,35 +6,42 @@ import java.util.HashSet;
 import java.util.Objects;
 
 /**
- * Represents a player inside the game. With this class, it is able to login and have your stats saved.
+ * Represents a player inside the game.
  * @author Steve
  *
  */
 public class Person implements Serializable{
     /* -------------- Member vars --------------*/
     /**
-     * Unique identifier of each object. Takes its value from the hashValue of the object.
+     * Unique identifier of each object. 
+     * Takes its value from the hashValue of the object.
      */
     protected int id; // this has to be present in order to differentiate between different users with the same nickname.
+    
     /**
      * String representing the given name by the user
      */
     protected String nickname;
+    
     /**
      * Saves the IDs of the sudokus having been solved by the user
      */
     protected HashSet<String> sudokuSolved;
+    
     /**
      * Saves the statistics of the current user.
      */
     protected Stats statistics;
     /**
-     * Saves the timestamp of the last time the user logged in.
-     * Used to present the difference to the user between diffrerent users with the same nickname.
+     * Saves the timestamp of the user's creation.
+     * Used to present the difference to the user between different users with the same nickname.
      */
-    protected Date lastLoggedIn; // will use date in order to distinguish different users with the same nickname.
+    protected Date dateCreated; // will use date in order to distinguish different users with the same nickname.
+    
+    
+    
+    
     /*-------------- Methods -------------*/
-    //ctor
     /**
      * Default ctor.
      * Instantiates member variables.
@@ -44,14 +51,14 @@ public class Person implements Serializable{
             this.nickname = null;
             this.sudokuSolved = new HashSet<>();
             this.statistics = new Stats();
-            this.lastLoggedIn = new Date(); // gets the current date. The first time of login is when the user is created.
-            this.id = this.hashCode();
+            this.dateCreated = new Date(); // gets the current date. The first time of login is when the user is created.
+            this.id = this.hashCode(); // the order matters here.
     }
 	
     /**
      * Ctor accepting nickname.
      * Calls the default ctor and set the nickname to the given value.
-     * @param nickname
+     * @param nickname The name the user gives to identify themselves
      */
     public Person(String nickname)
     {
@@ -60,6 +67,12 @@ public class Person implements Serializable{
             this.id = this.hashCode();
     }
 
+    /**
+     * Overrides the equals class needed for the Database searching.
+     * @param obj the object to compare with.
+     * @return true if equal, false otherwise
+     */
+    @Override
     public boolean equals(Object obj)
     {
         if (this != obj)
@@ -72,66 +85,76 @@ public class Person implements Serializable{
             return true;
     }
 
+    /**
+     * Overrides the hashCode() method.
+     * Uses nickname and date of creation as sources.
+     * @return 
+     */
     @Override
     public int hashCode() {
         int hash = 5;
         hash = 97 * hash + Objects.hashCode(this.nickname);
-        hash = 97 * hash + Objects.hashCode(this.lastLoggedIn);
+        hash = 97 * hash + Objects.hashCode(this.dateCreated);
         return hash;
     }
 
+    /**
+     * Overrides the toString() method.
+     * @return the nickname and the date of creation concatenated in a string.
+     */
     @Override
     public String toString() // this is implemented to show the results of a search in a JList
     {
         StringBuilder toBeReturned = new StringBuilder();
         toBeReturned.append(this.nickname);
         toBeReturned.append(" ");
-        toBeReturned.append(this.lastLoggedIn.toString());
+        toBeReturned.append(this.dateCreated.toString());
         return toBeReturned.toString();
     }
+    
+    
+    
     // setters
     /**
      * Changes the nickname of the user to the specified value.
-     * @param nickname
+     * @param nickname the new nickname.
      */
     public void setNickname(String nickname)
     {
             this.nickname = nickname;
     }
+    
     /**
      * Increments the number of victories of the user by 1.
-     * @return
+     * @return the incremented value.
      */
     public int incrementVictories()
     {
             return ++this.statistics.numberOfVictories;
     }
+    
     /**
      * Increments the number of defeats of the user by 1.
-     * @return
+     * @return the incremented value.
      */
     public int incrementDefeats()
     {
             return ++this.statistics.numberOfDefeats;
     }
+    
+    
     /**
-     * Adds a sudoku puzzle to the solved ones.
-     * @param idOfSudokuSolved
-     * @return true if added successfully, false if already in
+     * Add the id of the sudoku passed in the set of solved sudokus.
+     * @param idOfSudokuSolved the id of the sudoku solved.
+     * @return true if added, false otherwise.
      */
     public boolean addSudokuSolved(String idOfSudokuSolved)
     {
             return this.sudokuSolved.add(idOfSudokuSolved);
     }
-    /**
-     * Updates the timestamp of last login.
-     */
-    public void updateTimeLastLoggedIn()
-    {
-            this.lastLoggedIn = new Date(); // get the current time
-    }
 
 
+    
     // getters 
     /**
      * Returns the unique identifier of the user.
@@ -150,25 +173,25 @@ public class Person implements Serializable{
     {return this.nickname;}
 
     /**
-     * Returns if the user has Solved a specific sudoku puzzle
-     * @param SudokuId.
-     * @return true if solved, false otherwise
+     * Returns if the user has Solved a specific sudoku puzzle.
+     * @param the id of the sudoku in the query.
+     * @return true if solved, false otherwise.
      */
-    public boolean hasSolved(Integer SudokuId)
+    public boolean hasSolved(String SudokuId)
     {
-            if (this.sudokuSolved.contains(Integer.valueOf(SudokuId)))
+            if (this.sudokuSolved.contains(SudokuId.toString()))
                     return true;
             else
                     return false;
     }
 
     /**
-     * Returns the timestamp of last login.
-     * @return last login date
+     * Returns the timestamp of creation.
+     * @return the timestamp of the user creation.
      */
     public Date getTimeLastLoggedIn()
     {
-            return this.lastLoggedIn;
+            return this.dateCreated;
     }
 
     /**
@@ -189,13 +212,6 @@ public class Person implements Serializable{
             return this.statistics.numberOfDefeats;
     }
     
-    public void reset()
-    {
-        this.sudokuSolved = new HashSet<>();
-        this.statistics.numberOfDefeats = 0;
-        this.statistics.numberOfVictories = 0;
-    }
-    
     public int getGamesPlayed()
     {
         return this.sudokuSolved.size();
@@ -204,6 +220,16 @@ public class Person implements Serializable{
     public HashSet<String> getSudokusSolved()
     {
         return this.sudokuSolved;
+    }
+    
+    /** 
+     * Resets the statistics of the player.
+     */
+    public void reset()
+    {
+        this.sudokuSolved = new HashSet<>();
+        this.statistics.numberOfDefeats = 0;
+        this.statistics.numberOfVictories = 0;
     }
 }
 /**

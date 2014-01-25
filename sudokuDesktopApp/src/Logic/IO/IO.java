@@ -20,6 +20,10 @@ import java.io.StreamCorruptedException;
 import sudokudesktopapp.GlobalConstants;
 
 
+/**
+ * Class containing static member for handling Input/Output processes.
+ * @author Steve
+ */
 public class IO {
 
     // Remember that Android is using Java 6. You cannot use the try(Reader) ... catch syntax.
