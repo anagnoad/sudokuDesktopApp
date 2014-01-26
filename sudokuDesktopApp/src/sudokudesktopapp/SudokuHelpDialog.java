@@ -5,13 +5,18 @@
 package sudokudesktopapp;
 
 /**
- *
+ * Custom JDialog class for showing help about Sudoku Rules.
+ * Creates a new JDialog.
  * @author Steve
  */
 public class SudokuHelpDialog extends javax.swing.JDialog {
 
     /**
+     * Default constructor.
      * Creates new form SudokuHelpDialog
+     * @param parent the parent component
+     * @param modal if the dialog needs to be modal or not.
+     * @param guiHandler the GUIHandler instance of the application.
      */
     public SudokuHelpDialog(java.awt.Frame parent, boolean modal, GUIHandler guiHandler) {
         super(parent, modal);
@@ -91,7 +96,13 @@ public class SudokuHelpDialog extends javax.swing.JDialog {
 //        });
 //    }
     
+    /**
+     * The string in which the help text is loaded
+     */
     private String help;
+    /**
+     * Instance of the GUIHandler controller.
+     */
     private GUIHandler myGuiHandler;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JEditorPane jEditorPane1;

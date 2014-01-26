@@ -7,16 +7,36 @@ package sudokudesktopapp;
 import java.util.HashMap;
 
 /**
- *
+ * Final class that contains all the static final values that are used 
+ * throughout the application.
  * @author Steve
  */
 public final class GlobalConstants {
+    /**
+     * The path for the object file of PersonDB.
+     */
     public static final String PERSONDB_PATH = "./resources/personDB_file";
+    /**
+     * The path for the html file of Sudoku Help (used in help dialog)
+     */
     public static final String SUDOKUHELP_PATH = "./resources/sudoku_help.html";
+    /**
+     * The path for the resources directory.
+     */
     public static final String RESOURCES_PATH = "./resources/";
+    /**
+     * The path for the saved games directory.
+     */
     public static final String SAVES_PATH = "./resources/saves/";
+    
+    /**
+     * Constant value of the number of presaved games that come with this app.
+     */
     public static final int TOTAL_GAMES_PRESAVED = 10;
     
+    /** 
+     * HashMap that matches numbers to letters (and vice versa) for Wordoku.
+     */
     public static final HashMap<String, String> wordokuMap;
     static
     {
@@ -44,6 +64,12 @@ public final class GlobalConstants {
     
     
     // Testing constants
+    /**
+     * Constant for the PersonDB that is used in JUnit Tests.
+     */
     public static final String PERSONDB_PATH_TESTING = "./testing_Resources/testDB";
+    /**
+     * Constant for the testing directory used in JUnit Tests.
+     */
     public static final String TESTING_PATH ="/testing/";
 }

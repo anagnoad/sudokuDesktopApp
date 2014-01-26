@@ -11,29 +11,24 @@ import javax.swing.JList;
 
 
 /**
- *
+ * Custom JPanel class for the Log In panel.
+ * It is used in the main application frame, in main panel.
  * @author Steve
  */
 public class LogInPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form LogInPanel
+     * Default constructor.
+     * Creates new form LogInPanel.
      */
     public LogInPanel(GUIHandler guiHandler) {
         this.myGuiHandler = guiHandler;
-        
-//        listModeForJList = new javax.swing.AbstractListModel()
-//        listModeForJList = new DefaultListModel()
-//        {
-//                ArrayList<Person> listToShow = resultsToShare;
-//                @Override
-//                public int getSize() {return listToShow.size();}
-//                @Override
-//                public Object getElementAt(int i) {return listToShow.get(i);}
-//        };
         initComponents();
         this.resultsToShare = new ArrayList<>(); // so as not to have null ptr exception
     }
+    /**
+     * Function that updates the JList values, according to search.
+     */
     private void updateJList()
     {
         DefaultListModel<Person> model = new DefaultListModel<>();
@@ -42,7 +37,6 @@ public class LogInPanel extends javax.swing.JPanel {
             model.addElement(p);
         }
         resultsJList.setModel(model);
-        
     }
     
     /**
@@ -78,7 +72,7 @@ public class LogInPanel extends javax.swing.JPanel {
             }
         });
 
-        searchIconLabel.setText("[icon here]");
+        searchIconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sudokudesktopapp/search.png"))); // NOI18N
 
         org.jdesktop.layout.GroupLayout searchPanelLayout = new org.jdesktop.layout.GroupLayout(searchPanel);
         searchPanel.setLayout(searchPanelLayout);
@@ -88,15 +82,19 @@ public class LogInPanel extends javax.swing.JPanel {
                 .add(searchIconLabel)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(nicknameSearchInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 205, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 211, Short.MAX_VALUE))
+                .add(0, 279, Short.MAX_VALUE))
         );
         searchPanelLayout.setVerticalGroup(
             searchPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, searchPanelLayout.createSequentialGroup()
-                .add(16, 16, 16)
-                .add(searchPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(searchIconLabel)
-                    .add(nicknameSearchInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(searchPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(searchPanelLayout.createSequentialGroup()
+                        .add(16, 16, 16)
+                        .add(searchIconLabel))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, searchPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(nicknameSearchInput, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(16, 16, 16)))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -145,6 +143,11 @@ public class LogInPanel extends javax.swing.JPanel {
         add(jSeparator2, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Event handling for when the user searches for a particular nickname.
+     * Searching personDB and updating the list.
+     * @param evt 
+     */
     private void nicknameSearchInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nicknameSearchInputActionPerformed
         // search nickname on the db and return results
         ArrayList<Person> results;
@@ -160,6 +163,11 @@ public class LogInPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_nicknameSearchInputActionPerformed
 
+    /**
+     * Event handling for when the user selects a value off the JList.
+     * The user is logged in, and the logged in panel is set to visible.
+     * @param evt 
+     */
     private void resultsJListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_resultsJListValueChanged
         JList list = (JList) evt.getSource();
         
@@ -169,11 +177,20 @@ public class LogInPanel extends javax.swing.JPanel {
         this.myGuiHandler.showLoggedInPanel();
     }//GEN-LAST:event_resultsJListValueChanged
 
+
+    /**
+     * Instance of the GUIHandler of the app.
+     */
+
     private void nicknameSearchInputMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nicknameSearchInputMouseClicked
         this.nicknameSearchInput.setText("");
     }//GEN-LAST:event_nicknameSearchInputMouseClicked
 
+
     private GUIHandler myGuiHandler;
+    /**
+     * ArrayList containing all Person objects, returned from the user's search.
+     */
     private ArrayList<Person> resultsToShare;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;

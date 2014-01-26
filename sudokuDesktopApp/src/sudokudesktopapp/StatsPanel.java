@@ -7,12 +7,14 @@ package sudokudesktopapp;
 import Logic.Users.Person;
 
 /**
- *
+ * Custom JPanel classed used for showing user's statistics.
+ * It is loaded in the main panel, when prompted.
  * @author Steve
  */
 public class StatsPanel extends javax.swing.JPanel {
 
     /**
+     * Default constructor.
      * Creates new form StatsPanel
      */
     public StatsPanel(GUIHandler guiHandler, Person p) {
@@ -143,6 +145,11 @@ public class StatsPanel extends javax.swing.JPanel {
         add(jSeparator3, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Event handling for clicking on "Reset". 
+     * User's stats are erased from the PersonDB.
+     * @param evt 
+     */
     private void clearAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearAllButtonActionPerformed
         // TODO add your handling code here:
         if (this.player != null)
@@ -152,6 +159,9 @@ public class StatsPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_clearAllButtonActionPerformed
 
+    /**
+     * Helper function, populating this panel's fields to the person's properties.
+     */
     private void updateUIToPlayerStats()
     {
         if (player!=null)
@@ -164,7 +174,13 @@ public class StatsPanel extends javax.swing.JPanel {
         }
     }
     
+    /**
+     * Instance of the GUIHandler controller.
+     */
     private GUIHandler myGuiHandler;
+    /**
+     * Instance of the Person object that has logged in the application.
+     */
     private Person player;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel aliasLabel;

@@ -7,13 +7,16 @@ package sudokudesktopapp;
 import java.awt.Color;
 
 /**
- *
+ * Custom JPanel class that is used for the Getting Started panel.
+ * This panel is visible when the application is first loaded.
  * @author Steve
  */
 public class GettingStartedPanel extends javax.swing.JPanel {
 
     /**
+     * Default constructor.
      * Creates new form GettingStartedPanel
+     * @param GUIHandler the guiHandler that controls all components
      */
     public GettingStartedPanel(GUIHandler guiHandler) {
         this.myGuiHandler = guiHandler; //save the instance of the guiHandler
@@ -164,71 +167,131 @@ public class GettingStartedPanel extends javax.swing.JPanel {
         add(jSeparator1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Event handling for the "New User" JLabel.
+     * Shows the NewUserPanel in sidebar.
+     * @param evt MouseEvent
+     */
     private void newUserClick(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newUserClick
         // this will redirect you to a JFrame To Add a new user
         this.myGuiHandler.showAddNewUserPanel();
     }//GEN-LAST:event_newUserClick
 
+    /**
+     * Event handling for the "Log in" JLabel.
+     * Shows the LogInPanel in sidebar.
+     * @param evt MouseEvent
+     */
     private void logInClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logInClicked
         // this will redirect you to a JPanel to choose with which nickname to log in
         this.myGuiHandler.showLogInPanel();
         
     }//GEN-LAST:event_logInClicked
 
+    /**
+     * Event handling for playing a sudoku anonymously
+     * Shows the NewGameOptionsPanel to the sidebar.
+     * @param evt MouseEvent
+     */
     private void playSudokuAnonymouslyClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playSudokuAnonymouslyClicked
         // this will redirect you to a JFrame selecting options for the sudoku
         myGuiHandler.showNewGameOptionsPanel();
     }//GEN-LAST:event_playSudokuAnonymouslyClicked
 
+    /**
+     * Event handling for the "Show Rules" JLabel
+     * Shows SudokuHelpDialog.
+     * @param evt 
+     */
     private void showSudokuRulesClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showSudokuRulesClicked
         // this will open up a JPanel showing help from a file for sudoku
         myGuiHandler.showHelpDialog();
     }//GEN-LAST:event_showSudokuRulesClicked
 
+    /**
+     * Event handling for hovering over the JLabel of New User(entering)
+     * @param evt 
+     */
     private void newUserLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newUserLabelMouseEntered
         // TODO add your handling code here:
         this.newUserLabel.setForeground(alternativeFontColor);
     }//GEN-LAST:event_newUserLabelMouseEntered
-
+    /**
+     * Event handling for hovering over the JLabel of New User(exiting)
+     * @param evt 
+     */
     private void newUserLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newUserLabelMouseExited
         // TODO add your handling code here:
         this.newUserLabel.setForeground(defaultFontColor);
         
     }//GEN-LAST:event_newUserLabelMouseExited
 
+    /**
+     * Event handling for hovering over the JLabel of Log in (entering)
+     * @param evt 
+     */
     private void logInLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logInLabelMouseEntered
         // TODO add your handling code here:
         this.logInLabel.setForeground(alternativeFontColor);
     }//GEN-LAST:event_logInLabelMouseEntered
 
+    /**
+     * Event handling for hovering over the JLabel of Log in (exiting)
+     * @param evt 
+     */
     private void logInLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logInLabelMouseExited
         // TODO add your handling code here:
         this.logInLabel.setForeground(defaultFontColor);
     }//GEN-LAST:event_logInLabelMouseExited
 
+    /**
+     * Event handling for hovering over the JLabel of playing sudoku (entering)
+     * @param evt 
+     */
     private void playSudokuLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playSudokuLabelMouseEntered
         // TODO add your handling code here:
         this.playSudokuLabel.setForeground(alternativeFontColor);
     }//GEN-LAST:event_playSudokuLabelMouseEntered
 
+    /**
+     * Event handling for hovering over the JLabel of playing Sudoku (exiting)
+     * @param evt 
+     */
     private void playSudokuLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playSudokuLabelMouseExited
         // TODO add your handling code here:
         this.playSudokuLabel.setForeground(defaultFontColor);
     }//GEN-LAST:event_playSudokuLabelMouseExited
 
+    /**
+     * Event handling for hovering over the JLabel of Show Rules (entering)
+     * @param evt 
+     */
     private void showRulesLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showRulesLabelMouseEntered
         // TODO add your handling code here:
         this.showRulesLabel.setForeground(alternativeFontColor);
     }//GEN-LAST:event_showRulesLabelMouseEntered
 
+    /**
+     * Event handling for hovering over the JLabel of Show Rules (exiting)
+     * @param evt 
+     */
     private void showRulesLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showRulesLabelMouseExited
         // TODO add your handling code here:
         this.showRulesLabel.setForeground(defaultFontColor);
     }//GEN-LAST:event_showRulesLabelMouseExited
 
     
+    /**
+     * Color constant for JLabels.
+     */
     private static final Color defaultFontColor = new Color(255, 255, 255);
+    /**
+     * Color constant for hovered over JLabels.
+     */
     private static final Color alternativeFontColor = new Color(204, 204, 204);
+    /**
+     * An instance of the GUIHandler.
+     */
     private GUIHandler myGuiHandler;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel gettingStartedLabel;
