@@ -214,7 +214,7 @@ public class Person implements Serializable{
     
     public int getGamesPlayed()
     {
-        return this.sudokuSolved.size();
+        return this.sudokuSolved.size()+this.getDefeats()+this.getVictories();
     }
     
     public HashSet<String> getSudokusSolved()
